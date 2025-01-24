@@ -1,1 +1,26 @@
-<p>sidenav works!</p>
+<mat-drawer-container class="app-sidenav-container">
+    <mat-drawer #drawer
+                mode="over" 
+                class="app-sidenav mat-elevation-z10">
+                <mat-toolbar color="primary">
+                  Eventi
+                </mat-toolbar>
+                <mat-list>
+                  <mat-list-item role="listitem"><a [routerLink]="['/','today']">Oggi</a></mat-list-item>
+                  <mat-list-item role="listitem"><a [routerLink]="['/','birthdays']">Compleanni</a></mat-list-item>
+                  <mat-list-item role="listitem"><a [routerLink]="['/','namedays']"> Onomastici</a></mat-list-item>                  
+                  <mat-list-item role="listitem"><a [routerLink]="['/','days']">Date</a></mat-list-item> 
+                  <mat-list-item role="listitem"><a [routerLink]="['/','all']">Tutti</a></mat-list-item> 
+                </mat-list>
+            
+                
+    </mat-drawer>
+    <mat-drawer-content  class="app-sidenav-content">
+      <app-toolbar (toogleSidenav)="drawer.toggle()">
+      </app-toolbar>
+      <div class="wrapper">
+          <router-outlet></router-outlet>
+      </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
