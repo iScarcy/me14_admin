@@ -11,6 +11,8 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AlbumComponent } from './components/albums/album/album.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,14 +20,16 @@ import { HttpClientModule } from '@angular/common/http';
     ToolbarComponent,
     MainContentComponent,
     GalleryComponent,
-    AlbumsComponent
+    AlbumsComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,10 +4,9 @@ export interface IAlbum{
     id: number,
     title: string,
     anno: number,
-    branca: Branca,
+    branca: string,
     folder: string,
     file: string,
-    data: Date,
     fullPath:string,
     status: boolean
 }

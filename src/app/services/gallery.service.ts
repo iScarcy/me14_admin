@@ -23,7 +23,6 @@ export class GalleryService {
         branca: album.branca,
         folder: album.folder,
         file: album.file,
-        data: album.data,        
         fullPath: baseGalleryPublicImageUrl + album.anno + "/" + album.branca + "/" + album.folder + "/" + album.file,       
         status: album.status
       })))

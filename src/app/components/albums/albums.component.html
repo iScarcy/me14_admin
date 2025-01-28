@@ -1,4 +1,10 @@
+<div fxLayout="row" fxLayoutGap="32px" class="flex-container">
+    <div class="flex-item"  *ngFor="let al of this.albums$ | async">
+        <app-album [album]="al"/>
+    </div>
+</div>
+
+     
+
  
-<mat-grid-list cols="4" rowHeight="2:1">
-    <mat-grid-tile *ngFor="let album of this.albums$ | async">{{album.title}}</mat-grid-tile>
-</mat-grid-list>
+ 
