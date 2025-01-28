@@ -1,0 +1,4 @@
+ 
+<mat-grid-list cols="4" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let album of this.albums$ | async">{{album.title}}</mat-grid-tile>
+</mat-grid-list>

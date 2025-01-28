@@ -1,8 +1,11 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { AlbumsComponent } from './components/albums/albums.component';
  
 const routes: Routes = [
-  
+      {path:"gallery", component: GalleryComponent},
+      {path:"gallery/:branca", component: AlbumsComponent}
 ];
 
 @NgModule({

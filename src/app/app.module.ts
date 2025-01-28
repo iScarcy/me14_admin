@@ -8,18 +8,24 @@ import { ToolbarComponent } from './components/layout/toolbar/toolbar.component'
 import { MainContentComponent } from './components/layout/main-content/main-content.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from 'src/app/shared/material.module';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { AlbumsComponent } from './components/albums/albums.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
     ToolbarComponent,
-    MainContentComponent
+    MainContentComponent,
+    GalleryComponent,
+    AlbumsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
