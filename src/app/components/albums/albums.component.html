@@ -1,10 +1,12 @@
-<div fxLayout="row" fxLayoutGap="32px" class="flex-container">
-    <div class="flex-item"  *ngFor="let al of this.albums$ | async">
+<div class="container">
+    <div class="item"  *ngFor="let al of this.albums$ | async">
         <app-album [album]="al"/>
     </div>
-</div>
+  </div>
+
+
+
+    
+
 
      
-
- 
- 

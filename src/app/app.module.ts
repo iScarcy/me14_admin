@@ -12,7 +12,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './components/albums/album/album.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlexLayoutModule } from '@angular/flex-layout';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-    NgbModule
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
