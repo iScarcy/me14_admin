@@ -1,14 +1,14 @@
 .container {
-    flex-direction: row;
-    flex-wrap: wrap ;
-    justify-content: space-evenly;
-    align-items: center;
-
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+    
 }
 
 .item {
-    align-self: center ;
+    align-self:auto ;
     flex-grow: 2;
     flex-shrink: 1;
-    flex-basis: 5px;
+    flex-basis: 25%;
+    
   }
