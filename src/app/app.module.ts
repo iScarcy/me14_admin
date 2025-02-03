@@ -13,6 +13,7 @@ import { AlbumsComponent } from './components/albums/albums.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './components/albums/album/album.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NewAlbumComponent } from './components/albums/new-album/new-album.component';
  
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MainContentComponent,
     GalleryComponent,
     AlbumsComponent,
-    AlbumComponent
+    AlbumComponent,
+    NewAlbumComponent
   ],
   imports: [
     BrowserModule,
