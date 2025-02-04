@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './components/albums/album/album.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewAlbumComponent } from './components/albums/new-album/new-album.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
  
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NewAlbumComponent } from './components/albums/new-album/new-album.compo
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule, ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,11 +6,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list'
-import {MatButtonModule} from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [],
   imports: [
@@ -26,6 +26,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatCardModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }

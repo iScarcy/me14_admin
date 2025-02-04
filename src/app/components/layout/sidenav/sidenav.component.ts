@@ -7,15 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css']
 })
-export class SidenavComponent implements OnInit{
+export class SidenavComponent  {
   
   constructor(private router:Router){}
 
   @ViewChild(MatDrawer)
   drawer!: MatDrawer;
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+   
 
 }

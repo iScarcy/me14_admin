@@ -1,22 +1,36 @@
-<h2 mat-dialog-titile>Aggiungi Album</h2>
+
 <mat-dialog-content>
+  <h2 mat-dialog-titile>Aggiungi Album</h2>
     <div class="dialog-container dialog-responsive">
-        <mat-form-field appearance="fill">
-            <mat-label>Descrizione evento</mat-label>
-            <input matInput required minlength="10" maxlength="400"/>        
+          <div>
+          <mat-form-field class="new-album-item">
+            <mat-label>Nome Album</mat-label>
+            <input matInput [formControl] = "FC_title" required />        
+          
+          </mat-form-field>
+        </div>
+        <div>
+        <mat-form-field>
+            <mat-label>Branca</mat-label>
+            <mat-select>
+              <mat-option value="lc">L/C</mat-option>
+              <mat-option value="eg">E/G</mat-option>
+              <mat-option value="rs">R/S</mat-option>
+              <mat-option value="gruppo">Gruppo</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div> 
+        <div>
+          <mat-form-field>
+            <mat-label>Anno</mat-label>
+            <input matInput  />        
            
           </mat-form-field>
-        <mat-form-field >
-            <mat-label>Data</mat-label>
-            <input matInput  required >
-            <mat-hint>DD/MM/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix ></mat-datepicker-toggle>
-            
-        </mat-form-field>
+        </div>  
     </div>
 </mat-dialog-content>
 
-<mat-dialog-actions  align="end">
+<mat-dialog-actions >
     <button mat-flat-button color="primary">Ok</button>
     <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>

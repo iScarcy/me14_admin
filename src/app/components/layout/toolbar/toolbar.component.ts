@@ -5,12 +5,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent   {
   
   @Output() toogleSidenav = new EventEmitter<void>();
 
-  ngOnInit(): void {
-    
-  }
+  
 
 }

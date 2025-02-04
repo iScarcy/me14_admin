@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-album',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class NewAlbumComponent {
 
+  constructor(){}
+
+  FC_title = new FormControl('',[
+    Validators.required
+  ])
 }
