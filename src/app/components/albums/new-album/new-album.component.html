@@ -27,10 +27,26 @@
            
           </mat-form-field>
         </div>  
+        <div>
+          <mat-form-field style="width: 100%;">
+          <mat-label>Copertina</mat-label>
+          <button mat-icon-button matPrefix (click)="f_input.click()">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+          <input type="text" readonly matInput [formControl]="display" />
+          <input
+            type="file"
+            multiple
+            hidden
+            #f_input
+            (change)="handleFileInputChange(f_input.files!)"
+          />
+        </mat-form-field>
+        </div> 
     </div>
 </mat-dialog-content>
 
 <mat-dialog-actions >
-    <button mat-flat-button color="primary">Ok</button>
+    <button mat-flat-button color="primary" (click)="handleSubmit()">Ok</button>
     <button mat-button mat-dialog-close>Cancel</button>
 </mat-dialog-actions>
