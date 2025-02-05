@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { IUploadFile } from 'src/app/models/IUploadFile';
+import { GalleryService } from 'src/app/services/gallery.service';
 
 @Component({
   selector: 'app-new-album',
@@ -8,7 +11,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class NewAlbumComponent {
 
-  constructor(){}
+  constructor(private _service:GalleryService){}
 
   FC_title = new FormControl('',[
     Validators.required
@@ -18,19 +21,29 @@ export class NewAlbumComponent {
   file_store!: FileList;
   file_list: Array<string> = [];
   
+
   handleFileInputChange(l: FileList ): void {
     this.file_store = l;
     if (l.length) {
       const f = l[0];
+      console.log(f);
+    
       const count = l.length > 1 ? `(+${l.length - 1} files)` : "";
-      this.display.patchValue(`${f.name}${count}`);
+      
+      this._service.uploadAlbumImg(f).subscribe((data) =>{
+          this.display.patchValue(data.file);        
+      });
+
     } else {
       this.display.patchValue("");
     }
+
+    
+
   }
 
   handleSubmit(): void {
-    debugger;
+    
     var fd = new FormData();
     this.file_list = [];
     for (let i = 0; i < this.file_store.length; i++) {

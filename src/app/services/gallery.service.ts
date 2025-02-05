@@ -4,6 +4,7 @@ import { Branca } from '../models/Branca';
 import { map, Observable } from 'rxjs';
 import { IAlbum } from '../models/IAlbum';
 import { baseGalleryApiUrl, baseGalleryPublicImageUrl } from '../app.costant';
+import { IUploadFile } from '../models/IUploadFile';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,16 @@ export class GalleryService {
         status: album.status
       })))
     );
+  }
+
+  uploadAlbumImg(file: File):Observable<IUploadFile>{
+    
+    var url: string = baseGalleryApiUrl+"album/upload";
+    const formData = new FormData();
+    formData.append('file', file);
+
+   return this.httpEvents.post<IUploadFile>(url, formData).pipe(
+    map(data => ({file:  data.file}))
+   )
   }
 }
