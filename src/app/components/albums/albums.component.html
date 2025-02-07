@@ -1,3 +1,5 @@
+<h2 class="row justify-content-center align-items-center">Album {{this.branca.toUpperCase()}}</h2>
+    
 <div class="container">
     <div class="item"  *ngFor="let al of this.albums$ | async">
         <app-album [album]="al"/>

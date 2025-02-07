@@ -11,7 +11,8 @@ import { Branca } from 'src/app/models/Branca';
   styleUrls: ['./albums.component.css']
 })
 export class AlbumsComponent implements OnInit {
-  
+  branca:string = "";
+
   albums$: Observable<IAlbum[]> | undefined;
 
   private readonly route = inject(ActivatedRoute);
@@ -22,8 +23,8 @@ export class AlbumsComponent implements OnInit {
 
   ngOnInit(): void {    
     
-    let branca:string | null  =  this.route.snapshot.paramMap.get('branca');
-    this.albums$ = this._service.getAlbums(branca);
+    this.branca  =  this.route.snapshot.paramMap.get('branca')!;
+    this.albums$ = this._service.getAlbums(this.branca);
     
   }
 
