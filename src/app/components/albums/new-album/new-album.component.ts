@@ -16,6 +16,14 @@ export class NewAlbumComponent {
   FC_title = new FormControl('',[
     Validators.required
   ])
+ 
+  FC_anno = new FormControl('',[
+    Validators.required
+  ])
+
+  FC_branca = new FormControl('',[
+    Validators.required
+  ])
 
   display: FormControl = new FormControl("", Validators.required);
   file_store!: FileList;
@@ -43,13 +51,19 @@ export class NewAlbumComponent {
   }
 
   handleSubmit(): void {
-    
-    var fd = new FormData();
-    this.file_list = [];
-    for (let i = 0; i < this.file_store.length; i++) {
-      fd.append("files", this.file_store[i], this.file_store[i].name);
-      this.file_list.push(this.file_store[i].name);
+    if(this.FC_title.valid && this.FC_anno.valid && this.FC_branca.valid && this.display.valid){
+      
+      var fd = new FormData();
+      this.file_list = [];
+      for (let i = 0; i < this.file_store.length; i++) {
+        fd.append("files", this.file_store[i], this.file_store[i].name);
+        this.file_list.push(this.file_store[i].name);
+      }
+
+      
     }
+
+    
 
     // do submit ajax
   }

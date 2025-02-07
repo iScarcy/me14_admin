@@ -6,29 +6,31 @@
           <mat-form-field class="new-album-item">
             <mat-label>Nome Album</mat-label>
             <input matInput [formControl] = "FC_title" required />        
-          
+            <mat-error>Campo Obligatorio</mat-error>
           </mat-form-field>
         </div>
         <div>
         <mat-form-field>
             <mat-label>Branca</mat-label>
-            <mat-select>
+            <mat-select [formControl]="FC_branca" required>
               <mat-option value="lc">L/C</mat-option>
               <mat-option value="eg">E/G</mat-option>
               <mat-option value="rs">R/S</mat-option>
               <mat-option value="gruppo">Gruppo</mat-option>
             </mat-select>
+            <mat-error>Campo Obligatorio</mat-error>
           </mat-form-field>
+          
         </div> 
         <div>
           <mat-form-field>
             <mat-label>Anno</mat-label>
-            <input matInput  />        
+            <input matInput  [formControl] = "FC_anno" required  />        
            
           </mat-form-field>
         </div>  
         <div>
-          <mat-form-field style="width: 100%;">
+          <mat-form-field>
           <mat-label>Copertina</mat-label>
           <button mat-icon-button matPrefix (click)="f_input.click()">
             <mat-icon>attach_file</mat-icon>
@@ -41,6 +43,7 @@
             #f_input
             (change)="handleFileInputChange(f_input.files!)"
           />
+          <mat-error>Campo Obligatorio</mat-error>
         </mat-form-field>
         </div> 
         
