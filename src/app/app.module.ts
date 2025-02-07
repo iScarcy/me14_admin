@@ -15,6 +15,7 @@ import { AlbumComponent } from './components/albums/album/album.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewAlbumComponent } from './components/albums/new-album/new-album.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FotoComponent } from './components/albums/foto/foto.component';
  
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GalleryComponent,
     AlbumsComponent,
     AlbumComponent,
-    NewAlbumComponent
+    NewAlbumComponent,
+    FotoComponent
   ],
   imports: [
     BrowserModule,
