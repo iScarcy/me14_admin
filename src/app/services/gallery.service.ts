@@ -43,8 +43,8 @@ export class GalleryService {
   }
 
   getFoto(id:number):Observable<IFoto[]>{
-    var url: string = baseGalleryApiUrl+"photo";
-    return this.httpEvents.put<Array<IFoto>>(url,id).pipe(
+    var url: string = baseGalleryApiUrl+"photo/"+id;
+    return this.httpEvents.get<Array<IFoto>>(url).pipe(
       map(albums => albums.map(photo => ({
         id: photo.id,
         thumbPathFile: photo.thumbPathFile,

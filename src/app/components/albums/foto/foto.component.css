@@ -1,0 +1,17 @@
+img{
+    width: 100%;
+ } 
+ .container {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+    
+}
+
+.item {
+    align-self:auto ;
+    flex: 1 1 calc(25% - 10px);
+    margin: 5px;
+  }
+
+ 

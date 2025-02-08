@@ -1,1 +1,16 @@
-<p>foto works!</p>
+<div class="container">
+        <div class="item"  *ngFor="let ph of this.photo$ | async">
+            
+            <mat-card appearance="outlined">
+               
+                <img mat-card-image src="{{ph.thumbPathFile}}"  >
+                
+                <mat-card-actions class="row justify-content-center align-items-center">
+                  <button mat-raised-button>Modifica</button>
+                  <button mat-raised-button>Elimina</button>
+                </mat-card-actions>
+            </mat-card>
+
+
+        </div>
+  </div>
