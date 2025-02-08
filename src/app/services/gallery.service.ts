@@ -5,6 +5,7 @@ import { map, Observable } from 'rxjs';
 import { IAlbum } from '../models/IAlbum';
 import { baseGalleryApiUrl, baseGalleryPublicImageUrl } from '../app.costant';
 import { IUploadFile } from '../models/IUploadFile';
+import { IFoto } from '../models/IFoto';
 
 @Injectable({
   providedIn: 'root'
@@ -40,4 +41,16 @@ export class GalleryService {
     map(data => ({file:  data.file}))
    )
   }
+
+  getFoto(id:number):Observable<IFoto[]>{
+    var url: string = baseGalleryApiUrl+"photo";
+    return this.httpEvents.put<Array<IFoto>>(url,id).pipe(
+      map(albums => albums.map(photo => ({
+        id: photo.id,
+        thumbPathFile: photo.thumbPathFile,
+        mediumPathFile: photo.mediumPathFile
+      })))
+    );
+  }
+
 }
