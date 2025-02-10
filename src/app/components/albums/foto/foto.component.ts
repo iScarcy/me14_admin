@@ -11,7 +11,7 @@ import { GalleryService } from 'src/app/services/gallery.service';
 })
 export class FotoComponent implements OnInit {
   
-  idAlbum:number = 0;
+  album:string = "";
   photo$: Observable<IFoto[]> | undefined;
 
   constructor(private _service:GalleryService, private _route:ActivatedRoute ){
@@ -20,9 +20,9 @@ export class FotoComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.idAlbum  = +this._route.snapshot.paramMap.get('idAlbum')!;
-    this.photo$   = this._service.getFoto(this.idAlbum);
-
+    this.album  =  this._route.snapshot.paramMap.get('album')!;
+    this.photo$   = this._service.getFoto(this.album);
+   
      
   }
 
