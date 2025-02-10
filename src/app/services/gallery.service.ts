@@ -6,6 +6,7 @@ import { IAlbum } from '../models/IAlbum';
 import { baseGalleryApiUrl, baseGalleryPublicImageUrl } from '../app.costant';
 import { IUploadFile } from '../models/IUploadFile';
 import { IFoto } from '../models/IFoto';
+import { IAlbumFoto } from '../models/IAlbumFoto';
 
 @Injectable({
   providedIn: 'root'
@@ -42,16 +43,18 @@ export class GalleryService {
    )
   }
 
-  getFoto(album:string):Observable<IFoto[]>{
+  getFoto(album:string):Observable<IAlbumFoto>{
     
     var url: string = baseGalleryApiUrl+"photo/"+album;
-    return this.httpEvents.get<Array<IFoto>>(url).pipe(
-      map(albums => albums.map(photo => ({
-        id: photo.id,
-        thumbPathFile: photo.thumbPathFile,
-        mediumPathFile: photo.mediumPathFile
-      })))
-    );
+    return this.httpEvents.get<IAlbumFoto>(url).pipe(
+      map(album => ({
+        id: album.id,
+        title: album.title,
+        anno: album.anno,
+        branca: album.branca,
+        foto: album.foto
+      }))
+     )
   }
 
 }

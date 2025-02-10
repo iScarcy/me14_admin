@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { IAlbum } from 'src/app/models/IAlbum';
+import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { IFoto } from 'src/app/models/IFoto';
 import { GalleryService } from 'src/app/services/gallery.service';
 
@@ -12,8 +14,18 @@ import { GalleryService } from 'src/app/services/gallery.service';
 export class FotoComponent implements OnInit {
   
   album:string = "";
-  photo$: Observable<IFoto[]> | undefined;
-
+  albumphoto$: Observable<IAlbumFoto> | undefined;
+  al:IAlbum =  {
+    id: 0,
+    title: '',
+    anno: 0,
+    branca: "",
+    folder: '',
+    file: '',
+    fullPath: '',
+    status: false
+  };
+  foto: IFoto[] | undefined;
   constructor(private _service:GalleryService, private _route:ActivatedRoute ){
     
   }
@@ -21,8 +33,11 @@ export class FotoComponent implements OnInit {
   ngOnInit(): void {
     
     this.album  =  this._route.snapshot.paramMap.get('album')!;
-    this.photo$   = this._service.getFoto(this.album);
-   
+    this.albumphoto$   = this._service.getFoto(this.album);
+    this.albumphoto$.subscribe((album)=>{
+      this.al.title = album.title
+      this.foto = album.foto
+    })
      
   }
 
