@@ -14,4 +14,7 @@ img{
     margin: 5px;
   }
 
- 
+ .item button {
+    flex: 1 1 10% ;
+    
+ }
