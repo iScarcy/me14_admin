@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { AlbumDialogData } from 'src/app/models/AlbumDialogData';
 import { IAlbum } from 'src/app/models/IAlbum';
+import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 import { IUploadFile } from 'src/app/models/IUploadFile';
 import { GalleryService } from 'src/app/services/gallery.service';
 
@@ -71,8 +72,12 @@ export class NewAlbumComponent implements OnInit {
         fd.append("files", this.file_store[i], this.file_store[i].name);
         this.file_list.push(this.file_store[i].name);
       }
-
-      this.data.callback();
+      
+      this.data.album.title = this.FC_title.value!;
+      this.data.album.branca = this.FC_branca.value!;
+      this.data.album.anno = this.FC_anno.value!;
+      this.data.album.copertina =  this.display.value;
+      this.data.callback(this.data.album);
       
     }
 

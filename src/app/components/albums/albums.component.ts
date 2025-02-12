@@ -6,6 +6,7 @@ import { IAlbum } from 'src/app/models/IAlbum';
 import { Branca } from 'src/app/models/Branca';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
+import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -34,7 +35,7 @@ export class AlbumsComponent implements OnInit {
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
       disableClose: true,
-      data: {album:{branca: this.branca}, callback: () => this.new()} 
+      data: {album:{branca: this.branca}, callback: (request:IAlbumRequest) => this.new(request)} 
       
     }
     
@@ -54,8 +55,11 @@ export class AlbumsComponent implements OnInit {
       })
   }
 
-  new(){
-    console.log("new");
+  new(request:IAlbumRequest){
+    console.log("new title: "+request.title);
+    console.log("new branca: "+request.branca);
+    console.log("new anno: "+request.anno);
+    console.log("new copertina: "+request.copertina);
   }
 
 }
