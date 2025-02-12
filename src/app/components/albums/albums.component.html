@@ -1,6 +1,10 @@
-<h2 class="row justify-content-center align-items-center">Album {{this.branca.toUpperCase()}}</h2>
-    
+  
 <div class="container">
+    <div class="itemHead">
+        <span>Album {{this.branca.toUpperCase()}}</span>
+        <button mat-raised-button (click)="this.openNewAlbumDialog()"><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="add" ></mat-icon>Nuovo Album</button> 
+    </div>
+    
     <div class="item"  *ngFor="let al of this.albums$ | async">
 
         <app-album [album]="al" (deleteAlbumEmitter)="deleteAlbumListener(al.id)"/>

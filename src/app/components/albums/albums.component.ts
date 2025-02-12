@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { IAlbum } from 'src/app/models/IAlbum';
 import { Branca } from 'src/app/models/Branca';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -17,7 +18,7 @@ export class AlbumsComponent implements OnInit {
   
   private readonly route = inject(ActivatedRoute);
 
-  constructor(private _service:GalleryService){
+  constructor(private _service:GalleryService, private _dialog: MatDialog){
 
   }
 
@@ -28,14 +29,28 @@ export class AlbumsComponent implements OnInit {
     
   }
 
+  openNewAlbumDialog(){
+   console.log("new");
+    let config: MatDialogConfig = {
+      panelClass: "dialog-responsive",
+      disableClose: true,
+      data: {branca: this.branca}     
+    }
+    
+    let dialogRed = this._dialog.open(NewAlbumComponent, config)
+  }
+
   deleteAlbumListener(id:number){
    
-    
-    this.albums$ = this.albums$!.pipe(
-      map(albums => albums.filter(album => album.id !== id))
-    )
 
-    this._service.deleteAlbum(id);
+    this._service.deleteAlbum(id)
+      .subscribe({
+        complete: () => {
+          this.albums$ = this.albums$!.pipe(
+            map(albums => albums.filter(album => album.id !== id))
+          )
+        } 
+      })
   }
 
 }

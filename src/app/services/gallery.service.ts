@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Branca } from '../models/Branca';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { IAlbum } from '../models/IAlbum';
 import { baseGalleryApiUrl, baseGalleryPublicImageUrl } from '../app.costant';
 import { IUploadFile } from '../models/IUploadFile';
 import { IFoto } from '../models/IFoto';
 import { IAlbumFoto } from '../models/IAlbumFoto';
+import { INewAlbum } from '../models/INewAlbum';
 
 @Injectable({
   providedIn: 'root'
@@ -57,9 +58,21 @@ export class GalleryService {
      )
   }
 
-  deleteAlbum(id:number):void{
+  deleteAlbum(id:number):Observable<Object>{
     var url: string = baseGalleryApiUrl+"album?idAlbum="+id;    
-    this.httpEvents.delete(url).subscribe(() => console.log("album deleted!!"));
+    return this.httpEvents.delete(url);
   }
 
+  newAlbum(request:INewAlbum):void{
+
+    var url: string = baseGalleryApiUrl+"album/upload";
+    const formData = new FormData();
+    formData.append('title', request.title);
+    formData.append('branca', request.branca);
+    formData.append('anno', request.anno);
+    formData.append('copertina', request.copertina);
+
+    
+
+  }
 }

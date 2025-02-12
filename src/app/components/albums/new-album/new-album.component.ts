@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { IAlbum } from 'src/app/models/IAlbum';
 import { IUploadFile } from 'src/app/models/IUploadFile';
 import { GalleryService } from 'src/app/services/gallery.service';
 
@@ -9,10 +11,19 @@ import { GalleryService } from 'src/app/services/gallery.service';
   templateUrl: './new-album.component.html',
   styleUrls: ['./new-album.component.css']
 })
-export class NewAlbumComponent {
+export class NewAlbumComponent implements OnInit {
 
-  constructor(private _service:GalleryService){}
 
+  constructor(
+     @Inject(MAT_DIALOG_DATA) public data: IAlbum,
+    private _service:GalleryService
+  ){}
+  ngOnInit(): void {
+     
+  }
+
+
+  
   FC_title = new FormControl('',[
     Validators.required
   ])

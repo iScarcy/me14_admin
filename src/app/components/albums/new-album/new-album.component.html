@@ -12,12 +12,7 @@
         <div>
         <mat-form-field>
             <mat-label>Branca</mat-label>
-            <mat-select [formControl]="FC_branca" required>
-              <mat-option value="lc">L/C</mat-option>
-              <mat-option value="eg">E/G</mat-option>
-              <mat-option value="rs">R/S</mat-option>
-              <mat-option value="gruppo">Gruppo</mat-option>
-            </mat-select>
+            <input matInput [formControl]="FC_branca" required [(ngModel)]="this.data.branca" readonly="readonly"/>
             <mat-error>Campo Obligatorio</mat-error>
           </mat-form-field>
           
