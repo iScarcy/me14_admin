@@ -7,7 +7,7 @@ import { baseGalleryApiUrl, baseGalleryPublicImageUrl } from '../app.costant';
 import { IUploadFile } from '../models/IUploadFile';
 import { IFoto } from '../models/IFoto';
 import { IAlbumFoto } from '../models/IAlbumFoto';
-import { INewAlbum } from '../models/INewAlbum';
+import { IAlbumRequest } from '../models/IAlbumRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +63,7 @@ export class GalleryService {
     return this.httpEvents.delete(url);
   }
 
-  newAlbum(request:INewAlbum):void{
+  newAlbum(request:IAlbumRequest):void{
 
     var url: string = baseGalleryApiUrl+"album/upload";
     const formData = new FormData();

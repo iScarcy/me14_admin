@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { AlbumDialogData } from 'src/app/models/AlbumDialogData';
 import { IAlbum } from 'src/app/models/IAlbum';
 import { IUploadFile } from 'src/app/models/IUploadFile';
 import { GalleryService } from 'src/app/services/gallery.service';
@@ -15,14 +16,14 @@ export class NewAlbumComponent implements OnInit {
 
 
   constructor(
-     @Inject(MAT_DIALOG_DATA) public data: IAlbum,
+     @Inject(MAT_DIALOG_DATA) public data: AlbumDialogData,
     private _service:GalleryService
   ){}
   ngOnInit(): void {
      
   }
 
-
+  @Output() public deleteAlbumEmitter:EventEmitter<IAlbum> = new EventEmitter();
   
   FC_title = new FormControl('',[
     Validators.required
@@ -71,6 +72,7 @@ export class NewAlbumComponent implements OnInit {
         this.file_list.push(this.file_store[i].name);
       }
 
+      this.data.callback();
       
     }
 

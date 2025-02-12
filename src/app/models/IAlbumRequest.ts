@@ -1,4 +1,4 @@
-export interface INewAlbum {
+export interface IAlbumRequest {
     anno: string,
     title: string,
     branca: string,

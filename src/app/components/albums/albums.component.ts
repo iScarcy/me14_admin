@@ -34,7 +34,8 @@ export class AlbumsComponent implements OnInit {
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
       disableClose: true,
-      data: {branca: this.branca}     
+      data: {album:{branca: this.branca}, callback: () => this.new()} 
+      
     }
     
     let dialogRed = this._dialog.open(NewAlbumComponent, config)
@@ -51,6 +52,10 @@ export class AlbumsComponent implements OnInit {
           )
         } 
       })
+  }
+
+  new(){
+    console.log("new");
   }
 
 }
