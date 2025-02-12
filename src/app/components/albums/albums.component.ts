@@ -1,7 +1,7 @@
 import { Component, OnInit, inject  } from '@angular/core';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IAlbum } from 'src/app/models/IAlbum';
 import { Branca } from 'src/app/models/Branca';
 
@@ -14,7 +14,7 @@ export class AlbumsComponent implements OnInit {
   branca:string = "";
 
   albums$: Observable<IAlbum[]> | undefined;
-
+  
   private readonly route = inject(ActivatedRoute);
 
   constructor(private _service:GalleryService){
@@ -28,6 +28,14 @@ export class AlbumsComponent implements OnInit {
     
   }
 
+  deleteAlbumListener(id:number){
+   
+    
+    this.albums$ = this.albums$!.pipe(
+      map(albums => albums.filter(album => album.id !== id))
+    )
 
+    this._service.deleteAlbum(id);
+  }
 
 }

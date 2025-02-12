@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { IAlbum } from 'src/app/models/IAlbum';
+import { ConfirmComponent } from '../../confirm/confirm.component';
 
 @Component({
   selector: 'app-album',
@@ -19,10 +21,33 @@ export class AlbumComponent implements OnInit{
     status: false
   };
 
+  @Output() public deleteAlbumEmitter:EventEmitter<number> = new EventEmitter();
+
   ngOnInit(): void {
   
   }
 
+  constructor(private dialog: MatDialog){
 
+  }
+
+  delete(id:number){
+    this.dialog.closeAll();
+    this.deleteAlbumEmitter.emit(id);
+  }
+
+  openDeleteConfirmDialog(id:number): void {
+    
+    let config: MatDialogConfig = {
+      panelClass: "dialog-responsive",
+      disableClose: true,
+      data: {message: "Confermi di voler eliminare questo album ?", callback: () => this.delete(id)}    
+    }
+  
+   
+    let dialogRef = this.dialog.open(ConfirmComponent, config);
+    
+          
+  }
 
 }

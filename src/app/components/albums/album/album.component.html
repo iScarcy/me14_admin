@@ -13,6 +13,6 @@
     <mat-card-actions class="row justify-content-center align-items-center">
       <button [routerLink]="['/gallery/photo/',album.folder]" mat-raised-button>Foto</button>
       <button mat-raised-button>Modifica</button>
-      <button mat-raised-button>Elimina</button>
+      <button mat-raised-button (click)="this.openDeleteConfirmDialog(album.id)">Elimina</button>
     </mat-card-actions>
   </mat-card>

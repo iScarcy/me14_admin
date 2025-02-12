@@ -1,0 +1,12 @@
+
+<mat-dialog-content>
+    <h2 mat-dialog-titile>Attenzione</h2>
+    <div class="dialog-container">
+          <mat-label>{{this.data.message}}</mat-label>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="save()">OK</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

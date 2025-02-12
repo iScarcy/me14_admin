@@ -64,7 +64,5 @@ export class NewAlbumComponent {
     }
 
     
-
-    // do submit ajax
   }
 }

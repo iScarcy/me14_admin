@@ -57,4 +57,9 @@ export class GalleryService {
      )
   }
 
+  deleteAlbum(id:number):void{
+    var url: string = baseGalleryApiUrl+"album?idAlbum="+id;    
+    this.httpEvents.delete(url).subscribe(() => console.log("album deleted!!"));
+  }
+
 }

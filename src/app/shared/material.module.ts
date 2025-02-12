@@ -8,7 +8,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list'
 import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
@@ -29,7 +29,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    
   ]
 })
 export class MaterialModule { }
