@@ -56,10 +56,19 @@ export class AlbumsComponent implements OnInit {
   }
 
   new(request:IAlbumRequest){
-    console.log("new title: "+request.title);
-    console.log("new branca: "+request.branca);
-    console.log("new anno: "+request.anno);
-    console.log("new copertina: "+request.copertina);
+     
+    this._service.newAlbum(request).subscribe({
+      next: (album) => {
+       debugger;
+       
+        this.albums$!.pipe(
+          map(albums => albums.push(album))
+        )
+        this._dialog.closeAll();
+        
+      }
+    });
+
   }
 
 }

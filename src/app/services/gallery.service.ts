@@ -63,16 +63,22 @@ export class GalleryService {
     return this.httpEvents.delete(url);
   }
 
-  newAlbum(request:IAlbumRequest):void{
-
-    var url: string = baseGalleryApiUrl+"album/upload";
-    const formData = new FormData();
-    formData.append('title', request.title);
-    formData.append('branca', request.branca);
-    formData.append('anno', request.anno);
-    formData.append('copertina', request.copertina);
-
+  newAlbum(request:IAlbumRequest):Observable<IAlbum>{
+   
+    var url: string = baseGalleryApiUrl+"album";
     
+    return this.httpEvents.post<IAlbum>(url, request).pipe(
+      map(album => ({
+        id: album.id,
+        title: album.title,
+        anno: album.anno,
+        branca: album.branca,
+        folder: album.folder,
+        file: album.file,
+        fullPath: baseGalleryPublicImageUrl + album.anno + "/" + album.branca + "/" + album.folder + "/" + album.file,       
+        status: album.status
+      }))
+     )
 
   }
 }
