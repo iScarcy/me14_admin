@@ -1,7 +1,7 @@
 import { Component, OnInit, inject  } from '@angular/core';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { IAlbum } from 'src/app/models/IAlbum';
 import { Branca } from 'src/app/models/Branca';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -14,7 +14,7 @@ import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 })
 export class AlbumsComponent implements OnInit {
   branca:string = "";
-
+  
   albums$: Observable<IAlbum[]> | undefined;
   
   private readonly route = inject(ActivatedRoute);
@@ -26,10 +26,12 @@ export class AlbumsComponent implements OnInit {
   ngOnInit(): void {    
     
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
-    this.albums$ = this._service.getAlbums(this.branca);
+    this.albums$ = this.fetchData();
     
   }
-
+  fetchData():Observable<IAlbum[]>{
+    return this._service.getAlbums(this.branca);
+  }
   openNewAlbumDialog(){
    console.log("new");
     let config: MatDialogConfig = {
@@ -56,18 +58,25 @@ export class AlbumsComponent implements OnInit {
   }
 
   new(request:IAlbumRequest){
-     
+   
     this._service.newAlbum(request).subscribe({
-      next: (album) => {
-       debugger;
-       
+      /*next: (album) => {
+        console.log("ciao::"+album);
         this.albums$!.pipe(
-          map(albums => albums.push(album))
+          tap(albums => albums.unshift(album))
         )
+        console.log("_______ooooooo_______")
         this._dialog.closeAll();
+        
+      }*/
+     complete:() => { 
+      this.albums$ = this.fetchData();
+      this._dialog.closeAll();
         
       }
     });
+
+    
 
   }
 
