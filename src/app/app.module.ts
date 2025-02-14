@@ -17,6 +17,7 @@ import { NewAlbumComponent } from './components/albums/new-album/new-album.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FotoComponent } from './components/albums/foto/foto.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
+import { StoreModule } from '@ngrx/store';
  
  
 @NgModule({
@@ -40,7 +41,7 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     MaterialModule,
     HttpClientModule,
     FlexLayoutModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule, StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
