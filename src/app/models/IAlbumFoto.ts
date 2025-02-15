@@ -5,5 +5,6 @@ export interface IAlbumFoto{
     title: string,
     anno: number,
     branca: string,
+    imgPathFolder: string,
     foto: Array<IFoto>
 }

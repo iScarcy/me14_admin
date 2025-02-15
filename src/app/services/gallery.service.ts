@@ -52,7 +52,9 @@ export class GalleryService {
         id: album.id,
         title: album.title,
         anno: album.anno,
-        branca: album.branca,
+        branca: album.branca, 
+        imgPathFolder: baseGalleryPublicImageUrl + album.imgPathFolder,       
+       
         foto: album.foto
       }))
      )
