@@ -8,6 +8,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
+import { IAlbumsModel } from 'src/app/shared/store/Albums/albums.model';
+import { Store } from '@ngrx/store';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -20,7 +22,10 @@ export class AlbumsComponent implements OnInit {
   
   private readonly route = inject(ActivatedRoute);
 
-  constructor(private _service:GalleryService, private _dialog: MatDialog){
+  constructor(
+    private _service:GalleryService, 
+    private _store: Store<IAlbumsModel>,
+    private _dialog: MatDialog){
 
   }
 
@@ -28,7 +33,7 @@ export class AlbumsComponent implements OnInit {
     
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
     this.albums$ = this.fetchData();
-    
+    //this._store.dispatch(albumsload(this.branca))
   }
   fetchData():Observable<IAlbumFoto[]>{
     return this._service.getAlbums(this.branca);

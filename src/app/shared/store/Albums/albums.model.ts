@@ -1,7 +1,8 @@
 import { IAlbum } from "src/app/models/IAlbum";
+import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 
 export interface IAlbumsModel{
-    albums:IAlbum[]
+    albums:IAlbumFoto[]
 }
 
 export interface IStoreModel{
