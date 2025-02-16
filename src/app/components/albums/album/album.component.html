@@ -4,14 +4,14 @@
       <mat-card-title>{{album.title}}</mat-card-title>
       <mat-card-subtitle>{{album.anno}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{album.fullPath}}"  >
+    <img mat-card-image src="{{album.imgPathFolder}}"  >
     <mat-card-content>
       <p>
         {{album.title}}
       </p>
     </mat-card-content>
     <mat-card-actions class="row justify-content-center align-items-center">
-      <button [routerLink]="['/gallery/photo/',album.folder]" mat-raised-button>Foto</button>
+      <button [routerLink]="['/gallery/photo/','']" mat-raised-button>Foto</button>
       <button mat-raised-button>Modifica</button>
       <button mat-raised-button (click)="this.openDeleteConfirmDialog(album.id)">Elimina</button>
     </mat-card-actions>

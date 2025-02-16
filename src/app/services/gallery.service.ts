@@ -16,19 +16,31 @@ export class GalleryService {
 
   constructor(private httpEvents: HttpClient) { }
 
-  getAlbums(branca: string | null):Observable<IAlbum[]>{
-  
+  getAlbums(branca: string | null):Observable<IAlbumFoto[]>{
+   console.log(branca);
    var url: string = baseGalleryApiUrl+"albums/"+branca;
+   /*
+   {
+    "id": 99,
+    "title": "Firma Carta di Clan 5 Aprile 2019",
+    "anno": 2019,
+    "branca": "rs",
+    "folder": "1556076955_firma_carta_di_clan_5_aprile_2019",
+    "file": "1556076955_IMG_8403.JPG",
+    "data": "2019-04-24T05:35:57",
+    "status": 1
+}
+   */ 
     return this.httpEvents.get<Array<IAlbum>>(url).pipe(
       map(albums => albums.map(album => ({
         id: album.id,
         title: album.title,
         anno: album.anno,
-        branca: album.branca,
-        folder: album.folder,
-        file: album.file,
-        fullPath: baseGalleryPublicImageUrl + album.anno + "/" + album.branca + "/" + album.folder + "/" + album.file,       
-        status: album.status
+        branca: album.branca, 
+        folder:album.folder,
+        imgPathFolder:  baseGalleryPublicImageUrl + album.anno + "/" + album.branca + "/" + album.folder + "/" + album.file,     
+       
+        foto: []
       })))
     );
   }
@@ -53,8 +65,8 @@ export class GalleryService {
         title: album.title,
         anno: album.anno,
         branca: album.branca, 
+        folder: '',
         imgPathFolder: baseGalleryPublicImageUrl + album.imgPathFolder,       
-       
         foto: album.foto
       }))
      )

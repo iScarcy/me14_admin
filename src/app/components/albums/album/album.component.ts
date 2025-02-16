@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { IAlbum } from 'src/app/models/IAlbum';
 import { ConfirmComponent } from '../../confirm/confirm.component';
+import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 
 @Component({
   selector: 'app-album',
@@ -10,15 +11,14 @@ import { ConfirmComponent } from '../../confirm/confirm.component';
 })
 export class AlbumComponent implements OnInit{
   
-  @Input() album:IAlbum = {
+  @Input() album:IAlbumFoto = {
     id: 0,
     title: '',
     anno: 0,
     branca: "",
-    folder: '',
-    file: '',
-    fullPath: '',
-    status: false
+    folder:'',
+    imgPathFolder: '',
+    foto: []
   };
 
   @Output() public deleteAlbumEmitter:EventEmitter<number> = new EventEmitter();

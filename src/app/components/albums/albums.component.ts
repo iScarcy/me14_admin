@@ -7,6 +7,7 @@ import { Branca } from 'src/app/models/Branca';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
+import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -15,7 +16,7 @@ import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 export class AlbumsComponent implements OnInit {
   branca:string = "";
   
-  albums$: Observable<IAlbum[]> | undefined;
+  albums$: Observable<IAlbumFoto[]> | undefined;
   
   private readonly route = inject(ActivatedRoute);
 
@@ -29,7 +30,7 @@ export class AlbumsComponent implements OnInit {
     this.albums$ = this.fetchData();
     
   }
-  fetchData():Observable<IAlbum[]>{
+  fetchData():Observable<IAlbumFoto[]>{
     return this._service.getAlbums(this.branca);
   }
   openNewAlbumDialog(){
