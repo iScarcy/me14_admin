@@ -8,7 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
-import { IAlbumsModel } from 'src/app/shared/store/Albums/albums.model';
+import { IAlbumsModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
 import { loadalbums } from 'src/app/shared/store/Albums/albums.actions';
 @Component({
@@ -34,14 +34,15 @@ export class AlbumsComponent implements OnInit {
     
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
   //  this.albums$ = this.fetchData();
-    this._store.dispatch(loadalbums({branca: this.branca}));
+ const req:IGetAlbumsRequestModel={
+  branca: this.branca
+ }
+    this._store.dispatch(loadalbums({data:req}));
     
     this.albums$ = this._store.select("albums");
 
   }
-  fetchData():Observable<IAlbumFoto[]>{
-    return this._service.getAlbums(this.branca);
-  }
+   
   openNewAlbumDialog(){
    console.log("new");
     let config: MatDialogConfig = {
@@ -80,7 +81,7 @@ export class AlbumsComponent implements OnInit {
         
       }*/
      complete:() => { 
-      this.albums$ = this.fetchData();
+      //this.albums$ = this.fetchData();
       this._dialog.closeAll();
         
       }

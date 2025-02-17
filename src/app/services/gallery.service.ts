@@ -17,7 +17,8 @@ export class GalleryService {
   constructor(private httpEvents: HttpClient) { }
 
   getAlbums(branca: string | null):Observable<IAlbumFoto[]>{
-   console.log(branca);
+   debugger;
+    console.log(branca);
    var url: string = baseGalleryApiUrl+"albums/"+branca;
    /*
    {

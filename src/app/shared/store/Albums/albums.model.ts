@@ -9,3 +9,17 @@ export interface IStoreModel{
     data: IAlbumsModel,
     type: string
 }
+
+/*riquest*/ 
+
+export interface IGetAlbumsRequestModel{
+    branca:string
+}
+
+export interface IGetAlbumsStoreRequest extends IStoreRequest{
+    data:IGetAlbumsRequestModel
+}
+
+export interface IStoreRequest{
+    type:string
+}
