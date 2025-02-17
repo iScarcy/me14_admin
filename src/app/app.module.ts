@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -18,6 +18,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FotoComponent } from './components/albums/foto/foto.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { StoreModule } from '@ngrx/store';
+import { albumsReducer } from './shared/store/Albums/albums.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AlbumEffects } from './shared/store/Albums/albums.effects';
  
  
 @NgModule({
@@ -41,7 +45,11 @@ import { StoreModule } from '@ngrx/store';
     MaterialModule,
     HttpClientModule,
     FlexLayoutModule,
-    FormsModule, ReactiveFormsModule, StoreModule.forRoot({}, {})
+    FormsModule, 
+    ReactiveFormsModule, 
+    StoreModule.forRoot({albums:albumsReducer}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    EffectsModule.forRoot([AlbumEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

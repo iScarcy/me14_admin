@@ -10,6 +10,7 @@ import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { IAlbumsModel } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
+import { loadalbums } from 'src/app/shared/store/Albums/albums.actions';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -32,8 +33,11 @@ export class AlbumsComponent implements OnInit {
   ngOnInit(): void {    
     
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
-    this.albums$ = this.fetchData();
-    //this._store.dispatch(albumsload(this.branca))
+  //  this.albums$ = this.fetchData();
+    this._store.dispatch(loadalbums({branca: this.branca}));
+    
+    this.albums$ = this._store.select("albums");
+
   }
   fetchData():Observable<IAlbumFoto[]>{
     return this._service.getAlbums(this.branca);
