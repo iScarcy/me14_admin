@@ -1,10 +1,10 @@
 import { GalleryService } from "src/app/services/gallery.service";
-import { LOAD_ALBUMS, loadalbums, loadalbumssuccess } from "./albums.actions";
+import { DELETE_ALBUM, deletealbumsuccess, LOAD_ALBUMS, loadalbums, loadalbumssuccess } from "./albums.actions";
 import { exhaustMap, map } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IAlbumRequest } from "src/app/models/IAlbumRequest";
-import { IGetAlbumsRequestModel, IGetAlbumsStoreRequest } from "./albums.model";
+import { IDeleteAlbumStoreRequesst, IGetAlbumsRequestModel, IGetAlbumsStoreRequest } from "./albums.model";
 
 @Injectable()
 export class AlbumEffects {
@@ -19,6 +19,21 @@ export class AlbumEffects {
             return loadalbumssuccess({ albums: data });
           })
         );
+      })
+    )
+  );
+
+  effectsDelete$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(DELETE_ALBUM),
+      exhaustMap((action: IDeleteAlbumStoreRequesst) => {
+        return this.galleryService
+          .deleteAlbum(action.data.id)
+          .pipe(
+            map((data) => {
+              return deletealbumsuccess({ data: action.data });
+            })
+          );
       })
     )
   );

@@ -20,6 +20,14 @@ export interface IGetAlbumsStoreRequest extends IStoreRequest{
     data:IGetAlbumsRequestModel
 }
 
+export interface IDeleteAlbumRequestModel{
+    id:number
+}
+
+export interface IDeleteAlbumStoreRequesst extends IStoreRequest{
+    data:IDeleteAlbumRequestModel
+}
+
 export interface IStoreRequest{
     type:string
 }
