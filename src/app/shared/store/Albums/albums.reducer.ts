@@ -6,7 +6,7 @@ const _albumsReducer = createReducer(
     initialState,
   
     on(loadalbumssuccess, (state,action)=>{
-        debugger;
+       
         return {
             albums: action.albums
         }

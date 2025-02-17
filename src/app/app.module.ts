@@ -22,6 +22,7 @@ import { albumsReducer } from './shared/store/Albums/albums.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AlbumEffects } from './shared/store/Albums/albums.effects';
+import { AppState } from './shared/store/Global/AppState.model';
  
  
 @NgModule({
@@ -47,7 +48,7 @@ import { AlbumEffects } from './shared/store/Albums/albums.effects';
     FlexLayoutModule,
     FormsModule, 
     ReactiveFormsModule, 
-    StoreModule.forRoot({albums:albumsReducer}),
+    StoreModule.forRoot(AppState),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([AlbumEffects])
   ],

@@ -12,13 +12,10 @@ export class AlbumEffects {
     this.action$.pipe(
       ofType(LOAD_ALBUMS),
       exhaustMap((action:IGetAlbumsStoreRequest) => {
-       
         
-        console.log(action.data.branca);
-        debugger;
         return this.galleryService.getAlbums(action.data.branca).pipe(
           map((data) => {
-            console.log(data);
+           
             return loadalbumssuccess({ albums: data });
           })
         );

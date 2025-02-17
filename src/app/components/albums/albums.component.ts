@@ -11,6 +11,7 @@ import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { IAlbumsModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
 import { loadalbums } from 'src/app/shared/store/Albums/albums.actions';
+import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -19,13 +20,13 @@ import { loadalbums } from 'src/app/shared/store/Albums/albums.actions';
 export class AlbumsComponent implements OnInit {
   branca:string = "";
   
-  albums$: Observable<IAlbumFoto[]> | undefined;
+  albums$ = new Observable<IAlbumsModel> ();
   
   private readonly route = inject(ActivatedRoute);
 
   constructor(
     private _service:GalleryService, 
-    private _store: Store<IAlbumsModel>,
+    private _store: Store<AppStateModel>,
     private _dialog: MatDialog){
 
   }
@@ -34,13 +35,14 @@ export class AlbumsComponent implements OnInit {
     
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
   //  this.albums$ = this.fetchData();
- const req:IGetAlbumsRequestModel={
-  branca: this.branca
- }
+    const req:IGetAlbumsRequestModel={
+      branca: this.branca
+    }
     this._store.dispatch(loadalbums({data:req}));
     
     this.albums$ = this._store.select("albums");
-
+     console.log(this._store.select("albums"))
+    
   }
    
   openNewAlbumDialog(){
@@ -56,7 +58,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   deleteAlbumListener(id:number){
-   
+   /*
 
     this._service.deleteAlbum(id)
       .subscribe({
@@ -66,6 +68,8 @@ export class AlbumsComponent implements OnInit {
           )
         } 
       })
+
+      */
   }
 
   new(request:IAlbumRequest){
