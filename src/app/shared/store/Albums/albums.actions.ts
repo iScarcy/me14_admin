@@ -11,6 +11,9 @@ export const DELETE_ALBUM_SUCCESS = '[Gallery page] delete album success'
 export const NEW_ALBUM = '[Gallery page] new album'
 export const NEW_ALBUM_SUCCESS = '[Gallery page] new album success'  
 
+export const LOAD_ALBUMS_FOTO = '[Gallery page] load foto albums'
+export const LOAD_ALBUMS_FOTO_SUCCESS = '[Gallery page] load foto albums success'
+
 export const loadalbums=createAction(LOAD_ALBUMS, props<{data:IGetAlbumsRequestModel}>());
 export const loadalbumssuccess=createAction(LOAD_ALBUMS_SUCCESS, props<{albums:IAlbumFoto[]}>());
 
