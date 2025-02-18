@@ -1,10 +1,10 @@
 import { GalleryService } from "src/app/services/gallery.service";
-import { DELETE_ALBUM, deletealbumsuccess, LOAD_ALBUMS, loadalbums, loadalbumssuccess, NEW_ALBUM, newalbumsuccess } from "./albums.actions";
+import { DELETE_ALBUM, deletealbumsuccess, LOAD_ALBUM_FOTO, LOAD_ALBUMS, loadalbumfotosuccess, loadalbums, loadalbumssuccess, NEW_ALBUM, newalbumsuccess } from "./albums.actions";
 import { exhaustMap, map } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IAlbumRequest } from "src/app/models/IAlbumRequest";
-import { IDeleteAlbumStoreRequest, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumStoreRequest } from "./albums.model";
+import { IDeleteAlbumStoreRequest, IGetAlbumFotoStoreRequest, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumStoreRequest } from "./albums.model";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { baseGalleryPublicImageUrl } from "src/app/app.costant";
 
@@ -59,6 +59,31 @@ export class AlbumEffects {
                 foto: []
               }
               return newalbumsuccess({ album: albumFoto });
+            })
+          );
+      })
+    )
+  );
+
+  effectsFoto$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(LOAD_ALBUM_FOTO),
+      exhaustMap((action: IGetAlbumFotoStoreRequest) => {
+        return this.galleryService
+          .getFoto(action.data.album.folder) 
+          .pipe(
+            map((album) => {
+            
+              var albumFoto: IAlbumFoto = {
+                id: action.data.album.id,
+                title: action.data.album.title,
+                anno: action.data.album.anno,
+                branca: action.data.album.branca,
+                folder: action.data.album.folder,
+                imgPathFolder: baseGalleryPublicImageUrl + action.data.album.imgPathFolder,
+                foto: album.foto
+              }
+              return loadalbumfotosuccess({ album: albumFoto });
             })
           );
       })

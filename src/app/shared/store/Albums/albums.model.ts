@@ -10,7 +10,7 @@ export interface IStoreModel{
     type: string
 }
 
-/*riquest*/ 
+/*ALBUM*/ 
 
 export interface IGetAlbumsRequestModel{
     branca:string
@@ -42,6 +42,18 @@ export interface INewAlbumRequestModel{
 export interface INewAlbumStoreRequest extends IStoreRequest{
     data:INewAlbumRequestModel
 }
+
+//FOTO
+
+export interface IGetAlbumFotoRequestModel{
+    album:IAlbumFoto
+}
+
+export interface IGetAlbumFotoStoreRequest extends IStoreRequest{
+    data:IGetAlbumFotoRequestModel
+}
+
+//COMMON
 
 export interface IStoreRequest{
     type:string
