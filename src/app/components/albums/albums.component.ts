@@ -2,15 +2,14 @@ import { Component, OnInit, inject  } from '@angular/core';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
-import { IAlbum } from 'src/app/models/IAlbum';
-import { Branca } from 'src/app/models/Branca';
+
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
-import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
-import { IAlbumsModel, IDeleteAlbumRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest } from 'src/app/shared/store/Albums/albums.model';
+
+import { IAlbumsModel, IDeleteAlbumRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumRequestModel } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
-import { deletealbum, loadalbums } from 'src/app/shared/store/Albums/albums.actions';
+import { deletealbum, loadalbums, newalbum } from 'src/app/shared/store/Albums/albums.actions';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 @Component({
   selector: 'app-albums',
@@ -34,14 +33,14 @@ export class AlbumsComponent implements OnInit {
   ngOnInit(): void {    
     
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
-  //  this.albums$ = this.fetchData();
+
     const req:IGetAlbumsRequestModel={
       branca: this.branca
     }
+ 
     this._store.dispatch(loadalbums({data:req}));
     
-    this.albums$ = this._store.select("albums");
-     console.log(this._store.select("albums"))
+    this.albums$ = this._store.select("albums"); 
     
   }
    
@@ -58,46 +57,24 @@ export class AlbumsComponent implements OnInit {
   }
 
   deleteAlbumListener(id:number){
-    console.log(id);
+    
     var req:IDeleteAlbumRequestModel={
       id: id
     }
+    
     this._store.dispatch(deletealbum({data: req}));
-    /*
-
-    this._service.deleteAlbum(id)
-      .subscribe({
-        complete: () => {
-          this.albums$ = this.albums$!.pipe(
-            map(albums => albums.filter(album => album.id !== id))
-          )
-        } 
-      })
-
-      */
+    
   }
 
-  new(request:IAlbumRequest){
-   
-    this._service.newAlbum(request).subscribe({
-      /*next: (album) => {
-        console.log("ciao::"+album);
-        this.albums$!.pipe(
-          tap(albums => albums.unshift(album))
-        )
-        console.log("_______ooooooo_______")
-        this._dialog.closeAll();
-        
-      }*/
-     complete:() => { 
-      //this.albums$ = this.fetchData();
-      this._dialog.closeAll();
-        
-      }
-    });
-
+  new(album:IAlbumRequest){
     
+    var req: INewAlbumRequestModel = {
+      request: album
+    }
 
+    this._store.dispatch(newalbum({data:req}));
+    this._dialog.closeAll();
+    
   }
 
 }

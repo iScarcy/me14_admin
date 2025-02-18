@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { deletealbumsuccess, loadalbumssuccess } from "./albums.actions";
+import { deletealbumsuccess, loadalbumssuccess, newalbumsuccess } from "./albums.actions";
 import { initialState } from "./albums.state";
 
 const _albumsReducer = createReducer(
@@ -13,7 +13,16 @@ const _albumsReducer = createReducer(
     }),
     on(deletealbumsuccess, (state, action) => {
         return {
-            albums: state.albums.filter(album => album.id != action.data.id)  //albums.filter(album => album.id !== id))
+            albums: state.albums.filter(album => album.id != action.data.id)  
+        }
+    }),
+    on(newalbumsuccess, (state, action) => {
+      
+       var albumsNew = [...state.albums];
+        albumsNew.unshift(action.album) 
+        
+        return {
+            albums: albumsNew
         }
     })
 )

@@ -24,8 +24,23 @@ export interface IDeleteAlbumRequestModel{
     id:number
 }
 
-export interface IDeleteAlbumStoreRequesst extends IStoreRequest{
+export interface IDeleteAlbumStoreRequest extends IStoreRequest{
     data:IDeleteAlbumRequestModel
+}
+
+export interface IAlbumRequest {
+    anno: string,
+    title: string,
+    branca: string,
+    copertina: string    
+}
+
+export interface INewAlbumRequestModel{
+   request:IAlbumRequest
+}
+
+export interface INewAlbumStoreRequest extends IStoreRequest{
+    data:INewAlbumRequestModel
 }
 
 export interface IStoreRequest{
