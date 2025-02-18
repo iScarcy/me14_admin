@@ -8,9 +8,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
-import { IAlbumsModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest } from 'src/app/shared/store/Albums/albums.model';
+import { IAlbumsModel, IDeleteAlbumRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
-import { loadalbums } from 'src/app/shared/store/Albums/albums.actions';
+import { deletealbum, loadalbums } from 'src/app/shared/store/Albums/albums.actions';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 @Component({
   selector: 'app-albums',
@@ -58,7 +58,12 @@ export class AlbumsComponent implements OnInit {
   }
 
   deleteAlbumListener(id:number){
-   /*
+    console.log(id);
+    var req:IDeleteAlbumRequestModel={
+      id: id
+    }
+    this._store.dispatch(deletealbum({data: req}));
+    /*
 
     this._service.deleteAlbum(id)
       .subscribe({
