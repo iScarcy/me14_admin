@@ -17,15 +17,14 @@ export class FotoComponent implements OnInit {
   
   albumTitle:string = "";
   albumphoto$: Observable<IAlbumFoto> | undefined;
-  
+  al:IAlbumFoto | undefined; 
   foto: IFoto[] | undefined;
   constructor(@Inject(MAT_DIALOG_DATA) public data: AlbumFotoDialogData){
     
   }
 
   ngOnInit(): void {
-    this.albumTitle = this.data.album.title
-    this.foto = this.data.album.foto
+    this.al = this.data.album;
     /*
     this.album  =  this._route.snapshot.paramMap.get('album')!;
     this.albumphoto$   = this._service.getFoto(this.album);

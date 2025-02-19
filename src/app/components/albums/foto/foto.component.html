@@ -1,7 +1,8 @@
-<h2 >{{this.albumTitle}}</h2>
+<h2 mat-dialog-title>{{this.al?.title}}</h2>
+<mat-dialog-content>
 <div class="container">
        
-        <div class="item"  *ngFor="let ph of this.foto">
+        <div class="item"  *ngFor="let ph of this.al?.foto">
             
             <mat-card appearance="outlined">
                
@@ -16,3 +17,8 @@
 
         </div>
   </div>
+</mat-dialog-content>  
+<mat-dialog-actions>
+  
+  <button mat-button mat-dialog-close>Chiudi</button>
+</mat-dialog-actions>

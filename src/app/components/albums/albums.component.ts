@@ -13,6 +13,8 @@ import { deletealbum, loadalbumfoto, loadalbums, newalbum } from 'src/app/shared
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { FotoComponent } from './foto/foto.component';
+import { getalbum, getalbumslist } from 'src/app/shared/store/Albums/albums.selectors';
+ 
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -21,12 +23,11 @@ import { FotoComponent } from './foto/foto.component';
 export class AlbumsComponent implements OnInit {
   branca:string = "";
   
-  albums$ = new Observable<IAlbumsModel> ();
-  
+  albums$ = new Observable<IAlbumFoto[]> ();
+  albumF : IAlbumFoto | undefined
   private readonly route = inject(ActivatedRoute);
 
   constructor(
-    private _service:GalleryService, 
     private _store: Store<AppStateModel>,
     private _dialog: MatDialog){
 
@@ -42,7 +43,7 @@ export class AlbumsComponent implements OnInit {
  
     this._store.dispatch(loadalbums({data:req}));
     
-    this.albums$ = this._store.select("albums"); 
+    this.albums$ = this._store.select(getalbumslist); 
     
   }
    
@@ -69,21 +70,60 @@ export class AlbumsComponent implements OnInit {
   }
 
   getAlbumFotoListener(albumFoto:IAlbumFoto){
+    debugger;
     console.log("albums:"+albumFoto.folder)
     var req: IGetAlbumFotoRequestModel={
       album: albumFoto.folder
     }
     this._store.dispatch(loadalbumfoto({data:req}));
     
-    debugger;
-
-    let config: MatDialogConfig = {
-      panelClass: "dialog-responsive",
-      disableClose: false,
-      data: {album: albumFoto}       
-    }
+   
+  if(albumFoto.foto.length <= 0){
+    //readonly dialogRef = inject(MatDialogRef<DialogAnimationsExampleDialog>);
     
-    let dialogRed = this._dialog.open(FotoComponent, config)
+     this._store.select(getalbum(albumFoto.folder)).subscribe(albumx =>{
+        const dialogExist = this._dialog.getDialogById('album-dialog');
+
+        if(!dialogExist){
+        let config: MatDialogConfig = {
+          id:"album-dialog",
+          panelClass: "dialog-responsive",
+          disableClose: true,
+          
+          data: {album: albumx}       
+        }
+        
+        
+        let dialogRef = this._dialog.open(FotoComponent, config)
+      
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+          
+        })
+      }
+    });
+  }else{
+    const dialogExist = this._dialog.getDialogById('album-dialog');
+
+    if(!dialogExist){
+
+      let config: MatDialogConfig = {
+        id:"album-dialog",
+        panelClass: "dialog-responsive",
+        disableClose: true,
+        
+        data: {album: albumFoto}       
+      }
+      
+      this._dialog.getDialogById
+      let dialogRef = this._dialog.open(FotoComponent, config)
+      
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      })
+    }
+  }
+    
   }
 
   new(album:IAlbumRequest){
@@ -97,4 +137,7 @@ export class AlbumsComponent implements OnInit {
     
   }
 
+  closeDialog(){
+    this._dialog.closeAll();
+  }
 }

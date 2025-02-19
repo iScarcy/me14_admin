@@ -1,5 +1,6 @@
-import { IAlbumsModel } from "../Albums/albums.model";
+import { IAlbumFoto } from "src/app/models/IAlbumFoto";
+ 
 
 export interface AppStateModel{
-    albums:IAlbumsModel
+    albums:IAlbumFoto[]
 }
