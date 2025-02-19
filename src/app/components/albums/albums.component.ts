@@ -70,59 +70,26 @@ export class AlbumsComponent implements OnInit {
   }
 
   getAlbumFotoListener(albumFoto:IAlbumFoto){
-    debugger;
+    
     console.log("albums:"+albumFoto.folder)
     var req: IGetAlbumFotoRequestModel={
       album: albumFoto.folder
     }
     this._store.dispatch(loadalbumfoto({data:req}));
     
+    const buttonElement = document.activeElement as HTMLElement; // Get the currently focused element
+    buttonElement.blur(); // Remove focus from the button
    
-  if(albumFoto.foto.length <= 0){
-    //readonly dialogRef = inject(MatDialogRef<DialogAnimationsExampleDialog>);
-    
-     this._store.select(getalbum(albumFoto.folder)).subscribe(albumx =>{
-        const dialogExist = this._dialog.getDialogById('album-dialog');
-
-        if(!dialogExist){
-        let config: MatDialogConfig = {
-          id:"album-dialog",
-          panelClass: "dialog-responsive",
-          disableClose: true,
-          
-          data: {album: albumx}       
+    this._store.select(getalbum(albumFoto.folder)).subscribe({
+      next:(albumx)=>{console.log("next:"+albumx?.foto.length)
+        if(albumx?.foto.length==undefined || albumx!.foto.length<=0){
+            console.log("ko")
+        }else{
+          console.log("ok")
         }
-        
-        
-        let dialogRef = this._dialog.open(FotoComponent, config)
-      
-        dialogRef.afterClosed().subscribe(result => {
-          console.log(`Dialog result: ${result}`);
-          
-        })
-      }
+      },
+      complete:()=>{console.log("complete")}
     });
-  }else{
-    const dialogExist = this._dialog.getDialogById('album-dialog');
-
-    if(!dialogExist){
-
-      let config: MatDialogConfig = {
-        id:"album-dialog",
-        panelClass: "dialog-responsive",
-        disableClose: true,
-        
-        data: {album: albumFoto}       
-      }
-      
-      this._dialog.getDialogById
-      let dialogRef = this._dialog.open(FotoComponent, config)
-      
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
-      })
-    }
-  }
     
   }
 
