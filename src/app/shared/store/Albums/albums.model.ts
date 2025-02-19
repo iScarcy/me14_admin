@@ -46,7 +46,7 @@ export interface INewAlbumStoreRequest extends IStoreRequest{
 //FOTO
 
 export interface IGetAlbumFotoRequestModel{
-    album:IAlbumFoto
+    album:string
 }
 
 export interface IGetAlbumFotoStoreRequest extends IStoreRequest{

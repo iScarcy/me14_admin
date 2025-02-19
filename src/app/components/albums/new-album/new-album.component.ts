@@ -2,7 +2,7 @@ import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { AlbumDialogData } from 'src/app/models/AlbumDialogData';
+import { AlbumDialogData } from 'src/app/models/dialog/AlbumDialogData';
 import { IAlbum } from 'src/app/models/IAlbum';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 import { IUploadFile } from 'src/app/models/IUploadFile';

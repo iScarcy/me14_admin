@@ -23,6 +23,8 @@ export class AlbumComponent implements OnInit{
 
   @Output() public deleteAlbumEmitter:EventEmitter<number> = new EventEmitter();
 
+  @Output() public openAlbumFotoEmitter:EventEmitter<string> = new EventEmitter();
+
   ngOnInit(): void {
   
   }
@@ -34,6 +36,11 @@ export class AlbumComponent implements OnInit{
   delete(id:number){
     this.dialog.closeAll();
     this.deleteAlbumEmitter.emit(id);
+  }
+
+  getAlbumFoto(folder:string){
+    console.log(folder);
+    this.openAlbumFotoEmitter.emit(folder);
   }
 
   openDeleteConfirmDialog(id:number): void {

@@ -7,7 +7,7 @@
     
     <div class="item"  *ngFor="let al of (this.albums$ | async)!.albums">
 
-        <app-album [album]="al" (deleteAlbumEmitter)="deleteAlbumListener(al.id)"/>
+        <app-album [album]="al" (deleteAlbumEmitter)="deleteAlbumListener(al.id)" (openAlbumFotoEmitter)="getAlbumFotoListener(al)"/>
     </div>
   </div>
 

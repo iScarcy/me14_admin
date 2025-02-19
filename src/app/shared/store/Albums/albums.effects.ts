@@ -70,17 +70,17 @@ export class AlbumEffects {
       ofType(LOAD_ALBUM_FOTO),
       exhaustMap((action: IGetAlbumFotoStoreRequest) => {
         return this.galleryService
-          .getFoto(action.data.album.folder) 
+          .getFoto(action.data.album) 
           .pipe(
             map((album) => {
             
               var albumFoto: IAlbumFoto = {
-                id: action.data.album.id,
-                title: action.data.album.title,
-                anno: action.data.album.anno,
-                branca: action.data.album.branca,
-                folder: action.data.album.folder,
-                imgPathFolder: baseGalleryPublicImageUrl + action.data.album.imgPathFolder,
+                id: album.id,
+                title: album.title,
+                anno: album.anno,
+                branca: album.branca,
+                folder: album.folder,
+                imgPathFolder: baseGalleryPublicImageUrl + album.imgPathFolder,
                 foto: album.foto
               }
               return loadalbumfotosuccess({ album: albumFoto });

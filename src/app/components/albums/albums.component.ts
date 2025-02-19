@@ -7,10 +7,12 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 
-import { IAlbumsModel, IDeleteAlbumRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumRequestModel } from 'src/app/shared/store/Albums/albums.model';
+import { IAlbumsModel, IDeleteAlbumRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumRequestModel } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
-import { deletealbum, loadalbums, newalbum } from 'src/app/shared/store/Albums/albums.actions';
+import { deletealbum, loadalbumfoto, loadalbums, newalbum } from 'src/app/shared/store/Albums/albums.actions';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
+import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
+import { FotoComponent } from './foto/foto.component';
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
@@ -45,7 +47,7 @@ export class AlbumsComponent implements OnInit {
   }
    
   openNewAlbumDialog(){
-   console.log("new");
+  
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
       disableClose: true,
@@ -64,6 +66,24 @@ export class AlbumsComponent implements OnInit {
     
     this._store.dispatch(deletealbum({data: req}));
     
+  }
+
+  getAlbumFotoListener(albumFoto:IAlbumFoto){
+    console.log("albums:"+albumFoto.folder)
+    var req: IGetAlbumFotoRequestModel={
+      album: albumFoto.folder
+    }
+    this._store.dispatch(loadalbumfoto({data:req}));
+    
+    debugger;
+
+    let config: MatDialogConfig = {
+      panelClass: "dialog-responsive",
+      disableClose: false,
+      data: {album: albumFoto}       
+    }
+    
+    let dialogRed = this._dialog.open(FotoComponent, config)
   }
 
   new(album:IAlbumRequest){

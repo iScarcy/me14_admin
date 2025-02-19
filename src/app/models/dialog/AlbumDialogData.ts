@@ -1,4 +1,4 @@
-import { IAlbumRequest } from "./IAlbumRequest";
+import { IAlbumRequest } from "../IAlbumRequest";
 
 export interface AlbumDialogData {
     album: IAlbumRequest,
