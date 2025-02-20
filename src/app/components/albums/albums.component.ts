@@ -68,10 +68,49 @@ export class AlbumsComponent implements OnInit {
     this._store.dispatch(deletealbum({data: req}));
     
   }
+ 
+  new(album:IAlbumRequest){
+    var req: INewAlbumRequestModel = {
+      request: album
+    }
+
+    this._store.dispatch(newalbum({data:req}));
+    this._dialog.closeAll();
+  }
+
 
   getAlbumFotoListener(albumFoto:IAlbumFoto){
     
-    console.log("albums:"+albumFoto.folder)
+      
+    //controllo se ho già aperto le foto dell'album
+    if(albumFoto.foto.length > 0){
+
+      const dialogExist = this._dialog.getDialogById('album-dialog');
+
+      if(!dialogExist){
+  
+        let config: MatDialogConfig = {
+          id:"album-dialog",
+          panelClass: "dialog-responsive",
+          disableClose: true,
+          
+          data: {album: albumFoto}       
+        }
+        
+      
+        let dialogRef = this._dialog.open(FotoComponent, config)
+       
+      }
+      
+    }else{
+       
+      this.loadAlbumFotoFromStore(albumFoto);
+    }  
+ 
+  }
+
+  loadAlbumFotoFromStore(albumFoto:IAlbumFoto){
+   
     var req: IGetAlbumFotoRequestModel={
       album: albumFoto.folder
     }
@@ -82,26 +121,34 @@ export class AlbumsComponent implements OnInit {
    
     this._store.select(getalbum(albumFoto.folder)).subscribe({
       next:(albumx)=>{console.log("next:"+albumx?.foto.length)
-        if(albumx?.foto.length==undefined || albumx!.foto.length<=0){
-            console.log("ko")
-        }else{
-          console.log("ok")
+        
+        if(albumx?.foto.length!=undefined && albumx!.foto.length>0){
+          this.openDialogAlbumFoto(albumx);         
         }
       },
       complete:()=>{console.log("complete")}
     });
-    
+
   }
 
-  new(album:IAlbumRequest){
-    
-    var req: INewAlbumRequestModel = {
-      request: album
-    }
+  openDialogAlbumFoto(albumFoto:IAlbumFoto){
+    console.log("openDialogAlbumFoto(albumFoto:IAlbumFoto):"+albumFoto.foto.length)
+    const dialogExist = this._dialog.getDialogById('album-dialog');
 
-    this._store.dispatch(newalbum({data:req}));
-    this._dialog.closeAll();
-    
+    if(!dialogExist){
+
+      let config: MatDialogConfig = {
+        id:"album-dialog",
+        panelClass: "dialog-responsive",
+        disableClose: true,
+        
+        data: {album: albumFoto}       
+      }
+      
+     
+      let dialogRef = this._dialog.open(FotoComponent, config)
+      
+    }
   }
 
   closeDialog(){
