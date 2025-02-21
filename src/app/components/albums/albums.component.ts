@@ -118,12 +118,17 @@ export class AlbumsComponent implements OnInit {
     
     const buttonElement = document.activeElement as HTMLElement; // Get the currently focused element
     buttonElement.blur(); // Remove focus from the button
-   
+    let x  = 0
     this._store.select(getalbum(albumFoto.folder)).subscribe({
       next:(albumx)=>{console.log("next:"+albumx?.foto.length)
         
-        if(albumx?.foto.length!=undefined && albumx!.foto.length>0){
-          this.openDialogAlbumFoto(albumx);         
+        if( x > 0 || (albumx?.foto.length!=undefined && albumx!.foto.length>0)){
+          this.openDialogAlbumFoto(albumx!);         
+        }
+        else{
+          console.log("ciaone");
+          x++
+          console.log(x)
         }
       },
       complete:()=>{console.log("complete")}
