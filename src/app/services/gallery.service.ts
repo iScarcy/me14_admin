@@ -8,6 +8,7 @@ import { IUploadFile } from '../models/IUploadFile';
 import { IFoto } from '../models/IFoto';
 import { IAlbumFoto } from '../models/IAlbumFoto';
 import { IAlbumRequest } from '../models/IAlbumRequest';
+import { IAlbumFotoRequest } from '../models/IAlbumFotoRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,13 @@ export class GalleryService {
     map(data => ({file:  data.file}))
    )
   }
+
+ uploadAlbumFoto(request:IAlbumFotoRequest):Observable<Array<IFoto>>{
+
+  var url: string = baseGalleryApiUrl+"album/upload";
+  return this.httpEvents.post<Array<IFoto>>(url, request);
+
+ }
 
   getFoto(album:string):Observable<IAlbumFoto>{
     

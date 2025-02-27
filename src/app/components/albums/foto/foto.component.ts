@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { Observable } from 'rxjs';
 import { AlbumFotoDialogData } from 'src/app/models/dialog/AlbumFotoDialogData';
@@ -19,20 +19,47 @@ export class FotoComponent implements OnInit {
   albumphoto$: Observable<IAlbumFoto> | undefined;
   al:IAlbumFoto | undefined; 
   foto: IFoto[] | undefined;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: AlbumFotoDialogData){
+
+  file_store!: FileList;
+  file_list: Array<string> = [];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: AlbumFotoDialogData, private dialog: MatDialog){
     
   }
 
   ngOnInit(): void {
     this.al = this.data.album;
-    /*
-    this.album  =  this._route.snapshot.paramMap.get('album')!;
-    this.albumphoto$   = this._service.getFoto(this.album);
-    this.albumphoto$.subscribe((album)=>{
-      this.al.title = album.title
-      this.foto = album.foto
-    })
-     */
+  
   }
 
+  handleFileInputChange(l: FileList ): void {
+    this.file_store = l;
+    if (l.length) {
+      const f = l;
+      console.log(f);
+     
+     for(var i=0;i<f.length;i++){
+        console.log(f[i].name);
+        var foto : IFoto = {
+          id: 0,
+          thumbPathFile: f[i].name,
+          mediumPathFile: '',
+          albumID: 0,
+          file: '',
+          fullPathFile: ''
+        }
+        debugger;
+        this.al?.foto.push(foto)
+     }
+      
+          const count = l.length > 1 ? `(+${l.length - 1} files)` : "";
+      
+      
+      
+
+    } 
+
+    
+
+  }
 }
