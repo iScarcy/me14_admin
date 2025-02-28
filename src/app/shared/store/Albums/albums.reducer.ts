@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { deletealbumsuccess, loadalbumfotosuccess, loadalbumssuccess, newalbumsuccess } from "./albums.actions";
+import { deletealbumsuccess, loadalbumfotosuccess, loadalbumssuccess, newalbumfotosuccess, newalbumsuccess } from "./albums.actions";
 import { initialState } from "./albums.state";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 
@@ -46,10 +46,15 @@ const _albumsReducer = createReducer(
         let index = albumsFoto.indexOf(item)
         
         albumsFoto[index] = album;
-        
-        
+                
         return {
             albums: albumsFoto
+        }
+    }),
+    on(newalbumfotosuccess, (state, action)=>{
+        var test = [...state.albums]
+        return {
+            albums: test
         }
     })
 )

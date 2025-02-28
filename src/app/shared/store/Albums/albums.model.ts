@@ -1,5 +1,6 @@
 import { IAlbum } from "src/app/models/IAlbum";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
+import { IAlbumFotoRequest } from "src/app/models/IAlbumFotoRequest";
 
 export interface IAlbumsModel{
     albums:IAlbumFoto[]
@@ -52,6 +53,14 @@ export interface IGetAlbumFotoRequestModel{
 export interface IGetAlbumFotoStoreRequest extends IStoreRequest{
     data:IGetAlbumFotoRequestModel
 }
+
+export interface INewAlbumFotoRequestModel{
+    request:IAlbumFotoRequest
+ }
+ 
+ export interface INewAlbumFotoStoreRequest extends IStoreRequest{
+     data:INewAlbumFotoRequestModel
+ }
 
 //COMMON
 

@@ -1,12 +1,13 @@
 import { GalleryService } from "src/app/services/gallery.service";
-import { DELETE_ALBUM, deletealbumsuccess, LOAD_ALBUM_FOTO, LOAD_ALBUMS, loadalbumfotosuccess, loadalbums, loadalbumssuccess, NEW_ALBUM, newalbumsuccess } from "./albums.actions";
-import { exhaustMap, map } from "rxjs";
+import { DELETE_ALBUM, deletealbumsuccess, LOAD_ALBUM_FOTO, LOAD_ALBUMS, loadalbumfotosuccess, loadalbums, loadalbumssuccess, NEW_ALBUM, NEW_ALBUM_FOTO, newalbumfotosuccess, newalbumsuccess } from "./albums.actions";
+import { exhaustMap, map, merge, mergeAll, mergeMap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IAlbumRequest } from "src/app/models/IAlbumRequest";
-import { IDeleteAlbumStoreRequest, IGetAlbumFotoStoreRequest, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumStoreRequest } from "./albums.model";
+import { IDeleteAlbumStoreRequest, IGetAlbumFotoStoreRequest, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumStoreRequest } from "./albums.model";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { baseGalleryPublicImageUrl } from "src/app/app.costant";
+import { IFoto } from "src/app/models/IFoto";
 
 @Injectable()
 export class AlbumEffects {
@@ -90,6 +91,49 @@ export class AlbumEffects {
     )
   );
 
+  effectsNewFoto$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(NEW_ALBUM_FOTO),
+      exhaustMap((action:INewAlbumFotoStoreRequest) => {
+        
+        return this.galleryService.uploadAlbumFoto(action.data.request).pipe(
+          map((data) => {
+           
+            return newalbumfotosuccess({ photo: data });
+          })
+        );
+      })
+    )
+  );
+
+  /*
+  effectsNewFoto$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(NEW_ALBUM_FOTO),
+      exhaustMap((action: INewAlbumFotoStoreRequest) => {
+        return this.galleryService
+          .uploadAlbumFoto(action.data.request) 
+          .pipe(
+             map(response =>  response.map(foto => {
+             
+              var foto: IFoto = {
+                    id: foto.id,
+                    albumID: foto.albumID,
+                    file: foto.file,
+                    thumbPathFile: foto.thumbPathFile,
+                    mediumPathFile: foto.mediumPathFile,
+                    fullPathFile: foto.fullPathFile
+                }
+              }
+              
+          ))
+          );
+          return newalbumfotosuccess({ photo: foto });
+      })
+    )
+  );
+  */
+  
   constructor(
     private action$: Actions,
     private galleryService: GalleryService   

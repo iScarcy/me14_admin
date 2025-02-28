@@ -1,6 +1,7 @@
 import { createAction, props } from "@ngrx/store"
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
-import { IDeleteAlbumRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, INewAlbumRequestModel } from "./albums.model";
+import { IDeleteAlbumRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, INewAlbumFotoRequestModel, INewAlbumRequestModel } from "./albums.model";
+import { IFoto } from "src/app/models/IFoto";
 
 export const LOAD_ALBUMS = '[Gallery page] load albums'
 export const LOAD_ALBUMS_SUCCESS = '[Gallery page] load albums success'
@@ -14,6 +15,9 @@ export const NEW_ALBUM_SUCCESS = '[Gallery page] new album success'
 export const LOAD_ALBUM_FOTO = '[Gallery page] load foto albums'
 export const LOAD_ALBUM_FOTO_SUCCESS = '[Gallery page] load foto albums success'
 
+export const NEW_ALBUM_FOTO = '[Gallery page] new album foto'
+export const NEW_ALBUM_FOTO_SUCCESS = '[Gallery page] new album foto success'  
+
 export const loadalbums=createAction(LOAD_ALBUMS, props<{data:IGetAlbumsRequestModel}>());
 export const loadalbumssuccess=createAction(LOAD_ALBUMS_SUCCESS, props<{albums:IAlbumFoto[]}>());
 
@@ -25,3 +29,6 @@ export const newalbumsuccess=createAction(NEW_ALBUM_SUCCESS, props<{album: IAlbu
 
 export const loadalbumfoto=createAction(LOAD_ALBUM_FOTO, props<{data: IGetAlbumFotoRequestModel}>())
 export const loadalbumfotosuccess=createAction(LOAD_ALBUM_FOTO_SUCCESS, props<{album: IAlbumFoto}>())
+
+export const newalbumfoto=createAction(NEW_ALBUM_FOTO, props<{data: INewAlbumFotoRequestModel}>())
+export const newalbumfotosuccess=createAction(NEW_ALBUM_FOTO_SUCCESS, props<{photo: Array<IFoto>}>())
