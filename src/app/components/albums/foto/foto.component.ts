@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { Observable } from 'rxjs';
@@ -23,6 +23,10 @@ export class FotoComponent implements OnInit {
   file_store!: FileList;
   file_list: Array<string> = [];
 
+  onRotate = new EventEmitter();
+
+  
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: AlbumFotoDialogData, private dialog: MatDialog){
     
   }
@@ -30,6 +34,11 @@ export class FotoComponent implements OnInit {
   ngOnInit(): void {
     this.al = this.data.album;
   
+  }
+
+  rotate():void{
+  
+    this.onRotate.emit();
   }
 
   handleFileInputChange(l: FileList ): void {

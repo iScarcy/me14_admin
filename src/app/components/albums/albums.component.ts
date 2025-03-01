@@ -97,14 +97,22 @@ export class AlbumsComponent implements OnInit {
           data: {album: albumFoto}       
         }
         
-      
+    
         let dialogRef = this._dialog.open(FotoComponent, config)
-       
+        const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
+          console.log("ci siamo 2");
+        })
+        /*
+          let dialogRef = this.dialog.open(Component);
+          const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
+            // do something
+          });*/
       }
       
     }else{
        
       this.loadAlbumFotoFromStore(albumFoto);
+
     }  
  
   }
@@ -153,6 +161,10 @@ export class AlbumsComponent implements OnInit {
      
       let dialogRef = this._dialog.open(FotoComponent, config)
       
+       
+        const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
+          console.log("ci siamo 1");
+        })
     }
   }
 
