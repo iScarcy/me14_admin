@@ -57,8 +57,9 @@ export class FotoComponent implements OnInit {
           file: '',
           fullPathFile: ''
         }
-        debugger;
-        this.al?.foto.push(foto)
+        
+        
+
      }
       
           const count = l.length > 1 ? `(+${l.length - 1} files)` : "";
