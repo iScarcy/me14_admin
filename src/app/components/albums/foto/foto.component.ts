@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AlbumFotoDialogData } from 'src/app/models/dialog/AlbumFotoDialogData';
 import { IAlbum } from 'src/app/models/IAlbum';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
+import { IAlbumFotoRequest } from 'src/app/models/IAlbumFotoRequest';
 import { IFoto } from 'src/app/models/IFoto';
 
 
@@ -16,15 +17,16 @@ import { IFoto } from 'src/app/models/IFoto';
 export class FotoComponent implements OnInit {
   
   albumTitle:string = "";
-  albumphoto$: Observable<IAlbumFoto> | undefined;
+
   al:IAlbumFoto | undefined; 
-  foto: IFoto[] | undefined;
+ 
 
   file_store!: FileList;
-  file_list: Array<string> = [];
+ 
 
   onRotate = new EventEmitter();
 
+  onUploadAlbumFoto = new EventEmitter<IAlbumFotoRequest>();
   
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: AlbumFotoDialogData, private dialog: MatDialog){
@@ -44,29 +46,21 @@ export class FotoComponent implements OnInit {
   handleFileInputChange(l: FileList ): void {
     this.file_store = l;
     if (l.length) {
-      const f = l;
-      console.log(f);
-     
+   
+     const f = l;
+    
+     const files : Array<File> = [];
+      
      for(var i=0;i<f.length;i++){
-        console.log(f[i].name);
-        var foto : IFoto = {
-          id: 0,
-          thumbPathFile: f[i].name,
-          mediumPathFile: '',
-          albumID: 0,
-          file: '',
-          fullPathFile: ''
-        }
-        
-        
-
+      files.push(f[i]);
+     }
+     
+     var fotoRequest : IAlbumFotoRequest = {
+       idAlbum: this.al?.id,
+       foto: files
      }
       
-          const count = l.length > 1 ? `(+${l.length - 1} files)` : "";
-      
-      
-      
-
+      this.onUploadAlbumFoto.emit(fotoRequest);
     } 
 
     

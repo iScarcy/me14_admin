@@ -7,9 +7,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 
-import { IAlbumsModel, IDeleteAlbumRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumRequestModel } from 'src/app/shared/store/Albums/albums.model';
+import { IAlbumsModel, IDeleteAlbumRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoRequestModel, INewAlbumRequestModel } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
-import { deletealbum, loadalbumfoto, loadalbums, newalbum } from 'src/app/shared/store/Albums/albums.actions';
+import { deletealbum, loadalbumfoto, loadalbums, newalbum, newalbumfoto } from 'src/app/shared/store/Albums/albums.actions';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { FotoComponent } from './foto/foto.component';
@@ -102,11 +102,7 @@ export class AlbumsComponent implements OnInit {
         const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
           console.log("ci siamo 2");
         })
-        /*
-          let dialogRef = this.dialog.open(Component);
-          const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
-            // do something
-          });*/
+        
       }
       
     }else{
@@ -164,6 +160,15 @@ export class AlbumsComponent implements OnInit {
        
         const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
           console.log("ci siamo 1");
+        })
+
+        const subfoto = dialogRef.componentInstance.onUploadAlbumFoto.subscribe((data) => {
+          const req:INewAlbumFotoRequestModel={
+            request: data
+          }
+          //newalbumfoto=createAction(NEW_ALBUM_FOTO, props<{data: INewAlbumFotoRequestModel}>())
+          this._store.dispatch(newalbumfoto({data:req}));
+           
         })
     }
   }
