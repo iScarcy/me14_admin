@@ -79,7 +79,7 @@ export class AlbumsComponent implements OnInit {
   }
 
 
-  getAlbumFotoListener(albumFoto:IAlbumFoto){
+/*   getAlbumFotoListener(albumFoto:IAlbumFoto){
     
       
     //controllo se ho già aperto le foto dell'album
@@ -171,7 +171,7 @@ export class AlbumsComponent implements OnInit {
            
         })
     }
-  }
+  } */
 
   closeDialog(){
     this._dialog.closeAll();
