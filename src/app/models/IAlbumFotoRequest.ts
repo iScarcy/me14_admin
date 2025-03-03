@@ -1,4 +1,4 @@
 export interface IAlbumFotoRequest {
     idAlbum:number | undefined,
-    foto: Array<File>
+    Files: Array<File>
 }

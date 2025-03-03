@@ -95,7 +95,7 @@ export class AlbumEffects {
     this.action$.pipe(
       ofType(NEW_ALBUM_FOTO),
       exhaustMap((action:INewAlbumFotoStoreRequest) => {
-        debugger;
+         
         return this.galleryService.uploadAlbumFoto(action.data.request).pipe(
           map((data) => {
            

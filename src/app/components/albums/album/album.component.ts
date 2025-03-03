@@ -150,6 +150,7 @@ export class AlbumComponent implements OnInit{
             const req:INewAlbumFotoRequestModel={
               request: data
             }
+            
             //newalbumfoto=createAction(NEW_ALBUM_FOTO, props<{data: INewAlbumFotoRequestModel}>())
             this._store.dispatch(newalbumfoto({data:req}));
              

@@ -57,7 +57,7 @@ export class FotoComponent implements OnInit {
      
      var fotoRequest : IAlbumFotoRequest = {
        idAlbum: this.al?.id,
-       foto: files
+       Files: files
      }
       
       this.onUploadAlbumFoto.emit(fotoRequest);

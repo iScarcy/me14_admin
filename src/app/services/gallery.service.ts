@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Branca } from '../models/Branca';
 import { map, Observable, of } from 'rxjs';
@@ -47,9 +47,16 @@ export class GalleryService {
   }
 
  uploadAlbumFoto(request:IAlbumFotoRequest):Observable<Array<IFoto>>{
-
-  var url: string = baseGalleryApiUrl+"album/upload";
-  return this.httpEvents.post<Array<IFoto>>(url, request);
+  
+  var url: string = baseGalleryApiUrl+"album/photo";
+  const formData = new FormData();
+  formData.append("idAlbum", ""+request.idAlbum);
+  for (const image of request.Files) {
+    formData.append("files", image);
+  }
+  
+  const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
+  return this.httpEvents.post<Array<IFoto>>(url, formData);
 
  }
 

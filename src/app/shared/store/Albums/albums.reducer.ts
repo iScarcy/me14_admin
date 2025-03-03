@@ -52,7 +52,7 @@ const _albumsReducer = createReducer(
         }
     }),
     on(newalbumfotosuccess, (state, action)=>{
-       debugger;
+      
         var test = [...state.albums]
         return {
             albums: test
