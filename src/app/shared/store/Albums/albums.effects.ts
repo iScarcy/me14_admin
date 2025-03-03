@@ -98,7 +98,7 @@ export class AlbumEffects {
          
         return this.galleryService.uploadAlbumFoto(action.data.request).pipe(
           map((data) => {
-           
+          
             return newalbumfotosuccess({ photo: data });
           })
         );

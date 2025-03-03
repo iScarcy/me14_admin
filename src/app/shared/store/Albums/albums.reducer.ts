@@ -42,7 +42,7 @@ const _albumsReducer = createReducer(
        
         action.album.foto.forEach(element => {
             album.foto.push(element);
-        }); ;
+        }); 
         let index = albumsFoto.indexOf(item)
         
         albumsFoto[index] = album;
@@ -52,10 +52,33 @@ const _albumsReducer = createReducer(
         }
     }),
     on(newalbumfotosuccess, (state, action)=>{
-      
-        var test = [...state.albums]
+       
+        var albumsFoto = [...state.albums];
+        var item =  albumsFoto.find(item => item.id == action.photo[0].albumID)!;
+        
+        var album : IAlbumFoto = {
+            id: item.id,
+            title: item.title,
+            anno: item.anno,
+            branca: item.branca,
+            folder: item.folder,
+            imgPathFolder: item.imgPathFolder,
+            foto: []
+        } 
+
+        item.foto.forEach(element => {
+            album.foto.push(element);
+        });
+
+        action.photo.forEach(element => {
+            album.foto.push(element);
+        }); 
+        let index = albumsFoto.indexOf(item)
+        
+        albumsFoto[index] = album;
+
         return {
-            albums: test
+            albums: albumsFoto
         }
     })
 )
