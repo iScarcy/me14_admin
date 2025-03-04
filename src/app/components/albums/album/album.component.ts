@@ -153,7 +153,12 @@ export class AlbumComponent implements OnInit{
             
             //newalbumfoto=createAction(NEW_ALBUM_FOTO, props<{data: INewAlbumFotoRequestModel}>())
             this._store.dispatch(newalbumfoto({data:req}));
-             
+          
+            this._store.select(getalbum(albumFoto.folder)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data;
+              }
+            }); 
           })
       }
     }
