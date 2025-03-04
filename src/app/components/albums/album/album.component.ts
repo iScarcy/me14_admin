@@ -6,8 +6,8 @@ import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { Store } from '@ngrx/store';
 import { FotoComponent } from '../foto/foto.component';
-import { IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
-import { loadalbumfoto, newalbumfoto } from 'src/app/shared/store/Albums/albums.actions';
+import { IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
+import { deletealbumfoto, loadalbumfoto, newalbumfoto } from 'src/app/shared/store/Albums/albums.actions';
 import { getalbum } from 'src/app/shared/store/Albums/albums.selectors';
 
 @Component({
@@ -84,8 +84,40 @@ export class AlbumComponent implements OnInit{
       
           let dialogRef = this._dialog.open(FotoComponent, config)
           const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
-            console.log("ci siamo 2");
+            console.log("rotate");
           })
+          //end sub
+          const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
+            
+            const req:IDeleteRequestModel = {
+              idAlbum: this.album.id,
+              idFoto: id
+            }
+            
+            this._store.dispatch(deletealbumfoto({data:req}));
+            
+            this._store.select(getalbum(albumFoto.folder)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data!;
+              }
+            }); 
+            
+          })
+          //end subDelete
+          const subfoto = dialogRef.componentInstance.onUploadAlbumFoto.subscribe((data) => {
+            const req:INewAlbumFotoRequestModel={
+              request: data
+            }
+            
+            this._store.dispatch(newalbumfoto({data:req}));
+          
+            this._store.select(getalbum(albumFoto.folder)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data!;
+              }
+            }); 
+          })
+          //end subfoto
           
         }
         
@@ -139,27 +171,45 @@ export class AlbumComponent implements OnInit{
         }
         
        
-        let dialogRef = this._dialog.open(FotoComponent, config)
+        let dialogRef = this._dialog.open(FotoComponent, config);
         
          
           const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
-            console.log("ci siamo 1");
+            console.log("rotate");
           })
-  
+          //end sub
+          const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
+            
+            const req:IDeleteRequestModel = {
+              idAlbum: this.album.id,
+              idFoto: id
+            }
+            
+            this._store.dispatch(deletealbumfoto({data:req}));
+            
+            this._store.select(getalbum(albumFoto.folder)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data!;
+              }
+            }); 
+            
+          })
+          //end subDelete
           const subfoto = dialogRef.componentInstance.onUploadAlbumFoto.subscribe((data) => {
             const req:INewAlbumFotoRequestModel={
               request: data
             }
             
-            //newalbumfoto=createAction(NEW_ALBUM_FOTO, props<{data: INewAlbumFotoRequestModel}>())
             this._store.dispatch(newalbumfoto({data:req}));
           
             this._store.select(getalbum(albumFoto.folder)).subscribe({
               next: (data) =>{
-                dialogRef.componentInstance.al = data;
+                dialogRef.componentInstance.al = data!;
               }
             }); 
           })
+          //end subfoto
+
       }
     }
      

@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { deletealbumsuccess, loadalbumfotosuccess, loadalbumssuccess, newalbumfotosuccess, newalbumsuccess } from "./albums.actions";
+import { deletealbumfotosuccess, deletealbumsuccess, loadalbumfotosuccess, loadalbumssuccess, newalbumfotosuccess, newalbumsuccess } from "./albums.actions";
 import { initialState } from "./albums.state";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 
@@ -14,7 +14,7 @@ const _albumsReducer = createReducer(
     }),
     on(deletealbumsuccess, (state, action) => {
         return {
-            albums: state.albums.filter(album => album.id != action.data.id)  
+            albums: state.albums.filter(album => album.id != action.data.idAlbum)  
         }
     }),
     on(newalbumsuccess, (state, action) => {
@@ -80,7 +80,31 @@ const _albumsReducer = createReducer(
         return {
             albums: albumsFoto
         }
-    })
+    }),
+    on(deletealbumfotosuccess, (state, action) => {
+     
+        var albumsFoto = [...state.albums];
+        var item =  albumsFoto.find(item => item.id == action.data.idAlbum)!;
+        
+        var album : IAlbumFoto = {
+            id: item.id,
+            title: item.title,
+            anno: item.anno,
+            branca: item.branca,
+            folder: item.folder,
+            imgPathFolder: item.imgPathFolder,
+            foto: item.foto.filter(f => f.id != action.data.idFoto)
+        } 
+       
+        let index = albumsFoto.indexOf(item)
+        
+        albumsFoto[index] = album;
+
+
+        return {
+            albums: albumsFoto
+        }
+    }),
 )
 
 export function albumsReducer(state: any, action: any) {

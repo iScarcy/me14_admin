@@ -1,10 +1,10 @@
 import { GalleryService } from "src/app/services/gallery.service";
-import { DELETE_ALBUM, deletealbumsuccess, LOAD_ALBUM_FOTO, LOAD_ALBUMS, loadalbumfotosuccess, loadalbums, loadalbumssuccess, NEW_ALBUM, NEW_ALBUM_FOTO, newalbumfotosuccess, newalbumsuccess } from "./albums.actions";
+import { DELETE_ALBUM, DELETE_ALBUM_FOTO, deletealbumfotosuccess, deletealbumsuccess, LOAD_ALBUM_FOTO, LOAD_ALBUMS, loadalbumfotosuccess, loadalbums, loadalbumssuccess, NEW_ALBUM, NEW_ALBUM_FOTO, newalbumfotosuccess, newalbumsuccess } from "./albums.actions";
 import { exhaustMap, map, merge, mergeAll, mergeMap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IAlbumRequest } from "src/app/models/IAlbumRequest";
-import { IDeleteAlbumStoreRequest, IGetAlbumFotoStoreRequest, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumStoreRequest } from "./albums.model";
+import { IDeleteStoreRequest, IGetAlbumFotoStoreRequest, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumStoreRequest } from "./albums.model";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { baseGalleryPublicImageUrl } from "src/app/app.costant";
 import { IFoto } from "src/app/models/IFoto";
@@ -29,12 +29,27 @@ export class AlbumEffects {
   effectsDelete$ = createEffect(() =>
     this.action$.pipe(
       ofType(DELETE_ALBUM),
-      exhaustMap((action: IDeleteAlbumStoreRequest) => {
+      exhaustMap((action: IDeleteStoreRequest) => {
         return this.galleryService
-          .deleteAlbum(action.data.id)
+          .deleteAlbum(action.data.idAlbum)
           .pipe(
             map((data) => {
               return deletealbumsuccess({ data: action.data });
+            })
+          );
+      })
+    )
+  );
+
+  effectsDeleteFoto$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(DELETE_ALBUM_FOTO),
+      exhaustMap((action: IDeleteStoreRequest) => {
+        return this.galleryService
+          .deleteFoto(action.data.idFoto!)
+          .pipe(
+            map((data) => {
+              return deletealbumfotosuccess({ data: action.data });
             })
           );
       })

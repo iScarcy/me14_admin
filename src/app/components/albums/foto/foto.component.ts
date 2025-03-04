@@ -18,7 +18,15 @@ export class FotoComponent implements OnInit {
   
   albumTitle:string = "";
 
-  al:IAlbumFoto | undefined; 
+  al:IAlbumFoto = {
+    id: 0,
+    title: '',
+    anno: 0,
+    branca: '',
+    folder: '',
+    imgPathFolder: '',
+    foto: []
+  }; 
  
 
   file_store!: FileList;
@@ -28,6 +36,7 @@ export class FotoComponent implements OnInit {
 
   onUploadAlbumFoto = new EventEmitter<IAlbumFotoRequest>();
   
+  onDelete = new EventEmitter<number>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: AlbumFotoDialogData, private dialog: MatDialog){
     
@@ -39,8 +48,12 @@ export class FotoComponent implements OnInit {
   }
 
   rotate():void{
-  
-    this.onRotate.emit();
+      this.onRotate.emit();
+  }
+
+  delete(id:number):void{
+ 
+    this.onDelete.emit(id);
   }
 
   handleFileInputChange(l: FileList ): void {

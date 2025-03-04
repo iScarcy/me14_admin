@@ -76,6 +76,12 @@ export class GalleryService {
      )
   }
 
+  deleteFoto(id:number):Observable<Object>{
+    var url: string = baseGalleryApiUrl+"album/photo?idFoto="+id;    
+    return this.httpEvents.delete(url);
+  }
+
+
   deleteAlbum(id:number):Observable<Object>{
     var url: string = baseGalleryApiUrl+"album?idAlbum="+id;    
     return this.httpEvents.delete(url);
