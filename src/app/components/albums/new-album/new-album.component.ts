@@ -20,8 +20,11 @@ export class NewAlbumComponent implements OnInit {
      @Inject(MAT_DIALOG_DATA) public data: AlbumDialogData,
     private _service:GalleryService
   ){}
+
   ngOnInit(): void {
-     
+     this.FC_title.setValue(this.data.album.title)
+     this.FC_anno.setValue(this.data.album.anno)
+     this.FC_branca.setValue(this.data.album.branca)
   }
 
   

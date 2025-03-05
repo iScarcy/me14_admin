@@ -5,14 +5,14 @@
           <div>
           <mat-form-field class="new-album-item">
             <mat-label>Nome Album</mat-label>
-            <input matInput [formControl] = "FC_title" required [(ngModel)]="this.data.album.title" />        
+            <input matInput [formControl] = "FC_title" required  />        
             <mat-error>Campo Obligatorio</mat-error>
           </mat-form-field>
         </div>
         <div>
         <mat-form-field>
             <mat-label>Branca</mat-label>
-            <input matInput [formControl]="FC_branca" required [(ngModel)]="this.data.album.branca" readonly="readonly"/>
+            <input matInput [formControl]="FC_branca" required  readonly="readonly"/>
             <mat-error>Campo Obligatorio</mat-error>
           </mat-form-field>
           
@@ -20,7 +20,7 @@
         <div>
           <mat-form-field>
             <mat-label>Anno</mat-label>
-            <input matInput  [formControl] = "FC_anno" required [(ngModel)]="this.data.album.anno" />        
+            <input matInput  [formControl] = "FC_anno" required  />        
            
           </mat-form-field>
         </div>  
