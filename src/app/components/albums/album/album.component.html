@@ -11,8 +11,8 @@
       </p>
     </mat-card-content>
     <mat-card-actions class="row justify-content-center align-items-center">
-      <button mat-raised-button (click)="this.getAlbumFoto(album.folder)">Foto</button>
-      <button mat-raised-button>Modifica</button>
+      <button mat-raised-button (click)="this.getAlbumFoto(album)">Foto</button>
+      <button mat-raised-button (click)="this.openEditAlbumDialog(album)">Modifica</button>
       <button mat-raised-button (click)="this.openDeleteConfirmDialog(album.id)">Elimina</button>
     </mat-card-actions>
   </mat-card>

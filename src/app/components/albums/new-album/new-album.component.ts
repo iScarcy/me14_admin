@@ -24,7 +24,7 @@ export class NewAlbumComponent implements OnInit {
      
   }
 
-  @Output() public deleteAlbumEmitter:EventEmitter<IAlbum> = new EventEmitter();
+  
   
   FC_title = new FormControl('',[
     Validators.required

@@ -6,9 +6,10 @@ import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { Store } from '@ngrx/store';
 import { FotoComponent } from '../foto/foto.component';
-import { IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
+import { IAlbumRequest, IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
 import { deletealbumfoto, loadalbumfoto, newalbumfoto } from 'src/app/shared/store/Albums/albums.actions';
 import { getalbum } from 'src/app/shared/store/Albums/albums.selectors';
+import { NewAlbumComponent } from '../new-album/new-album.component';
 
 @Component({
   selector: 'app-album',
@@ -28,7 +29,7 @@ export class AlbumComponent implements OnInit{
   };
 
   @Output() public deleteAlbumEmitter:EventEmitter<number> = new EventEmitter();
- 
+  @Output() public editAlbumEmitter:EventEmitter<IAlbumFoto> = new EventEmitter();
 
   ngOnInit(): void {
   
@@ -38,16 +39,8 @@ export class AlbumComponent implements OnInit{
 
   }
 
-  delete(id:number){
-    this._dialog.closeAll();
-    this.deleteAlbumEmitter.emit(id);
-  }
 
-  getAlbumFoto(folder:string){
-    console.log(folder);
-    this.getAlbumFotoListener(this.album);
-  }
-
+  //apertura dialog per eliminare album
   openDeleteConfirmDialog(id:number): void {
     
     let config: MatDialogConfig = {
@@ -58,13 +51,91 @@ export class AlbumComponent implements OnInit{
   
    
     let dialogRef = this._dialog.open(ConfirmComponent, config);
-    
-          
+              
   }
-
-   
-    getAlbumFotoListener(albumFoto:IAlbumFoto){
+ 
+  delete(id:number){
+    this._dialog.closeAll();
+    this.deleteAlbumEmitter.emit(id);
+  }
+ 
+  
+  openEditAlbumDialog(album:IAlbumFoto){
+    
+      let config: MatDialogConfig = {
+        panelClass: "dialog-responsive",
+        disableClose: true,
+        data: {titleDialog: "Modifica album", album:album, callback: (request:IAlbumRequest) => this.edit(request)} 
+        
+      }
       
+      let dialogRed = this._dialog.open(NewAlbumComponent, config)
+    }
+ 
+   edit(album:IAlbumRequest){
+
+   }
+  
+  
+    //apertura Dialog per visualizzare le foto dell'album
+    openDialogAlbumFoto(albumFoto:IAlbumFoto){
+     
+      const dialogExist = this._dialog.getDialogById('album-dialog');
+  
+      if(!dialogExist){
+  
+        let config: MatDialogConfig = {
+          id:"album-dialog",
+          panelClass: "dialog-responsive",
+          disableClose: true,
+          
+          data: {album: albumFoto}       
+        }
+        
+       
+        let dialogRef = this._dialog.open(FotoComponent, config);
+        
+         
+          const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
+            console.log("rotate");
+          })
+          //end sub
+          const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
+            
+            const req:IDeleteRequestModel = {
+              idAlbum: this.album.id,
+              idFoto: id
+            }
+            
+            this._store.dispatch(deletealbumfoto({data:req}));
+            
+            this._store.select(getalbum(albumFoto.folder)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data!;
+              }
+            }); 
+            
+          })
+          //end subDelete
+          const subfoto = dialogRef.componentInstance.onUploadAlbumFoto.subscribe((data) => {
+            const req:INewAlbumFotoRequestModel={
+              request: data
+            }
+            
+            this._store.dispatch(newalbumfoto({data:req}));
+          
+            this._store.select(getalbum(albumFoto.folder)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data!;
+              }
+            }); 
+          })
+          //end subfoto
+
+      }
+    }
+     
+    getAlbumFoto(albumFoto:IAlbumFoto){
         
       //controllo se ho già aperto le foto dell'album
       if(albumFoto.foto.length > 0){
@@ -155,62 +226,4 @@ export class AlbumComponent implements OnInit{
       });
   
     }
-  
-    openDialogAlbumFoto(albumFoto:IAlbumFoto){
-      console.log("openDialogAlbumFoto(albumFoto:IAlbumFoto):"+albumFoto.foto.length)
-      const dialogExist = this._dialog.getDialogById('album-dialog');
-  
-      if(!dialogExist){
-  
-        let config: MatDialogConfig = {
-          id:"album-dialog",
-          panelClass: "dialog-responsive",
-          disableClose: true,
-          
-          data: {album: albumFoto}       
-        }
-        
-       
-        let dialogRef = this._dialog.open(FotoComponent, config);
-        
-         
-          const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
-            console.log("rotate");
-          })
-          //end sub
-          const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
-            
-            const req:IDeleteRequestModel = {
-              idAlbum: this.album.id,
-              idFoto: id
-            }
-            
-            this._store.dispatch(deletealbumfoto({data:req}));
-            
-            this._store.select(getalbum(albumFoto.folder)).subscribe({
-              next: (data) =>{
-                dialogRef.componentInstance.al = data!;
-              }
-            }); 
-            
-          })
-          //end subDelete
-          const subfoto = dialogRef.componentInstance.onUploadAlbumFoto.subscribe((data) => {
-            const req:INewAlbumFotoRequestModel={
-              request: data
-            }
-            
-            this._store.dispatch(newalbumfoto({data:req}));
-          
-            this._store.select(getalbum(albumFoto.folder)).subscribe({
-              next: (data) =>{
-                dialogRef.componentInstance.al = data!;
-              }
-            }); 
-          })
-          //end subfoto
-
-      }
-    }
-     
 }

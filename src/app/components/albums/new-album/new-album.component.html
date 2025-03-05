@@ -1,11 +1,11 @@
 
 <mat-dialog-content>
-  <h2 mat-dialog-titile>Aggiungi Album</h2>
+  <h2 mat-dialog-titile>{{this.data.titleDialog}}</h2>
     <div class="dialog-container dialog-responsive">
           <div>
           <mat-form-field class="new-album-item">
             <mat-label>Nome Album</mat-label>
-            <input matInput [formControl] = "FC_title" required />        
+            <input matInput [formControl] = "FC_title" required [(ngModel)]="this.data.album.title" />        
             <mat-error>Campo Obligatorio</mat-error>
           </mat-form-field>
         </div>
@@ -20,7 +20,7 @@
         <div>
           <mat-form-field>
             <mat-label>Anno</mat-label>
-            <input matInput  [formControl] = "FC_anno" required  />        
+            <input matInput  [formControl] = "FC_anno" required [(ngModel)]="this.data.album.anno" />        
            
           </mat-form-field>
         </div>  
