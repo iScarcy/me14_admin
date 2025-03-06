@@ -1,6 +1,7 @@
 import { IAlbum } from "src/app/models/IAlbum";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { IAlbumFotoRequest } from "src/app/models/IAlbumFotoRequest";
+import { IAlbumRequest } from "src/app/models/IAlbumRequest";
 
 export interface IAlbumsModel{
     albums:IAlbumFoto[]
@@ -30,12 +31,7 @@ export interface IDeleteStoreRequest extends IStoreRequest{
     data:IDeleteRequestModel
 }
 
-export interface IAlbumRequest {
-    anno: string,
-    title: string,
-    branca: string,
-    copertina: string    
-}
+ 
 
 export interface INewAlbumRequestModel{
    request:IAlbumRequest

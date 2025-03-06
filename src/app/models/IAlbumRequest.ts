@@ -1,6 +1,9 @@
 export interface IAlbumRequest {
-    anno: string,
+    
+    idAlbum: number | undefined,
+    anno: number,
     title: string,
     branca: string,
     copertina: string    
+
 }

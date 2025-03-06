@@ -23,7 +23,7 @@ export class NewAlbumComponent implements OnInit {
 
   ngOnInit(): void {
      this.FC_title.setValue(this.data.album.title)
-     this.FC_anno.setValue(this.data.album.anno)
+     this.FC_anno.setValue(""+this.data.album.anno)
      this.FC_branca.setValue(this.data.album.branca)
   }
 
@@ -67,20 +67,22 @@ export class NewAlbumComponent implements OnInit {
   }
 
   handleSubmit(): void {
-    if(this.FC_title.valid && this.FC_anno.valid && this.FC_branca.valid && this.display.valid){
+    debugger;
+    if(this.FC_title.valid && this.FC_anno.valid && this.FC_branca.valid && (this.display.valid || (this.display.valid==false && this.data.album.idAlbum!=undefined))){
       
-      var fd = new FormData();
-      this.file_list = [];
-      for (let i = 0; i < this.file_store.length; i++) {
-        fd.append("files", this.file_store[i], this.file_store[i].name);
-        this.file_list.push(this.file_store[i].name);
-      }
-      
-      this.data.album.title = this.FC_title.value!;
-      this.data.album.branca = this.FC_branca.value!;
-      this.data.album.anno = this.FC_anno.value!;
-      this.data.album.copertina =  this.display.value;
-      this.data.callback(this.data.album);
+      const idAlbum : number = 0;
+
+      var albumRequest : IAlbumRequest = {
+        idAlbum: this.data.album.idAlbum,
+        anno:  +this.FC_anno.value!,
+        title: this.FC_title.value!,
+        branca: this.FC_branca.value!,
+        copertina: this.display.value 
+      } 
+   
+
+
+      this.data.callback(albumRequest);
       
     }
 

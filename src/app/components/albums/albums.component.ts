@@ -52,7 +52,7 @@ export class AlbumsComponent implements OnInit {
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
       disableClose: true,
-      data: {titleDialog: "Aggiungi album",  album:{branca: this.branca}, callback: (request:IAlbumRequest) => this.new(request)} 
+      data: {titleDialog: "Aggiungi album", album:{branca: this.branca}, callback: (request:IAlbumRequest) => this.new(request)} 
       
     }
     
@@ -60,7 +60,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   deleteAlbumListener(id:number){
-    debugger;
+     
     var req:IDeleteRequestModel={
       idAlbum: id,
       idFoto : undefined
@@ -71,9 +71,7 @@ export class AlbumsComponent implements OnInit {
     
   }
  
-  editAlbumListener(album:IAlbumFoto){
-    console.log(album);
-  }
+   
 
   new(album:IAlbumRequest){
     var req: INewAlbumRequestModel = {

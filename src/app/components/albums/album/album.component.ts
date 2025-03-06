@@ -6,10 +6,11 @@ import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { Store } from '@ngrx/store';
 import { FotoComponent } from '../foto/foto.component';
-import { IAlbumRequest, IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
+import { IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
 import { deletealbumfoto, loadalbumfoto, newalbumfoto } from 'src/app/shared/store/Albums/albums.actions';
 import { getalbum } from 'src/app/shared/store/Albums/albums.selectors';
 import { NewAlbumComponent } from '../new-album/new-album.component';
+import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
 
 @Component({
   selector: 'app-album',
@@ -29,7 +30,7 @@ export class AlbumComponent implements OnInit{
   };
 
   @Output() public deleteAlbumEmitter:EventEmitter<number> = new EventEmitter();
-  @Output() public editAlbumEmitter:EventEmitter<IAlbumFoto> = new EventEmitter();
+   
 
   ngOnInit(): void {
   
@@ -60,12 +61,12 @@ export class AlbumComponent implements OnInit{
   }
  
   
-  openEditAlbumDialog(album:IAlbumFoto){
+  openEditAlbumDialog(albumfoto:IAlbumFoto){
     
       let config: MatDialogConfig = {
         panelClass: "dialog-responsive",
         disableClose: true,
-        data: {titleDialog: "Modifica album", album:album, callback: (request:IAlbumRequest) => this.edit(request)} 
+        data: {titleDialog: "Modifica album", idAlbum:albumfoto.id, album:{idAlbum: albumfoto.id, anno: albumfoto.anno, title: albumfoto.title, branca: albumfoto.branca }, callback: (request:IAlbumRequest) => this.edit(request)} 
         
       }
       
@@ -73,7 +74,9 @@ export class AlbumComponent implements OnInit{
     }
  
    edit(album:IAlbumRequest){
-
+    debugger;
+    console.log("album:"+album) 
+  
    }
   
   
