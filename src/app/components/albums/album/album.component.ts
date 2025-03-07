@@ -74,8 +74,11 @@ export class AlbumComponent implements OnInit{
     }
  
    edit(album:IAlbumRequest){
-   
-    console.log("album:"+album) 
+    
+    console.log("idAlbum:"+album.idAlbum) 
+    console.log("anno:"+album.anno) 
+    console.log("branca:"+album.branca) 
+    console.log("title:"+album.title) 
   
    }
   
@@ -204,7 +207,7 @@ export class AlbumComponent implements OnInit{
     }
   
     loadAlbumFotoFromStore(albumFoto:IAlbumFoto){
-     
+     debugger;
       var req: IGetAlbumFotoRequestModel={
         album: albumFoto.folder
       }

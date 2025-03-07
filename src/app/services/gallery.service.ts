@@ -35,6 +35,50 @@ export class GalleryService {
     );
   }
 
+  
+
+
+  newAlbum(request:IAlbumRequest):Observable<IAlbum>{
+   
+    var url: string = baseGalleryApiUrl+"album";
+    
+    return this.httpEvents.post<IAlbum>(url, request).pipe(
+      map(album => ({
+        id: album.id,
+        title: album.title,
+        anno: album.anno,
+        branca: album.branca,
+        folder: album.folder,
+        file: album.file,
+        folderUrl: baseGalleryPublicImageUrl + album.folderUrl + "/" + album.file,       
+        status: album.status
+      }))
+     )
+  }
+
+  editAlbum(request:IAlbumRequest):Observable<IAlbum>{
+   
+    var url: string = baseGalleryApiUrl+"album";
+    
+    return this.httpEvents.post<IAlbum>(url, request).pipe(
+      map(album => ({
+        id: album.id,
+        title: album.title,
+        anno: album.anno,
+        branca: album.branca,
+        folder: album.folder,
+        file: album.file,
+        folderUrl: baseGalleryPublicImageUrl + album.folderUrl + "/" + album.file,       
+        status: album.status
+      }))
+     )
+  }
+
+  deleteAlbum(id:number):Observable<Object>{
+    var url: string = baseGalleryApiUrl+"album?idAlbum="+id;    
+    return this.httpEvents.delete(url);
+  }
+
   uploadAlbumImg(file: File):Observable<IUploadFile>{
     
     var url: string = baseGalleryApiUrl+"album/upload";
@@ -82,27 +126,4 @@ export class GalleryService {
   }
 
 
-  deleteAlbum(id:number):Observable<Object>{
-    var url: string = baseGalleryApiUrl+"album?idAlbum="+id;    
-    return this.httpEvents.delete(url);
-  }
-
-  newAlbum(request:IAlbumRequest):Observable<IAlbum>{
-   
-    var url: string = baseGalleryApiUrl+"album";
-    
-    return this.httpEvents.post<IAlbum>(url, request).pipe(
-      map(album => ({
-        id: album.id,
-        title: album.title,
-        anno: album.anno,
-        branca: album.branca,
-        folder: album.folder,
-        file: album.file,
-        folderUrl: baseGalleryPublicImageUrl + album.folderUrl + "/" + album.file,       
-        status: album.status
-      }))
-     )
-
-  }
 }
