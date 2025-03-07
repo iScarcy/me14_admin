@@ -71,7 +71,7 @@ export class AlbumEffects {
                 anno: album.anno,
                 branca: album.branca,
                 folder: album.folder,
-                imgPathFolder: baseGalleryPublicImageUrl + album.anno + "/" + album.branca + "/" + album.folder + "/" + album.file,
+                folderUrl: baseGalleryPublicImageUrl + album.anno + "/" + album.branca + "/" + album.folder + "/" + album.file,
                 foto: []
               }
               return newalbumsuccess({ album: albumFoto });
@@ -96,7 +96,7 @@ export class AlbumEffects {
                 anno: album.anno,
                 branca: album.branca,
                 folder: album.folder,
-                imgPathFolder: baseGalleryPublicImageUrl + album.imgPathFolder,
+                folderUrl: baseGalleryPublicImageUrl + album.folderUrl,
                 foto: album.foto
               }
               return loadalbumfotosuccess({ album: albumFoto });

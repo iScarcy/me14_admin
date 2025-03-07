@@ -25,7 +25,7 @@ export class AlbumComponent implements OnInit{
     anno: 0,
     branca: "",
     folder:'',
-    imgPathFolder: '',
+    folderUrl: '',
     foto: []
   };
 
@@ -74,7 +74,7 @@ export class AlbumComponent implements OnInit{
     }
  
    edit(album:IAlbumRequest){
-    debugger;
+   
     console.log("album:"+album) 
   
    }

@@ -7,6 +7,6 @@ export interface IAlbum{
     branca: string,
     folder: string,
     file: string,
-    fullPath:string,
+    folderUrl:string,
     status: boolean
 }

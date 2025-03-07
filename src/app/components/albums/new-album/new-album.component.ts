@@ -67,7 +67,7 @@ export class NewAlbumComponent implements OnInit {
   }
 
   handleSubmit(): void {
-    debugger;
+   
     if(this.FC_title.valid && this.FC_anno.valid && this.FC_branca.valid && (this.display.valid || (this.display.valid==false && this.data.album.idAlbum!=undefined))){
       
       const idAlbum : number = 0;

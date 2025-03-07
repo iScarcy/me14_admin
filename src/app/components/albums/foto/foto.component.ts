@@ -24,7 +24,7 @@ export class FotoComponent implements OnInit {
     anno: 0,
     branca: '',
     folder: '',
-    imgPathFolder: '',
+    folderUrl: '',
     foto: []
   }; 
  
