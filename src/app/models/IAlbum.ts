@@ -6,7 +6,6 @@ export interface IAlbum{
     anno: number,
     branca: string,
     folder: string,
-    file: string,
-    folderUrl:string,
+    imgFolderUrl:string,
     status: boolean
 }

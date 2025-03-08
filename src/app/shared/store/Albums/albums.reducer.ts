@@ -36,7 +36,7 @@ const _albumsReducer = createReducer(
            anno: item.anno,
            branca: item.branca,
            folder: item.folder,
-           folderUrl: item.folderUrl,
+           imgFolderUrl: item.imgFolderUrl,
            foto: []
        } 
        
@@ -62,7 +62,7 @@ const _albumsReducer = createReducer(
             anno: item.anno,
             branca: item.branca,
             folder: item.folder,
-            folderUrl: item.folderUrl,
+            imgFolderUrl: item.imgFolderUrl,
             foto: []
         } 
 
@@ -92,7 +92,7 @@ const _albumsReducer = createReducer(
             anno: item.anno,
             branca: item.branca,
             folder: item.folder,
-            folderUrl: item.folderUrl,
+            imgFolderUrl: item.imgFolderUrl,
             foto: item.foto.filter(f => f.id != action.data.idFoto)
         } 
        

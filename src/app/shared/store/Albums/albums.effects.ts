@@ -71,7 +71,7 @@ export class AlbumEffects {
                 anno: album.anno,
                 branca: album.branca,
                 folder: album.folder,
-                folderUrl: baseGalleryPublicImageUrl + album.anno + "/" + album.branca + "/" + album.folder + "/" + album.file,
+                imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl,
                 foto: []
               }
               return newalbumsuccess({ album: albumFoto });
@@ -96,7 +96,7 @@ export class AlbumEffects {
                 anno: album.anno,
                 branca: album.branca,
                 folder: album.folder,
-                folderUrl: baseGalleryPublicImageUrl + album.folderUrl,
+                imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl,
                 foto: album.foto
               }
               return loadalbumfotosuccess({ album: albumFoto });
@@ -120,34 +120,7 @@ export class AlbumEffects {
       })
     )
   );
-
-  /*
-  effectsNewFoto$ = createEffect(() =>
-    this.action$.pipe(
-      ofType(NEW_ALBUM_FOTO),
-      exhaustMap((action: INewAlbumFotoStoreRequest) => {
-        return this.galleryService
-          .uploadAlbumFoto(action.data.request) 
-          .pipe(
-             map(response =>  response.map(foto => {
-             
-              var foto: IFoto = {
-                    id: foto.id,
-                    albumID: foto.albumID,
-                    file: foto.file,
-                    thumbPathFile: foto.thumbPathFile,
-                    mediumPathFile: foto.mediumPathFile,
-                    fullPathFile: foto.fullPathFile
-                }
-              }
-              
-          ))
-          );
-          return newalbumfotosuccess({ photo: foto });
-      })
-    )
-  );
-  */
+ 
   
   constructor(
     private action$: Actions,

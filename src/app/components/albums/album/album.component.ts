@@ -25,7 +25,7 @@ export class AlbumComponent implements OnInit{
     anno: 0,
     branca: "",
     folder:'',
-    folderUrl: '',
+    imgFolderUrl: '',
     foto: []
   };
 

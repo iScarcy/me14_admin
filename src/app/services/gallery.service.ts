@@ -19,7 +19,7 @@ export class GalleryService {
 
   getAlbums(branca: string | null):Observable<IAlbumFoto[]>{
    
-   var url: string = baseGalleryApiUrl+"albums/"+branca;
+   var url: string = baseGalleryApiUrl+"albums/"+branca+"/0";
  
     return this.httpEvents.get<Array<IAlbum>>(url).pipe(
       map(albums => albums.map(album => ({
@@ -28,8 +28,7 @@ export class GalleryService {
         anno: album.anno,
         branca: album.branca, 
         folder:album.folder,
-        folderUrl:  baseGalleryPublicImageUrl + album.folderUrl + "/" + album.file,     
-       
+        imgFolderUrl:  baseGalleryPublicImageUrl + album.imgFolderUrl ,            
         foto: []
       })))
     );
@@ -49,8 +48,7 @@ export class GalleryService {
         anno: album.anno,
         branca: album.branca,
         folder: album.folder,
-        file: album.file,
-        folderUrl: baseGalleryPublicImageUrl + album.folderUrl + "/" + album.file,       
+        imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))
      )
@@ -60,15 +58,14 @@ export class GalleryService {
    
     var url: string = baseGalleryApiUrl+"album";
     
-    return this.httpEvents.post<IAlbum>(url, request).pipe(
+    return this.httpEvents.patch<IAlbum>(url, request).pipe(
       map(album => ({
         id: album.id,
         title: album.title,
         anno: album.anno,
         branca: album.branca,
         folder: album.folder,
-        file: album.file,
-        folderUrl: baseGalleryPublicImageUrl + album.folderUrl + "/" + album.file,       
+        imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))
      )
@@ -114,7 +111,7 @@ export class GalleryService {
         anno: album.anno,
         branca: album.branca, 
         folder: '',
-        folderUrl: baseGalleryPublicImageUrl + album.folderUrl,       
+        imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl,       
         foto: album.foto
       }))
      )
