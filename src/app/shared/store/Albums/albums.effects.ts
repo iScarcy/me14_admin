@@ -86,7 +86,7 @@ export class AlbumEffects {
       ofType(LOAD_ALBUM_FOTO),
       exhaustMap((action: IGetAlbumFotoStoreRequest) => {
         return this.galleryService
-          .getFoto(action.data.album) 
+          .getFoto(action.data.idAlbum) 
           .pipe(
             map((album) => {
             

@@ -115,7 +115,7 @@ export class AlbumComponent implements OnInit{
             
             this._store.dispatch(deletealbumfoto({data:req}));
             
-            this._store.select(getalbum(albumFoto.folder)).subscribe({
+            this._store.select(getalbum(albumFoto.id)).subscribe({
               next: (data) =>{
                 dialogRef.componentInstance.al = data!;
               }
@@ -130,7 +130,7 @@ export class AlbumComponent implements OnInit{
             
             this._store.dispatch(newalbumfoto({data:req}));
           
-            this._store.select(getalbum(albumFoto.folder)).subscribe({
+            this._store.select(getalbum(albumFoto.id)).subscribe({
               next: (data) =>{
                 dialogRef.componentInstance.al = data!;
               }
@@ -173,7 +173,7 @@ export class AlbumComponent implements OnInit{
             
             this._store.dispatch(deletealbumfoto({data:req}));
             
-            this._store.select(getalbum(albumFoto.folder)).subscribe({
+            this._store.select(getalbum(albumFoto.id)).subscribe({
               next: (data) =>{
                 dialogRef.componentInstance.al = data!;
               }
@@ -188,7 +188,7 @@ export class AlbumComponent implements OnInit{
             
             this._store.dispatch(newalbumfoto({data:req}));
           
-            this._store.select(getalbum(albumFoto.folder)).subscribe({
+            this._store.select(getalbum(albumFoto.id)).subscribe({
               next: (data) =>{
                 dialogRef.componentInstance.al = data!;
               }
@@ -209,14 +209,14 @@ export class AlbumComponent implements OnInit{
     loadAlbumFotoFromStore(albumFoto:IAlbumFoto){
      debugger;
       var req: IGetAlbumFotoRequestModel={
-        album: albumFoto.folder
+        idAlbum: albumFoto.id
       }
       this._store.dispatch(loadalbumfoto({data:req}));
       
       const buttonElement = document.activeElement as HTMLElement; // Get the currently focused element
       buttonElement.blur(); // Remove focus from the button
       let x  = 0
-      this._store.select(getalbum(albumFoto.folder)).subscribe({
+      this._store.select(getalbum(albumFoto.id)).subscribe({
         next:(albumx)=>{console.log("next:"+albumx?.foto.length)
           
           if( x > 0 || (albumx?.foto.length!=undefined && albumx!.foto.length>0)){

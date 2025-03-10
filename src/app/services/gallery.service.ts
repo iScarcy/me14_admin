@@ -101,9 +101,9 @@ export class GalleryService {
 
  }
 
-  getFoto(album:string):Observable<IAlbumFoto>{
+  getFoto(idAlbum:number):Observable<IAlbumFoto>{
     
-    var url: string = baseGalleryApiUrl+"photo/"+album;
+    var url: string = baseGalleryApiUrl+"photo/"+idAlbum;
     return this.httpEvents.get<IAlbumFoto>(url).pipe(
       map(album => ({
         id: album.id,
