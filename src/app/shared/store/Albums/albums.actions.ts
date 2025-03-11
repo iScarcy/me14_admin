@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store"
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
-import { IDeleteRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, INewAlbumFotoRequestModel, INewAlbumRequestModel } from "./albums.model";
+import { IDeleteRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, INewAlbumFotoRequestModel, INewAlbumRequestModel, IRotateAlbumFotoRequestModel } from "./albums.model";
 import { IFoto } from "src/app/models/IFoto";
 
 export const LOAD_ALBUMS = '[Gallery page] load albums'
@@ -21,6 +21,10 @@ export const NEW_ALBUM_FOTO_SUCCESS = '[Gallery page] new album foto success'
 export const DELETE_ALBUM_FOTO = '[Gallery page] delete album foto'
 export const DELETE_ALBUM_FOTO_SUCCESS = '[Gallery page] delete album success foto' 
 
+export const ROTATE_ALBUM_FOTO = '[Gallery page] rotate album foto'
+export const ROTATE_ALBUM_FOTO_SUCCESS = '[Gallery page] rotate album success foto' 
+
+
 export const loadalbums=createAction(LOAD_ALBUMS, props<{data:IGetAlbumsRequestModel}>());
 export const loadalbumssuccess=createAction(LOAD_ALBUMS_SUCCESS, props<{albums:IAlbumFoto[]}>());
 
@@ -38,3 +42,7 @@ export const newalbumfotosuccess=createAction(NEW_ALBUM_FOTO_SUCCESS, props<{pho
 
 export const deletealbumfoto=createAction(DELETE_ALBUM_FOTO, props<{data: IDeleteRequestModel}>())
 export const deletealbumfotosuccess=createAction(DELETE_ALBUM_FOTO_SUCCESS, props<{data: IDeleteRequestModel}>())
+
+export const rotatealbumfoto=createAction(ROTATE_ALBUM_FOTO, props<{data: IRotateAlbumFotoRequestModel}>())
+export const rotatealbumfotosuccess=createAction(ROTATE_ALBUM_FOTO_SUCCESS, props<{data: boolean}>())
+

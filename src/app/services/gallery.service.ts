@@ -19,7 +19,7 @@ export class GalleryService {
 
   getAlbums(branca: string | null):Observable<IAlbumFoto[]>{
    
-   var url: string = baseGalleryApiUrl+"albums/"+branca+"/0";
+   var url: string = baseGalleryApiUrl+"album/"+branca+"/0";
  
     return this.httpEvents.get<Array<IAlbum>>(url).pipe(
       map(albums => albums.map(album => ({
@@ -103,7 +103,7 @@ export class GalleryService {
 
   getFoto(idAlbum:number):Observable<IAlbumFoto>{
     
-    var url: string = baseGalleryApiUrl+"photo/"+idAlbum;
+    var url: string = baseGalleryApiUrl+"album/photo/"+idAlbum;
     return this.httpEvents.get<IAlbumFoto>(url).pipe(
       map(album => ({
         id: album.id,
@@ -122,5 +122,11 @@ export class GalleryService {
     return this.httpEvents.delete(url);
   }
 
+  rotateFoto(urlPhoto:string):Observable<boolean>{
+   
+   var url: string = baseGalleryApiUrl+"album/photo/rotate";
+      
+    return this.httpEvents.post<boolean>(url, urlPhoto);
 
+  }
 }

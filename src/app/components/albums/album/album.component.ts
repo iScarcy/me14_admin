@@ -6,8 +6,8 @@ import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { Store } from '@ngrx/store';
 import { FotoComponent } from '../foto/foto.component';
-import { IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
-import { deletealbumfoto, loadalbumfoto, newalbumfoto } from 'src/app/shared/store/Albums/albums.actions';
+import { IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel, IRotateAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
+import { deletealbumfoto, loadalbumfoto, newalbumfoto, rotatealbumfoto } from 'src/app/shared/store/Albums/albums.actions';
 import { getalbum } from 'src/app/shared/store/Albums/albums.selectors';
 import { NewAlbumComponent } from '../new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
@@ -102,8 +102,14 @@ export class AlbumComponent implements OnInit{
         let dialogRef = this._dialog.open(FotoComponent, config);
         
          
-          const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
-            console.log("rotate");
+          const sub = dialogRef.componentInstance.onRotate.subscribe((data) => {
+           
+            const req:IRotateAlbumFotoRequestModel = {
+              urlPhoto: data
+            }
+
+            this._store.dispatch(rotatealbumfoto({data:req}) );
+            console.log("rotate" + data);
           })
           //end sub
           const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
@@ -160,8 +166,13 @@ export class AlbumComponent implements OnInit{
           
       
           let dialogRef = this._dialog.open(FotoComponent, config)
-          const sub = dialogRef.componentInstance.onRotate.subscribe(() => {
-            console.log("rotate");
+          const sub = dialogRef.componentInstance.onRotate.subscribe((data) => {
+            const req:IRotateAlbumFotoRequestModel = {
+              urlPhoto: data
+            }
+
+            this._store.dispatch(rotatealbumfoto({data:req}) );
+            console.log("rotate" + data);
           })
           //end sub
           const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {

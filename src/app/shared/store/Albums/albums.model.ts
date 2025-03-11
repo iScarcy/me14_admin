@@ -59,6 +59,13 @@ export interface INewAlbumFotoRequestModel{
      data:INewAlbumFotoRequestModel
  }
 
+ export interface IRotateAlbumFotoRequestModel{
+    urlPhoto:string
+}
+
+export interface IRotateAlbumFotoStoreRequest extends IStoreRequest{
+    data:IRotateAlbumFotoRequestModel
+}
 //COMMON
 
 export interface IStoreRequest{

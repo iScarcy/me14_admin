@@ -32,7 +32,7 @@ export class FotoComponent implements OnInit {
   file_store!: FileList;
  
 
-  onRotate = new EventEmitter();
+  onRotate = new EventEmitter<string>();
 
   onUploadAlbumFoto = new EventEmitter<IAlbumFotoRequest>();
   
@@ -47,8 +47,8 @@ export class FotoComponent implements OnInit {
   
   }
 
-  rotate():void{
-      this.onRotate.emit();
+  rotate(urlPhoto:string):void{
+      this.onRotate.emit(urlPhoto);
   }
 
   delete(id:number):void{
