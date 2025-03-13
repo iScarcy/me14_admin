@@ -23,6 +23,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { AlbumEffects } from './shared/store/Albums/albums.effects';
 import { AppState } from './shared/store/Global/AppState.model';
+import { LoginComponent } from './components/login/login.component';
 
  
  
@@ -37,7 +38,8 @@ import { AppState } from './shared/store/Global/AppState.model';
     AlbumComponent,
     NewAlbumComponent,
     FotoComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
