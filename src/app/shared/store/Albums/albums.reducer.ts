@@ -2,6 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { deletealbumfotosuccess, deletealbumsuccess, loadalbumfotosuccess, loadalbumssuccess, newalbumfotosuccess, newalbumsuccess, rotatealbumfotosuccess } from "./albums.actions";
 import { initialState } from "./albums.state";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
+import { IFoto } from "src/app/models/IFoto";
 
 const _albumsReducer = createReducer(
     initialState,
@@ -41,7 +42,15 @@ const _albumsReducer = createReducer(
        } 
        
         action.album.foto.forEach(element => {
-            album.foto.push(element);
+            const ph:IFoto = {
+                id: element.id,
+                albumID: element.albumID,
+                file: element.file,
+                thumbPathFile: element.thumbPathFile +  "?t="+ Math.random() ,
+                fullPathFile: element.fullPathFile
+            }
+            
+            album.foto.push(ph);
         }); 
         let index = albumsFoto.indexOf(item)
         
@@ -107,11 +116,35 @@ const _albumsReducer = createReducer(
     }),
     on(rotatealbumfotosuccess, (state, action) => {
       
-        var albumsNew = [...state.albums];
-        console.log(action.data); 
+        var albumsFoto = [...state.albums];
+        var item =  albumsFoto.find(item => item.id == action.data )!;
+        var album : IAlbumFoto = {
+            id: item.id,
+            title: item.title,
+            anno: item.anno,
+            branca: item.branca,
+            folder: item.folder,
+            imgFolderUrl: item.imgFolderUrl,
+            foto: []
+        } 
+        
+         item.foto.forEach(element => {
+             const ph:IFoto = {
+                 id: element.id,
+                 albumID: element.albumID,
+                 file: element.file,
+                 thumbPathFile: element.thumbPathFile +  "?t="+ Math.random() ,
+                 fullPathFile: element.fullPathFile
+             }
+             
+             album.foto.push(ph);
+         }); 
+         let index = albumsFoto.indexOf(item)
          
+         albumsFoto[index] = album;
+                 
          return {
-             albums: albumsNew
+             albums: albumsFoto
          }
      })
 )

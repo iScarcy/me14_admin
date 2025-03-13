@@ -3,8 +3,6 @@ export interface IFoto{
     albumID: number,
     file: string,
     thumbPathFile: string,
-    mediumPathFile: string,
     fullPathFile: string
-
     
 }

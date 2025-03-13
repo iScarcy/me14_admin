@@ -7,6 +7,7 @@ import { IAlbum } from 'src/app/models/IAlbum';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { IAlbumFotoRequest } from 'src/app/models/IAlbumFotoRequest';
 import { IFoto } from 'src/app/models/IFoto';
+import { IFotoRotateRequest } from 'src/app/models/IFotoRotateRequest';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class FotoComponent implements OnInit {
   file_store!: FileList;
  
 
-  onRotate = new EventEmitter<string>();
+  onRotate = new EventEmitter<IFotoRotateRequest>();
 
   onUploadAlbumFoto = new EventEmitter<IAlbumFotoRequest>();
   
@@ -47,8 +48,14 @@ export class FotoComponent implements OnInit {
   
   }
 
-  rotate(urlPhoto:string):void{
-      this.onRotate.emit(urlPhoto);
+  rotate(albumID:number, urlFoto:string):void{
+    const photo = urlFoto.substring(0, urlFoto.indexOf("?"));
+    console.log(photo);
+    const request:IFotoRotateRequest = {
+      urlPhoto: photo,
+      idAlbum: albumID
+    }  
+    this.onRotate.emit(request);
   }
 
   delete(id:number):void{

@@ -9,6 +9,7 @@ import { IFoto } from '../models/IFoto';
 import { IAlbumFoto } from '../models/IAlbumFoto';
 import { IAlbumRequest } from '../models/IAlbumRequest';
 import { IAlbumFotoRequest } from '../models/IAlbumFotoRequest';
+import { IRotateAlbumFotoRequestModel, IRotateAlbumFotoStoreRequest } from '../shared/store/Albums/albums.model';
 
 @Injectable({
   providedIn: 'root'
@@ -122,11 +123,11 @@ export class GalleryService {
     return this.httpEvents.delete(url);
   }
 
-  rotateFoto(urlPhoto:string):Observable<boolean>{
+  rotateFoto(data:IRotateAlbumFotoRequestModel):Observable<number>{
    
    var url: string = baseGalleryApiUrl+"album/photo/rotate";
-      
-    return this.httpEvents.post<boolean>(url, urlPhoto);
+ // var url: string = "http://localhost:7065/api/Gallery/album/photo/rotate";
+    return this.httpEvents.patch<number>(url, {"urlPhoto": data.request.urlPhoto, "idAlbum": data.request.idAlbum});
 
   }
 }

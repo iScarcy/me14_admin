@@ -125,10 +125,10 @@ export class AlbumEffects {
     this.action$.pipe(
       ofType(ROTATE_ALBUM_FOTO),
       exhaustMap((action:IRotateAlbumFotoStoreRequest ) => {
-         
-        return this.galleryService.rotateFoto(action.data.urlPhoto).pipe(
+        
+        return this.galleryService.rotateFoto(action.data).pipe(
           map((ret) => {
-          
+            
             return rotatealbumfotosuccess({ data: ret });
           })
         );

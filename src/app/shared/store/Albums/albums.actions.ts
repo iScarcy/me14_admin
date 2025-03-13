@@ -44,5 +44,5 @@ export const deletealbumfoto=createAction(DELETE_ALBUM_FOTO, props<{data: IDelet
 export const deletealbumfotosuccess=createAction(DELETE_ALBUM_FOTO_SUCCESS, props<{data: IDeleteRequestModel}>())
 
 export const rotatealbumfoto=createAction(ROTATE_ALBUM_FOTO, props<{data: IRotateAlbumFotoRequestModel}>())
-export const rotatealbumfotosuccess=createAction(ROTATE_ALBUM_FOTO_SUCCESS, props<{data: boolean}>())
+export const rotatealbumfotosuccess=createAction(ROTATE_ALBUM_FOTO_SUCCESS, props<{data: number}>())
 

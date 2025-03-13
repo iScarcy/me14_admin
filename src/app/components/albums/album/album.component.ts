@@ -105,11 +105,15 @@ export class AlbumComponent implements OnInit{
           const sub = dialogRef.componentInstance.onRotate.subscribe((data) => {
            
             const req:IRotateAlbumFotoRequestModel = {
-              urlPhoto: data
+              request: data
             }
 
             this._store.dispatch(rotatealbumfoto({data:req}) );
-            console.log("rotate" + data);
+            this._store.select(getalbum(albumFoto.id)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data!;
+              }
+            }); 
           })
           //end sub
           const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
@@ -168,11 +172,16 @@ export class AlbumComponent implements OnInit{
           let dialogRef = this._dialog.open(FotoComponent, config)
           const sub = dialogRef.componentInstance.onRotate.subscribe((data) => {
             const req:IRotateAlbumFotoRequestModel = {
-              urlPhoto: data
+              request: data
             }
 
             this._store.dispatch(rotatealbumfoto({data:req}) );
-            console.log("rotate" + data);
+            
+            this._store.select(getalbum(albumFoto.id)).subscribe({
+              next: (data) =>{
+                dialogRef.componentInstance.al = data!;
+              }
+            }); 
           })
           //end sub
           const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
@@ -218,7 +227,7 @@ export class AlbumComponent implements OnInit{
     }
   
     loadAlbumFotoFromStore(albumFoto:IAlbumFoto){
-     debugger;
+    
       var req: IGetAlbumFotoRequestModel={
         idAlbum: albumFoto.id
       }
