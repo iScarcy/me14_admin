@@ -3,15 +3,16 @@ import { LOGIN_USER, loginusersuccess } from "./login.actions";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { LoginService } from "src/app/services/login.service";
 import { map, exhaustMap } from "rxjs";
+import { ILoginRequest } from "./login.model";
 
 @Injectable()
 export class LoginEffects {
      effects$ = createEffect(() =>
         this.action$.pipe(
           ofType(LOGIN_USER),
-          exhaustMap((username: string, password: string) => {
+          exhaustMap((request: ILoginRequest) => {
             
-            return this.service.loginuser(username, password).pipe(
+            return this.service.loginuser(request.username,request. password).pipe(
               map((data) => {
                
                 return loginusersuccess({token: data});
