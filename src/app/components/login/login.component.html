@@ -1,11 +1,26 @@
 <mat-dialog-content>
     <h2 mat-dialog-titile>Attenzione</h2>
     <div class="dialog-container">
-          <mat-label>Login</mat-label>
+        <mat-form-field appearance="fill">
+            <mat-label>Login</mat-label>
+            <input matInput placeholder="Login">                       
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide() ? 'password' : 'text'" />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()"
+            >
+              <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
     </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-    <button mat-flat-button color="primary"></button> 
-        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-flat-button color="primary">Ok</button>        
 </mat-dialog-actions>

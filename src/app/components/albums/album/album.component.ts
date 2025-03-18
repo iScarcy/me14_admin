@@ -98,8 +98,8 @@ export class AlbumComponent implements OnInit{
           data: {album: albumFoto}       
         }
         
-       
         let dialogRef = this._dialog.open(FotoComponent, config);
+       
         
          
           const sub = dialogRef.componentInstance.onRotate.subscribe((data) => {
