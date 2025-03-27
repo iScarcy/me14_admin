@@ -31,13 +31,8 @@ export class LoginComponent  {
   ok(){
     debugger;
     if(this.FC_login.valid && this.FC_password.valid){
-
-        var req : ILoginRequest={
-          username: this.FC_login.value!,
-          password: this.FC_password.value!
-        }
-       
-         this._store.dispatch(loginuser({data:req}));
+ 
+         this._store.dispatch(loginuser({username: this.FC_login.value!, password: this.FC_password.value!}));
     }
     
   }
