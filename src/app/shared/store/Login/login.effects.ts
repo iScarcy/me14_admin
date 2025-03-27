@@ -13,9 +13,13 @@ export class LoginEffects {
           exhaustMap((request: ILoginRequest) => {
             debugger;
             return this.service.loginuser(request.username,request.password).pipe(
-              map((data) => {
+              map((resp) => {
                
-                return loginusersuccess({token: data});
+                return loginusersuccess({data:{
+                  token: resp,
+                  error: "",
+                  isLoading: true
+                }});
                
               })
             );

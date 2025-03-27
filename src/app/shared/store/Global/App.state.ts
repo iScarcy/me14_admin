@@ -1,8 +1,8 @@
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
-import { ILoginModel } from "../Login/login.model";
+import { ILogin } from "src/app/models/ILogin";
  
 
 export interface AppStateModel{
     albums:IAlbumFoto[],
-    login:ILoginModel
+    login:ILogin
 }

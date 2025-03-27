@@ -5,11 +5,9 @@ import { loginusersuccess } from "./login.actions";
 const _loginReducer = createReducer(
     initialState,
     on(loginusersuccess, (state, action)=>{
-           
+        
         return {
-            token: action.token , 
-            error: "",
-            isLoading: true
+           login: action.data   
         }
     }),
 )
