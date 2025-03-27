@@ -11,7 +11,7 @@ export class LoginEffects {
         this.action$.pipe(
           ofType(LOGIN_USER),
           exhaustMap((request: ILoginRequest) => {
-            
+            debugger;
             return this.service.loginuser(request.username,request. password).pipe(
               map((data) => {
                

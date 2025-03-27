@@ -24,6 +24,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AlbumEffects } from './shared/store/Albums/albums.effects';
 import { AppState } from './shared/store/Global/AppState.model';
 import { LoginComponent } from './components/login/login.component';
+import { LoginEffects } from './shared/store/Login/login.effects';
 
  
  
@@ -52,7 +53,7 @@ import { LoginComponent } from './components/login/login.component';
     ReactiveFormsModule, 
     StoreModule.forRoot(AppState),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([AlbumEffects])
+    EffectsModule.forRoot([AlbumEffects, LoginEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

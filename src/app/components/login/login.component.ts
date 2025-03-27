@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
+import { loginuser } from 'src/app/shared/store/Login/login.actions';
 import { ILoginRequest } from 'src/app/shared/store/Login/login.model';
 
 @Component({
@@ -28,14 +29,15 @@ export class LoginComponent  {
   ])
 
   ok(){
-    
+    debugger;
     if(this.FC_login.valid && this.FC_password.valid){
 
         var req : ILoginRequest={
           username: this.FC_login.value!,
           password: this.FC_password.value!
         }
-
+       
+         this._store.dispatch(loginuser({data:req}));
     }
     
   }
