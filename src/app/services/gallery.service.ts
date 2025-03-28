@@ -10,18 +10,28 @@ import { IAlbumFoto } from '../models/IAlbumFoto';
 import { IAlbumRequest } from '../models/IAlbumRequest';
 import { IAlbumFotoRequest } from '../models/IAlbumFotoRequest';
 import { IRotateAlbumFotoRequestModel, IRotateAlbumFotoStoreRequest } from '../shared/store/Albums/albums.model';
+import { AppStateModel } from '../shared/store/Global/App.state';
+import { Store } from '@ngrx/store';
+import { selectToken } from '../shared/store/Login/login.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GalleryService {
 
-  constructor(private httpEvents: HttpClient) { }
+  token : string | undefined;
+
+  constructor(private httpEvents: HttpClient, private _store: Store<AppStateModel>) { }
 
   getAlbums(branca: string | null):Observable<IAlbumFoto[]>{
-   
+   debugger;
+     this._store.select(selectToken).subscribe((data) =>{
+        this.token = data
+        console.log(this.token);
+      }); 
+
    var url: string = baseGalleryApiUrl+"album/"+branca+"/0";
- 
+  console.log(url);
     return this.httpEvents.get<Array<IAlbum>>(url).pipe(
       map(albums => albums.map(album => ({
         id: album.id,
