@@ -20,7 +20,7 @@ export interface IGetAlbumsRequestModel{
 }
 
 export interface IGetAlbumsStoreRequest extends IStoreRequest{
-    data:IGetAlbumsRequestModel
+    branca:string, token:string
 }
 
 export interface IDeleteRequestModel{

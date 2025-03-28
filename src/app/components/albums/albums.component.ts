@@ -14,6 +14,7 @@ import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { FotoComponent } from './foto/foto.component';
 import { getalbum, getalbumslist } from 'src/app/shared/store/Albums/albums.selectors';
+import { selectToken } from 'src/app/shared/store/Login/login.selectors';
  
 @Component({
   selector: 'app-albums',
@@ -34,16 +35,24 @@ export class AlbumsComponent implements OnInit {
   }
 
   ngOnInit(): void {    
-    
+    debugger;
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
 
-    const req:IGetAlbumsRequestModel={
-      branca: this.branca
-    }
- 
-    this._store.dispatch(loadalbums({data:req}));
-    
-    this.albums$ = this._store.select(getalbumslist); 
+    this._store.select(selectToken).subscribe((data) =>{
+       if(data){
+        const req:IGetAlbumsRequestModel={
+          branca: this.branca
+        }
+     
+        this._store.dispatch(loadalbums({branca:this.branca, token:data}));
+        
+        this.albums$ = this._store.select(getalbumslist);
+       }
+     }); 
+
+  
+
+   
     
   }
    

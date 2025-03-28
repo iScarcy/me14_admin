@@ -10,9 +10,7 @@ import { IAlbumFoto } from '../models/IAlbumFoto';
 import { IAlbumRequest } from '../models/IAlbumRequest';
 import { IAlbumFotoRequest } from '../models/IAlbumFotoRequest';
 import { IRotateAlbumFotoRequestModel, IRotateAlbumFotoStoreRequest } from '../shared/store/Albums/albums.model';
-import { AppStateModel } from '../shared/store/Global/App.state';
-import { Store } from '@ngrx/store';
-import { selectToken } from '../shared/store/Login/login.selectors';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +19,18 @@ export class GalleryService {
 
   token : string | undefined;
 
-  constructor(private httpEvents: HttpClient, private _store: Store<AppStateModel>) { }
+  constructor(private httpEvents: HttpClient) { }
 
-  getAlbums(branca: string | null):Observable<IAlbumFoto[]>{
-   debugger;
-     this._store.select(selectToken).subscribe((data) =>{
-        this.token = data
-        console.log(this.token);
-      }); 
+  getAlbums(branca: string , token: string):Observable<IAlbumFoto[]>{
+  
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  })
 
    var url: string = baseGalleryApiUrl+"album/"+branca+"/0";
-  console.log(url);
-    return this.httpEvents.get<Array<IAlbum>>(url).pipe(
+  
+    return this.httpEvents.get<Array<IAlbum>>(url, {headers:headers}).pipe(
       map(albums => albums.map(album => ({
         id: album.id,
         title: album.title,

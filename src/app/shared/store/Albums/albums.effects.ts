@@ -16,7 +16,7 @@ export class AlbumEffects {
       ofType(LOAD_ALBUMS),
       exhaustMap((action:IGetAlbumsStoreRequest) => {
         
-        return this.galleryService.getAlbums(action.data.branca).pipe(
+        return this.galleryService.getAlbums(action.branca, action.token).pipe(
           map((data) => {
            
             return loadalbumssuccess({ albums: data });

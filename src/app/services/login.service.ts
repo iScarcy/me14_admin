@@ -12,7 +12,7 @@ export class LoginService {
 
 
   loginuser(username: string, password:string):Observable<string>{
-      debugger;
+      
       var url: string = baseSecurityApiUrl+"CreateToken"; 
       return this.httpEvents.post<string>(url, {username:username, password:password});
      
