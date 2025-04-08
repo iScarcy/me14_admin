@@ -1,17 +1,19 @@
 <div class="container">
-    <div class="row">
-        <div class="col">
-        
-        <a [routerLink]="['/gallery','']"><img src="assets/img/gallery.png"/></a>
+   
+        <div class="item">
+            <mat-card appearance="outlined">
+                <a [routerLink]="['/gallery','']"><img mat-card-image src="assets/img/gallery.png"></a>
+            </mat-card>
         </div>
-        <div class="col">
-            <img src="assets/img/video.jpeg"/>
+        <div class="item">
+            <mat-card appearance="outlined">
+                <a [routerLink]="['/gallery','']"><img mat-card-image src="assets/img/video.jpeg"></a>
+            </mat-card>
         </div>
-        <div class="col">
-            <img src="assets/img/documents.webp">
-        </div>
-        <div class="col">
-            <span>Users</span>
+        <div class="item">
+            <mat-card appearance="outlined">
+                <a [routerLink]="['/gallery','']"><img mat-card-image src="assets/img/documents.webp"></a>
+            </mat-card>
         </div>
 </div>
     
