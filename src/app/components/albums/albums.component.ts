@@ -35,9 +35,10 @@ export class AlbumsComponent implements OnInit {
   }
 
   ngOnInit(): void {    
-    debugger;
+    
+     
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
-
+    
     this._store.select(selectToken).subscribe((data) =>{
        if(data){
         const req:IGetAlbumsRequestModel={
@@ -50,9 +51,7 @@ export class AlbumsComponent implements OnInit {
        }
      }); 
 
-  
-
-   
+    
     
   }
    

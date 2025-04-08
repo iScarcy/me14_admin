@@ -7,7 +7,7 @@ import { MainContentComponent } from './components/layout/main-content/main-cont
  
 const routes: Routes = [
       {path:"", component: MainContentComponent},
-      {path:"gallery", component: GalleryComponent},
+      {path:"gallery", component: AlbumsComponent},
       {path:"gallery/:branca", component: AlbumsComponent},
       {path:"gallery/photo/:album", component: FotoComponent}
 ];
