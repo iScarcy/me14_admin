@@ -33,24 +33,25 @@ export class AlbumsComponent implements OnInit {
     private _dialog: MatDialog){
 
   }
-
+  selected = 'option2';
   ngOnInit(): void {    
     
      
     this.branca  =  this.route.snapshot.paramMap.get('branca')!;
-    
-    this._store.select(selectToken).subscribe((data) =>{
-       if(data){
-        const req:IGetAlbumsRequestModel={
-          branca: this.branca
-        }
-     
-        this._store.dispatch(loadalbums({branca:this.branca, token:data}));
+  
+    if(this.branca!=null){
+        this._store.select(selectToken).subscribe((data) =>{
+          if(data){
+            const req:IGetAlbumsRequestModel={
+              branca: this.branca
+            }
         
-        this.albums$ = this._store.select(getalbumslist);
-       }
-     }); 
-
+            this._store.dispatch(loadalbums({branca:this.branca, token:data}));
+            
+            this.albums$ = this._store.select(getalbumslist);
+          }
+        }); 
+    }
     
     
   }

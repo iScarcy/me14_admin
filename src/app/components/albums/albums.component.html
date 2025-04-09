@@ -4,20 +4,19 @@
         <span>Album {{this.branca.toUpperCase()}}</span>
         <button mat-raised-button (click)="this.openNewAlbumDialog()"><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="add" ></mat-icon>Nuovo Album</button> 
         <div class="filer">
-            <select name="branca" class="form-select">
-                <option selected>Seleziona la banca</option>
-                <option value="lc">Lupetti</option>
-                <option value="eg">Reparto</option>
-                <option value="rs">Clan</option>
-              </select>
-            <select name="anno" class="form-select">
-                <option value="0" selected>Scegli un anno</option>
-                <option value="2027">2027</option>
-                <option value="2026">2026</option>
-                <option value="2025">2025</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-            </select>
+              
+              <mat-form-field>
+                <mat-label>Seleziona una branca</mat-label>
+                <mat-select [(value)]="selected">
+                  <mat-option value="lc">Lupetti</mat-option>
+                  <mat-option value="eg">Reparto</mat-option>
+                  <mat-option value="rs">Clan</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Inserisci un anno</mat-label>
+                <input matInput placeholder="2025" value="">
+              </mat-form-field>
         </div>
     </div>
     
