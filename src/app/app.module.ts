@@ -25,18 +25,43 @@ import { AlbumEffects } from './shared/store/Albums/albums.effects';
 import { AppState } from './shared/store/Global/AppState.model';
 import { LoginComponent } from './components/login/login.component';
 import { LoginEffects } from './shared/store/Login/login.effects';
-
+import { ILogin } from './models/ILogin';
+import {  IAppStateModel } from './shared/store/Global/App.state';
+import { localStorageSync, rehydrateApplicationState } from 'ngrx-store-localstorage';
  // console.log all actions
-export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
+export function debug(reducer: ActionReducer<IAppStateModel>): ActionReducer<IAppStateModel> {
   return function(state, action) {
     console.log('state', state);
     console.log('action', action);
+ 
+    const keys = ['loginInfo'];
+
+      
+     
+      console.log("token state:"+action);
+      console.log("state: "+state)
+      debugger;
+
+      const rehydratedState = rehydrateApplicationState(keys, localStorage, k => k, true);
+      console.log("ultima " +rehydratedState)
+      debugger;
+      return { ...state, ...rehydratedState };
+     
+
+   
+   
     
-    return reducer(state, action);
+    //return reducer(state, action);
+    return localStorageSync({
+      keys,
+      rehydrate: true,
+    })(reducer)(state, action);
   };
 }
 
-export const metaReducers: MetaReducer<any>[] = [debug];
+
+
+export const metaReducers: MetaReducer<IAppStateModel>[] = [debug];
  
 @NgModule({
   declarations: [

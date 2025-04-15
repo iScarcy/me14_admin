@@ -29,18 +29,18 @@ ngOnInit(): void {
   console.log("token:"+this._localStorage.get("token")) 
   isLogged = this._localStorage.get("token") !=null    
   console.log("log:"+isLogged) 
-  if(isLogged == false){
-    let dialogRef = this._dialog.open(LoginComponent, config);
+  
+  let dialogRef = this._dialog.open(LoginComponent, config);
 
-    
-    this._store.select(selectIsLoading).subscribe((data) =>{
-      if(data){
-        dialogRef.close();
-      }
-    }); 
-  }
+  
+  this._store.select(selectIsLoading).subscribe((data) =>{
+    if(data){
+      dialogRef.close();
+    }
+  }); 
+}
 
- }
+
 
   title = 'Messina14 Admin Page';
 }

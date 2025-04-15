@@ -5,6 +5,7 @@ import { LoginService } from "src/app/services/login.service";
 import { map, exhaustMap } from "rxjs";
 import { ILoginRequest } from "./login.model";
 import { LocalStorageService } from "src/app/services/local-storage.service";
+import { ILogin } from "src/app/models/ILogin";
 
 @Injectable()
 export class LoginEffects {
@@ -15,13 +16,14 @@ export class LoginEffects {
            
             return this.service.loginuser(request.username,request.password).pipe(
               map((resp) => {
-                this.localStorage.set("token",resp);
-                return loginusersuccess({data:{
+                let info:ILogin = {
                   email: request.username,
                   token: resp,
                   error: "",
                   isLoading: true
-                }});
+                }
+                this.localStorage.set("loginInfo",JSON.stringify(info));
+                return loginusersuccess({data:info});
                
               })
             );
