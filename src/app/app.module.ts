@@ -17,7 +17,7 @@ import { NewAlbumComponent } from './components/albums/new-album/new-album.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FotoComponent } from './components/albums/foto/foto.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { albumsReducer } from './shared/store/Albums/albums.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -26,7 +26,17 @@ import { AppState } from './shared/store/Global/AppState.model';
 import { LoginComponent } from './components/login/login.component';
 import { LoginEffects } from './shared/store/Login/login.effects';
 
- 
+ // console.log all actions
+export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
+  return function(state, action) {
+    console.log('state', state);
+    console.log('action', action);
+    
+    return reducer(state, action);
+  };
+}
+
+export const metaReducers: MetaReducer<any>[] = [debug];
  
 @NgModule({
   declarations: [
@@ -51,7 +61,7 @@ import { LoginEffects } from './shared/store/Login/login.effects';
     FlexLayoutModule,
     FormsModule, 
     ReactiveFormsModule, 
-    StoreModule.forRoot(AppState),
+    StoreModule.forRoot(AppState, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([AlbumEffects, LoginEffects])
   ],

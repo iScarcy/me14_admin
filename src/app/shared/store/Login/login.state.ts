@@ -2,8 +2,9 @@ import { ILoginModel } from "./login.model";
 
 export const initialState:ILoginModel={
    login:{
-       token: "",
-       error: "",
-       isLoading: false
+        email:"",
+        token: "",
+        error: "",
+        isLoading: false
    }
 }
