@@ -22,7 +22,9 @@ export class LoginEffects {
                   error: "",
                   isLoading: true
                 }
-                this.localStorage.set("loginInfo",JSON.stringify(info));
+                this.localStorage.set("loginInfo-email",info.email);
+                this.localStorage.set("loginInfo-token",info.token);
+                this.localStorage.set("lastUpdate", new Date());
                 return loginusersuccess({data:info});
                
               })

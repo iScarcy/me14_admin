@@ -13,3 +13,7 @@ export interface IAppStateModel{
     albums:IAlbumsModel,
     login:ILoginModel
 }
+
+export interface IAppStateInfoLogin{
+    data:ILogin
+}

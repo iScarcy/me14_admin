@@ -26,26 +26,40 @@ import { AppState } from './shared/store/Global/AppState.model';
 import { LoginComponent } from './components/login/login.component';
 import { LoginEffects } from './shared/store/Login/login.effects';
 import { ILogin } from './models/ILogin';
-import {  IAppStateModel } from './shared/store/Global/App.state';
+import {  IAppStateModel, IAppStateInfoLogin } from './shared/store/Global/App.state';
 import { localStorageSync, rehydrateApplicationState } from 'ngrx-store-localstorage';
- // console.log all actions
-export function debug(reducer: ActionReducer<IAppStateModel>): ActionReducer<IAppStateModel> {
-  return function(state, action) {
-    console.log('state', state);
-    console.log('action', action);
+import { LOGIN_SUCCESS } from './shared/store/Login/login.actions';
+
+const INIT_ACTION = "@ngrx/store/init";
+
+export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>): ActionReducer<IAppStateModel> {
+  return function(state, action : any) {
+    
  
-    const keys = ['loginInfo'];
+    const keys = ['loginInfo-email','loginInfo-token','lastUpdate'];
+
+      
+    if (action.type === INIT_ACTION){
+      console.log('state', state);
+      console.log('action type', typeof(action));
+      const test: IAppStateInfoLogin = action
+      console.log(test.data.token)
+      debugger;
+      const rehydratedState = rehydrateApplicationState(keys, localStorage, k => k, true);
+      return { ...state, ...rehydratedState };
+    }
+
+    if (action.type === LOGIN_SUCCESS){
+     
+    }
+    
+    
+      
 
       
      
-      console.log("token state:"+action);
-      console.log("state: "+state)
-      debugger;
-
-      const rehydratedState = rehydrateApplicationState(keys, localStorage, k => k, true);
-      console.log("ultima " +rehydratedState)
-      debugger;
-      return { ...state, ...rehydratedState };
+       
+     // return { ...state, ...rehydratedState };
      
 
    
@@ -61,7 +75,7 @@ export function debug(reducer: ActionReducer<IAppStateModel>): ActionReducer<IAp
 
 
 
-export const metaReducers: MetaReducer<IAppStateModel>[] = [debug];
+export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyncReducer];
  
 @NgModule({
   declarations: [
