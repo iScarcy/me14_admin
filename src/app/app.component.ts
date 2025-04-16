@@ -3,8 +3,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoginComponent } from './components/login/login.component';
 import { AppStateModel } from './shared/store/Global/App.state';
 import { Store } from '@ngrx/store';
-import { selectIsLoading } from './shared/store/Login/login.selectors';
+
 import { LocalStorageService } from './services/local-storage.service';
+import { selectIsLogged } from './shared/store/Login/login.selectors';
 
 @Component({
   selector: 'app-root',
@@ -32,12 +33,13 @@ ngOnInit(): void {
   
   let dialogRef = this._dialog.open(LoginComponent, config);
 
-  
-  this._store.select(selectIsLoading).subscribe((data) =>{
+   
+  this._store.select(selectIsLogged).subscribe((data) =>{
     if(data){
       dialogRef.close();
     }
   }); 
+   
 }
 
 

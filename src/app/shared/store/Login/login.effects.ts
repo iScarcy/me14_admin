@@ -18,12 +18,10 @@ export class LoginEffects {
               map((resp) => {
                 let info:ILogin = {
                   email: request.username,
-                  token: resp,
-                  error: "",
-                  isLoading: true
+                  token: resp
                 }
-                this.localStorage.set("loginInfo-email",info.email);
-                this.localStorage.set("loginInfo-token",info.token);
+                this.localStorage.set("login",JSON.stringify(info));
+                
                 this.localStorage.set("lastUpdate", new Date());
                 return loginusersuccess({data:info});
                

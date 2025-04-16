@@ -8,13 +8,7 @@ export const selectToken = createSelector(getloginstate, (state) => {
     return state.login.token;
 })
  
- 
-export const selectError = createSelector(getloginstate, (state) => {
+export const selectIsLogged = createSelector(getloginstate, (state) => {
     
-    return state.login.error;
-})
-
-export const selectIsLoading = createSelector(getloginstate, (state) => {
-   
-    return state.login.isLoading;
+    return state.login.token!=null && state.login.token.length>0;
 })

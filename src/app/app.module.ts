@@ -36,23 +36,26 @@ export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>):
   return function(state, action : any) {
     
  
-    const keys = ['loginInfo-email','loginInfo-token','lastUpdate'];
+    const keys = ['login','lastUpdate'];
 
-      
+     /*
     if (action.type === INIT_ACTION){
       console.log('state', state);
       console.log('action type', typeof(action));
-      const test: IAppStateInfoLogin = action
-      console.log(test.data.token)
-      debugger;
+      //const test: IAppStateInfoLogin = action
+      //console.log(test.data.token)
+     
       const rehydratedState = rehydrateApplicationState(keys, localStorage, k => k, true);
-      return { ...state, ...rehydratedState };
-    }
-
-    if (action.type === LOGIN_SUCCESS){
+     
+      console.log("_"+rehydratedState)
+      debugger;
      
     }
     
+    if (action.type === LOGIN_SUCCESS){
+     
+    }
+    */
     
       
 
@@ -64,12 +67,14 @@ export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>):
 
    
    
-    
+    console.log("state_:"+state!=null);
     //return reducer(state, action);
-    return localStorageSync({
+    let x = localStorageSync({
       keys,
       rehydrate: true,
     })(reducer)(state, action);
+ 
+    return x;
   };
 }
 
