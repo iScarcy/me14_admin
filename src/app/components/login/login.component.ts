@@ -1,18 +1,30 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { loginuser } from 'src/app/shared/store/Login/login.actions';
 import { ILoginRequest } from 'src/app/shared/store/Login/login.model';
+import { selectLoginFailed } from 'src/app/shared/store/Login/login.selectors';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent  {
+export class LoginComponent implements OnInit {
   
-   constructor(private _store: Store<AppStateModel>){}
+  constructor(private _store: Store<AppStateModel>){}
+  isErr : boolean = false;
+  ngOnInit(): void {
+    
+
+      this._store.select(selectLoginFailed).subscribe((resp) =>{
+       
+       this.isErr = resp
+    
+      }); 
+  }
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
