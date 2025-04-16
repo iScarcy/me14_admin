@@ -3,4 +3,22 @@
         <mat-icon>menu</mat-icon>
     </button>
     <span class="example-spacer"></span>
+    <div *ngIf="userLogged; else signin" class="align-items-end">
+        <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Utente: </mat-panel-title>
+              <mat-panel-description>
+                <span>{{userLogged}}</span>
+                <mat-icon>account_circle</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        
+            <button mat-button (click)="logout()">Logout<mat-icon>power_off</mat-icon></button>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <ng-template #signin>
+        <button mat-button>Accedi<mat-icon>power</mat-icon></button>
+    </ng-template>
 </mat-toolbar>    

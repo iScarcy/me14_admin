@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { LOGIN_USER, loginusersuccess } from "./login.actions";
+import { LOGIN_USER, loginusersuccess, LOGOUT_USER, logoutusersuccess } from "./login.actions";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { LoginService } from "src/app/services/login.service";
 import { map, exhaustMap } from "rxjs";
@@ -31,6 +31,28 @@ export class LoginEffects {
         )
       );
   
+      effectsOut$ = createEffect(() =>
+        this.action$.pipe(
+          ofType(LOGOUT_USER),
+          exhaustMap((request: ILoginRequest) => {
+         
+            return this.service.logoutuser(request.username).pipe(
+              map((resp) => {
+                let info:ILogin = {
+                  email: resp,
+                  token: resp
+                }
+                this.localStorage.remove("login");
+                
+                this.localStorage.set("lastUpdate", new Date());
+                return logoutusersuccess({data:info});
+               
+              })
+            );
+          })
+        )
+      );
+
        constructor(
             private action$: Actions,
             private service: LoginService,

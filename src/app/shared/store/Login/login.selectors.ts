@@ -12,3 +12,8 @@ export const selectIsLogged = createSelector(getloginstate, (state) => {
     
     return state.login.token!=null && state.login.token.length>0;
 })
+
+export const selectUserLogged = createSelector(getloginstate, (state) => {
+    
+    return state.login.email
+})

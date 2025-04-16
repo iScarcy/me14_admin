@@ -24,20 +24,17 @@ ngOnInit(): void {
     panelClass: "dialog-responsive",
     disableClose: true        
   }
-
   
-  let isLogged:Boolean = false;  
-  console.log("token:"+this._localStorage.get("token")) 
-  isLogged = this._localStorage.get("token") !=null    
-  console.log("log:"+isLogged) 
-  
-  let dialogRef = this._dialog.open(LoginComponent, config);
-
-   
-  this._store.select(selectIsLogged).subscribe((data) =>{
-    if(data){
-      dialogRef.close();
+    this._store.select(selectIsLogged).subscribe((data) =>{
+    
+    if(!data){
+      let dialogRef = this._dialog.open(LoginComponent, config); 
+     
+    }else{
+      let dialogRef = this._dialog.getDialogById("mat-mdc-dialog-0");      
+      dialogRef?.close();
     }
+
   }); 
    
 }

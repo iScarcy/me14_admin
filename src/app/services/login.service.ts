@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { baseSecurityApiUrl } from '../app.costant';
 
 @Injectable({
@@ -18,4 +18,8 @@ export class LoginService {
      
   }
 
+  logoutuser(username: string):Observable<string>{
+   
+    return from("");
+  }
 }
