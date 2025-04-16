@@ -39,43 +39,24 @@ export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>):
  
     const keys = ['login','lastUpdate'];
 
-     /*
+    let clearErrOnIinit : boolean = false;
     if (action.type === INIT_ACTION){
-      console.log('state', state);
-      console.log('action type', typeof(action));
-      //const test: IAppStateInfoLogin = action
-      //console.log(test.data.token)
+     
      
       const rehydratedState = rehydrateApplicationState(keys, localStorage, k => k, true);
-     
-      console.log("_"+rehydratedState)
-      debugger;
-     
+        
+      if(rehydratedState.login.login.token=="err")
+        clearErrOnIinit = true;
     }
-    
-    if (action.type === LOGIN_SUCCESS){
-     
-    }
-    */
-    
-      
-
-      
-     
-       
-     // return { ...state, ...rehydratedState };
-     
-
-   
-   
-    console.log("state_:"+state!=null);
-    //return reducer(state, action);
-    let x = localStorageSync({
+ 
+    let xapp = localStorageSync({
       keys,
       rehydrate: true,
     })(reducer)(state, action);
- 
-    return x;
+   
+    if(clearErrOnIinit)
+      xapp.login.login.token = "";
+    return xapp;
   };
 }
 

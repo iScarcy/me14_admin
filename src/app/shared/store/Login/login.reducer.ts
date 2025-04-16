@@ -11,7 +11,7 @@ const _loginReducer = createReducer(
         }
     }),
     on(loginuserfaild, (state, action)=>{
-        debugger;
+     
         return {
             login: {
                 email: "",
