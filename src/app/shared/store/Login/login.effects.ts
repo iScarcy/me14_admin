@@ -2,10 +2,11 @@ import { Injectable } from "@angular/core";
 import { LOGIN_USER, loginusersuccess, LOGOUT_USER, logoutusersuccess } from "./login.actions";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { LoginService } from "src/app/services/login.service";
-import { map, exhaustMap } from "rxjs";
+import { map, exhaustMap, catchError, throwError } from "rxjs";
 import { ILoginRequest } from "./login.model";
 import { LocalStorageService } from "src/app/services/local-storage.service";
 import { ILogin } from "src/app/models/ILogin";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Injectable()
 export class LoginEffects {
@@ -13,8 +14,9 @@ export class LoginEffects {
         this.action$.pipe(
           ofType(LOGIN_USER),
           exhaustMap((request: ILoginRequest) => {
-           
+           debugger;
             return this.service.loginuser(request.username,request.password).pipe(
+              
               map((resp) => {
                 let info:ILogin = {
                   email: request.username,
@@ -25,7 +27,7 @@ export class LoginEffects {
                 this.localStorage.set("lastUpdate", new Date());
                 return loginusersuccess({data:info});
                
-              })
+              }) 
             );
           })
         )

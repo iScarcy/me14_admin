@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { AlbumsComponent } from './components/albums/albums.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './components/albums/album/album.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewAlbumComponent } from './components/albums/new-album/new-album.component';
@@ -29,6 +29,7 @@ import { ILogin } from './models/ILogin';
 import {  IAppStateModel, IAppStateInfoLogin } from './shared/store/Global/App.state';
 import { localStorageSync, rehydrateApplicationState } from 'ngrx-store-localstorage';
 import { LOGIN_SUCCESS } from './shared/store/Login/login.actions';
+import { ErrorInterceptor } from './services/ErrorInterceptor';
 
 const INIT_ACTION = "@ngrx/store/init";
 
@@ -109,7 +110,9 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([AlbumEffects, LoginEffects])
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

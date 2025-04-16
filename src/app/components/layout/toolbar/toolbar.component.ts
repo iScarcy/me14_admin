@@ -24,7 +24,7 @@ export class ToolbarComponent  implements OnInit {
   }
   
    logout(){
-      this._store.dispatch(logoutuser({username: this.userLogged!}));      
+      this._store.dispatch(logoutuser());      
     }
 
 }

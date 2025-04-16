@@ -10,7 +10,7 @@ export const LOGOUT_SUCCESS = '[Login page] logut user'
 
 export const loginuser=createAction(LOGIN_USER, props<{ username:string, password:string }>());
 export const loginusersuccess=createAction(LOGIN_SUCCESS, props<{ data: ILogin}>());
-export const loginuserfaild=createAction(LOGIN_FAILD, props<{ data: ILogin}>());
+export const loginuserfaild=createAction(LOGIN_FAILD);
 
-export const logoutuser=createAction(LOGOUT_USER, props<{ username:string}>());
+export const logoutuser=createAction(LOGOUT_USER);
 export const logoutusersuccess=createAction(LOGOUT_SUCCESS, props<{ data: ILogin}>());
