@@ -30,6 +30,7 @@ import {  IAppStateModel, IAppStateInfoLogin } from './shared/store/Global/App.s
 import { localStorageSync, rehydrateApplicationState } from 'ngrx-store-localstorage';
 import { LOGIN_SUCCESS } from './shared/store/Login/login.actions';
 import { ErrorInterceptor } from './services/ErrorInterceptor';
+import { APP_BASE_HREF } from '@angular/common';
 
 const INIT_ACTION = "@ngrx/store/init";
 
@@ -92,7 +93,8 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     EffectsModule.forRoot([AlbumEffects, LoginEffects])
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    { provide: APP_BASE_HREF, useValue: '/me14_admin/' }
   ],
   bootstrap: [AppComponent]
 })
