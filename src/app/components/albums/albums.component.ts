@@ -36,9 +36,7 @@ export class AlbumsComponent implements OnInit {
 
   }
 
-  FC_anno = new FormControl('',[
-      
-  ])
+  
   brancaSelected = 'option2';
   ngOnInit(): void {    
         
@@ -67,10 +65,20 @@ export class AlbumsComponent implements OnInit {
     if(anno.length != 4 && (anno=="" || anno == null)){
       anno = "0"
     }
-
-
+    
     if(branca!=null){
-       
+      
+      switch(branca){
+        case "lc":  this.branca = "L/C";
+                    break;
+        case "eg":  this.branca = "E/G";
+                    break;
+        case "rs": this.branca = "R/S";
+                    break;            
+        case "varie": this.branca = "Gruppo";
+                    break;            
+      }
+      
       this.loadAlbums(branca, anno);
     }
     
