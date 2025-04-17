@@ -94,7 +94,7 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    { provide: APP_BASE_HREF, useValue: '/me14_admin/' }
+  
   ],
   bootstrap: [AppComponent]
 })
