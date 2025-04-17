@@ -3,7 +3,7 @@ import { DELETE_ALBUM, DELETE_ALBUM_FOTO, deletealbumfotosuccess, deletealbumsuc
 import { exhaustMap, map, merge, mergeAll, mergeMap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { IAlbumRequest } from "src/app/models/IAlbumRequest";
+import { IAlbumRequest } from "src/app/services/rest/IAlbumRequest";
 import { IDeleteStoreRequest, IGetAlbumFotoStoreRequest, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumStoreRequest, IRotateAlbumFotoStoreRequest } from "./albums.model";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { baseGalleryPublicImageUrl } from "src/app/app.costant";

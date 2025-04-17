@@ -18,8 +18,9 @@ export class ToolbarComponent  implements OnInit {
   userLogged: string | undefined;
   
   ngOnInit(): void {
-   this._store.select(selectUserLogged).subscribe((email) =>{
-      this.userLogged = email
+   this._store.select(selectUserLogged).subscribe((data) =>{
+ 
+    this.userLogged = data
      });
   }
   

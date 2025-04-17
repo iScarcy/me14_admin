@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { AlbumDialogData } from 'src/app/models/dialog/AlbumDialogData';
 import { IAlbum } from 'src/app/models/IAlbum';
-import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
+import { IAlbumRequest } from 'src/app/services/rest/IAlbumRequest';
 import { IUploadFile } from 'src/app/models/IUploadFile';
 import { GalleryService } from 'src/app/services/gallery.service';
 

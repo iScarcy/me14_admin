@@ -44,8 +44,8 @@ export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>):
      
      
       const rehydratedState = rehydrateApplicationState(keys, localStorage, k => k, true);
-        
-      if(rehydratedState.login.login.token=="err")
+     
+      if(rehydratedState.login != null && rehydratedState.login.login.token=="err")
         clearErrOnIinit = true;
     }
  

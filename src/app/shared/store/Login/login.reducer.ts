@@ -14,8 +14,10 @@ const _loginReducer = createReducer(
      
         return {
             login: {
-                email: "",
-                token: "err"
+                displayName:"",
+                token: "",   
+                tokenExpireDate:null,
+                role:""
             }  
         }
     }),
@@ -23,8 +25,10 @@ const _loginReducer = createReducer(
         
         return {
            login: {
-                    email:"",
-                    token: ""
+                    displayName:"",
+                    token: "",   
+                    tokenExpireDate:null,
+                    role:""
                 }   
         }
     })

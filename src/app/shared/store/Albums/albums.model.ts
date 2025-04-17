@@ -1,8 +1,8 @@
 import { IAlbum } from "src/app/models/IAlbum";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
-import { IAlbumFotoRequest } from "src/app/models/IAlbumFotoRequest";
-import { IAlbumRequest } from "src/app/models/IAlbumRequest";
-import { IFotoRotateRequest } from "src/app/models/IFotoRotateRequest";
+import { IAlbumFotoRequest } from "src/app/services/rest/IAlbumFotoRequest";
+import { IAlbumRequest } from "src/app/services/rest/IAlbumRequest";
+import { IFotoRotateRequest } from "src/app/services/rest/IFotoRotateRequest";
 
 export interface IAlbumsModel{
     albums:IAlbumFoto[]

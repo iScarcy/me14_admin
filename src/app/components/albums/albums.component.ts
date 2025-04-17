@@ -5,7 +5,7 @@ import { map, Observable, tap } from 'rxjs';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
-import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
+import { IAlbumRequest } from 'src/app/services/rest/IAlbumRequest';
 
 import { IAlbumsModel, IDeleteRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoRequestModel, INewAlbumRequestModel } from 'src/app/shared/store/Albums/albums.model';
 import { Store } from '@ngrx/store';
@@ -24,7 +24,7 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class AlbumsComponent implements OnInit {
   branca:string = "";
-  anno : string = "0";
+  anno : string = "";
 
   albums$ = new Observable<IAlbumFoto[]> ();
   albumF : IAlbumFoto | undefined

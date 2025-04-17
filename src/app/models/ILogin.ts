@@ -1,4 +1,6 @@
 export interface ILogin{
-    email:string;
+    displayName:string,
     token: string;   
+    tokenExpireDate:Date | null,
+    role:string
 }

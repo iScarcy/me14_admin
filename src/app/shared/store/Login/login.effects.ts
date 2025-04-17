@@ -18,9 +18,12 @@ export class LoginEffects {
             return this.service.loginuser(request.username,request.password).pipe(
               
               map((resp) => {
+               
                 let info:ILogin = {
-                  email: request.username,
-                  token: resp
+                  displayName: resp.name,
+                  token: resp.token,
+                  tokenExpireDate: resp.expire,
+                  role: resp.role
                 }
                 this.localStorage.set("login",JSON.stringify(info));
                 
@@ -41,8 +44,10 @@ export class LoginEffects {
             return this.service.logoutuser(request.username).pipe(
               map((resp) => {
                 let info:ILogin = {
-                  email: resp,
-                  token: resp
+                  displayName: "",
+                  token: "",
+                  tokenExpireDate: new Date(),
+                  role: ""
                 }
                 this.localStorage.remove("login");
                 

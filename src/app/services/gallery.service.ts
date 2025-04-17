@@ -7,8 +7,8 @@ import { baseGalleryApiUrl, baseGalleryPublicImageUrl } from '../app.costant';
 import { IUploadFile } from '../models/IUploadFile';
 import { IFoto } from '../models/IFoto';
 import { IAlbumFoto } from '../models/IAlbumFoto';
-import { IAlbumRequest } from '../models/IAlbumRequest';
-import { IAlbumFotoRequest } from '../models/IAlbumFotoRequest';
+import { IAlbumRequest } from './rest/IAlbumRequest';
+import { IAlbumFotoRequest } from './rest/IAlbumFotoRequest';
 import { IRotateAlbumFotoRequestModel, IRotateAlbumFotoStoreRequest } from '../shared/store/Albums/albums.model';
 
 

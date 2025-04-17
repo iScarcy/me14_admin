@@ -20,5 +20,5 @@ export const selectLoginFailed = createSelector(getloginstate, (state) => {
 
 export const selectUserLogged = createSelector(getloginstate, (state) => {
     
-    return state.login.email
+    return state.login.displayName
 })

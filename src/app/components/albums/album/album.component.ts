@@ -10,7 +10,7 @@ import { IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestMod
 import { deletealbumfoto, loadalbumfoto, newalbumfoto, rotatealbumfoto } from 'src/app/shared/store/Albums/albums.actions';
 import { getalbum } from 'src/app/shared/store/Albums/albums.selectors';
 import { NewAlbumComponent } from '../new-album/new-album.component';
-import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
+import { IAlbumRequest } from 'src/app/services/rest/IAlbumRequest';
 
 @Component({
   selector: 'app-album',
