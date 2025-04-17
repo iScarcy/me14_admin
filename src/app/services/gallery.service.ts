@@ -21,14 +21,14 @@ export class GalleryService {
 
   constructor(private httpEvents: HttpClient) { }
 
-  getAlbums(branca: string , token: string):Observable<IAlbumFoto[]>{
+  getAlbums(branca: string , anno: string , token: string):Observable<IAlbumFoto[]>{
   
   const headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
   })
 
-   var url: string = baseGalleryApiUrl+"album/"+branca+"/0";
+   var url: string = baseGalleryApiUrl+"album/"+branca+"/"+anno;
   
     return this.httpEvents.get<Array<IAlbum>>(url, {headers:headers}).pipe(
       map(albums => albums.map(album => ({

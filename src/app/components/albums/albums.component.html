@@ -1,13 +1,13 @@
   
 <div class="container">
     <div class="itemHead">
-        <span>Album {{this.branca.toUpperCase()}}</span>
+        <span>Album {{this.branca}}</span>
         <button mat-raised-button (click)="this.openNewAlbumDialog()"><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="add" ></mat-icon>Nuovo Album</button> 
         <div class="filer">
               
               <mat-form-field>
                 <mat-label>Seleziona una branca</mat-label>
-                <mat-select [(value)]="selected">
+                <mat-select [(value)]="brancaSelected" (selectionChange)="changeBranca($event.value)">
                   <mat-option value="lc">Lupetti</mat-option>
                   <mat-option value="eg">Reparto</mat-option>
                   <mat-option value="rs">Clan</mat-option>
@@ -15,7 +15,7 @@
               </mat-form-field>
               <mat-form-field class="example-full-width">
                 <mat-label>Inserisci un anno</mat-label>
-                <input matInput placeholder="2025" value="">
+                <input matInput [(ngModel)]="anno" (input)="onAnnoChange($event)" >
               </mat-form-field>
         </div>
     </div>

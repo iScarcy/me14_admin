@@ -15,6 +15,7 @@ import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
 import { FotoComponent } from './foto/foto.component';
 import { getalbum, getalbumslist } from 'src/app/shared/store/Albums/albums.selectors';
 import { selectToken } from 'src/app/shared/store/Login/login.selectors';
+import { FormControl, Validators } from '@angular/forms';
  
 @Component({
   selector: 'app-albums',
@@ -23,7 +24,8 @@ import { selectToken } from 'src/app/shared/store/Login/login.selectors';
 })
 export class AlbumsComponent implements OnInit {
   branca:string = "";
-  
+  anno : string = "0";
+
   albums$ = new Observable<IAlbumFoto[]> ();
   albumF : IAlbumFoto | undefined
   private readonly route = inject(ActivatedRoute);
@@ -33,30 +35,62 @@ export class AlbumsComponent implements OnInit {
     private _dialog: MatDialog){
 
   }
-  selected = 'option2';
+
+  FC_anno = new FormControl('',[
+      
+  ])
+  brancaSelected = 'option2';
   ngOnInit(): void {    
-    
-     
-    this.branca  =  this.route.snapshot.paramMap.get('branca')!;
-  
-    if(this.branca!=null){
-        this._store.select(selectToken).subscribe((data) =>{
-          if(data){
-            const req:IGetAlbumsRequestModel={
-              branca: this.branca
-            }
         
-            this._store.dispatch(loadalbums({branca:this.branca, token:data}));
-            
-            this.albums$ = this._store.select(getalbumslist);
-          }
-        }); 
+  }
+  
+  onAnnoChange(event: any) {
+    let anno:string = this.anno;
+    let branca:string = this.brancaSelected;
+    console.log(anno+"_"+anno.length);
+    
+        
+    if(branca!=""){
+      if(anno.length==4 || anno== ""){
+        
+          
+          this.loadAlbums(branca, anno);
+         
+      }
+    }
+  }
+  
+
+  changeBranca(event: any):void{
+    let anno:string = this.anno;
+    let branca:string = this.brancaSelected;
+    if(anno.length != 4 && (anno=="" || anno == null)){
+      anno = "0"
+    }
+
+
+    if(branca!=null){
+       
+      this.loadAlbums(branca, anno);
     }
     
-    
   }
+
+  loadAlbums(branca:string, anno: string){
    
-  openNewAlbumDialog(){
+    this._store.select(selectToken).subscribe((data) =>{
+      if(data){
+        const req:IGetAlbumsRequestModel={
+          branca: this.branca
+        }
+    
+        this._store.dispatch(loadalbums({branca: branca, anno: anno, token:data}));
+        
+        this.albums$ = this._store.select(getalbumslist);
+      }
+    }); 
+  }
+  openNewAlbumDialog():void{
   
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",

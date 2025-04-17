@@ -25,7 +25,7 @@ export const ROTATE_ALBUM_FOTO = '[Gallery page] rotate album foto'
 export const ROTATE_ALBUM_FOTO_SUCCESS = '[Gallery page] rotate album success foto' 
 
 //IGetAlbumsRequestModel
-export const loadalbums=createAction(LOAD_ALBUMS, props<{branca:string, token:string }>());
+export const loadalbums=createAction(LOAD_ALBUMS, props<{branca:string, anno:string, token:string }>());
 export const loadalbumssuccess=createAction(LOAD_ALBUMS_SUCCESS, props<{albums:IAlbumFoto[]}>());
 
 export const deletealbum=createAction(DELETE_ALBUM, props<{data: IDeleteRequestModel}>());
