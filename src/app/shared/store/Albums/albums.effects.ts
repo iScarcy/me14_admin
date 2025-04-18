@@ -70,7 +70,6 @@ export class AlbumEffects {
                 title: album.title,
                 anno: album.anno,
                 branca: album.branca,
-                folder: album.folder,
                 imgFolderUrl: album.imgFolderUrl,
                 foto: []
               }
@@ -95,7 +94,7 @@ export class AlbumEffects {
                 title: album.title,
                 anno: album.anno,
                 branca: album.branca,
-                folder: album.folder,
+             //   folder: album.folder,
                 imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl,
                 foto: album.foto
               }

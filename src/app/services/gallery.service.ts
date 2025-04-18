@@ -36,7 +36,6 @@ export class GalleryService {
         title: album.title,
         anno: album.anno,
         branca: album.branca, 
-        folder:album.folder,
         imgFolderUrl:  baseGalleryPublicImageUrl + album.imgFolderUrl ,            
         foto: []
       })))
@@ -62,7 +61,7 @@ export class GalleryService {
         title: album.title,
         anno: album.anno,
         branca: album.branca,
-        folder: album.folder,
+        //folder: album.folder,
         imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))
@@ -79,7 +78,7 @@ export class GalleryService {
         title: album.title,
         anno: album.anno,
         branca: album.branca,
-        folder: album.folder,
+      //  folder: album.folder,
         imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))
@@ -145,6 +144,7 @@ export class GalleryService {
   }
 
   deleteFoto(id:number, token: string):Observable<Object>{
+    
     var url: string = baseGalleryApiUrl+"album/photo?idFoto="+id;    
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

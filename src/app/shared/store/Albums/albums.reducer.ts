@@ -36,7 +36,6 @@ const _albumsReducer = createReducer(
            title: item.title,
            anno: item.anno,
            branca: item.branca,
-           folder: item.folder,
            imgFolderUrl: item.imgFolderUrl,
            foto: []
        } 
@@ -70,7 +69,7 @@ const _albumsReducer = createReducer(
             title: item.title,
             anno: item.anno,
             branca: item.branca,
-            folder: item.folder,
+          //  folder: item.folder,
             imgFolderUrl: item.imgFolderUrl,
             foto: []
         } 
@@ -91,7 +90,7 @@ const _albumsReducer = createReducer(
         }
     }),
     on(deletealbumfotosuccess, (state, action) => {
-     
+      
         var albumsFoto = [...state.albums];
         var item =  albumsFoto.find(item => item.id == action.data.idAlbum)!;
         
@@ -100,7 +99,7 @@ const _albumsReducer = createReducer(
             title: item.title,
             anno: item.anno,
             branca: item.branca,
-            folder: item.folder,
+          //  folder: item.folder,
             imgFolderUrl: item.imgFolderUrl,
             foto: item.foto.filter(f => f.id != action.data.idFoto)
         } 
@@ -123,7 +122,7 @@ const _albumsReducer = createReducer(
             title: item.title,
             anno: item.anno,
             branca: item.branca,
-            folder: item.folder,
+          //  folder: item.folder,
             imgFolderUrl: item.imgFolderUrl,
             foto: []
         } 

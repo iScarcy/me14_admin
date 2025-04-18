@@ -25,7 +25,6 @@ export class AlbumComponent implements OnInit{
     title: '',
     anno: 0,
     branca: "",
-    folder:'',
     imgFolderUrl: '',
     foto: []
   };
@@ -121,7 +120,7 @@ export class AlbumComponent implements OnInit{
             
             this._store.select(selectToken).subscribe((data) =>{
               if(data){
-            
+                  
                   this._store.dispatch(deletealbumfoto({idAlbum: this.album.id,idFoto: id, token: data}));
                   
                   this._store.select(getalbum(albumFoto.id)).subscribe({
