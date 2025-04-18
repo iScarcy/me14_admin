@@ -2,9 +2,12 @@
 <div class="container">
     <div class="itemHead">
         <span>Album {{this.branca}}</span>
-        <button mat-raised-button (click)="this.openNewAlbumDialog()"><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="add" ></mat-icon>Nuovo Album</button> 
+        <button *ngIf="(albums$ |async)" mat-raised-button (click)="this.openNewAlbumDialog()"><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="add"  ></mat-icon>Nuovo Album</button> 
         <div class="filer">
-              
+          <mat-form-field class="example-full-width" *ngIf="(albums$ |async)" >
+            <mat-label>Inserisci un anno</mat-label>
+            <input matInput [(ngModel)]="anno" (input)="onAnnoChange($event)" >
+          </mat-form-field>
               <mat-form-field>
                 <mat-label>Seleziona una branca</mat-label>
                 <mat-select [(value)]="brancaSelected" (selectionChange)="changeBranca($event.value)">
@@ -14,10 +17,7 @@
                   <mat-option value="varie">Gruppo</mat-option>
                 </mat-select>
               </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <mat-label>Inserisci un anno</mat-label>
-                <input matInput [(ngModel)]="anno" (input)="onAnnoChange($event)" >
-              </mat-form-field>
+             
         </div>
     </div>
     

@@ -35,13 +35,14 @@ export interface IDeleteStoreRequest extends IStoreRequest{
  
 
 export interface INewAlbumRequestModel{
-   request:IAlbumRequest
+   request:IAlbumRequest, token:string
 }
-
+ 
+/*
 export interface INewAlbumStoreRequest extends IStoreRequest{
     data:INewAlbumRequestModel
 }
-
+*/
 //FOTO
 
 export interface IGetAlbumFotoRequestModel  extends IStoreRequest{
@@ -61,7 +62,7 @@ export interface INewAlbumFotoRequestModel{
  export interface INewAlbumFotoStoreRequest extends IStoreRequest{
      data:INewAlbumFotoRequestModel
  }
-
+  
  export interface IRotateAlbumFotoRequestModel{
     request:IFotoRotateRequest
 }

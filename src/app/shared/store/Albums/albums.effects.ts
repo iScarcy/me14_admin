@@ -4,7 +4,7 @@ import { exhaustMap, map, merge, mergeAll, mergeMap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IAlbumRequest } from "src/app/services/rest/IAlbumRequest";
-import { IDeleteStoreRequest, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumStoreRequest, IRotateAlbumFotoStoreRequest } from "./albums.model";
+import { IDeleteStoreRequest, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumRequestModel, IRotateAlbumFotoStoreRequest } from "./albums.model";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { baseGalleryPublicImageUrl } from "src/app/app.costant";
 import { IFoto } from "src/app/models/IFoto";
@@ -59,9 +59,9 @@ export class AlbumEffects {
   effectsNew$ = createEffect(() =>
     this.action$.pipe(
       ofType(NEW_ALBUM),
-      exhaustMap((action: INewAlbumStoreRequest) => {
+      exhaustMap((action: INewAlbumRequestModel ) => {
         return this.galleryService
-          .newAlbum(action.data.request)
+          .newAlbum(action.request, action.token)
           .pipe(
             map((album) => {
             
@@ -71,7 +71,7 @@ export class AlbumEffects {
                 anno: album.anno,
                 branca: album.branca,
                 folder: album.folder,
-                imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl,
+                imgFolderUrl: album.imgFolderUrl,
                 foto: []
               }
               return newalbumsuccess({ album: albumFoto });

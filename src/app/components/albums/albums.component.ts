@@ -37,7 +37,7 @@ export class AlbumsComponent implements OnInit {
   }
 
   
-  brancaSelected = 'option2';
+  brancaSelected = '';
   ngOnInit(): void {    
         
   }
@@ -103,7 +103,7 @@ export class AlbumsComponent implements OnInit {
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
       disableClose: true,
-      data: {titleDialog: "Aggiungi album", album:{branca: this.branca}, callback: (request:IAlbumRequest) => this.new(request)} 
+      data: {titleDialog: "Aggiungi album", album:{branca: this.brancaSelected}, callback: (request:IAlbumRequest) => this.new(request)} 
       
     }
     
@@ -125,12 +125,19 @@ export class AlbumsComponent implements OnInit {
    
 
   new(album:IAlbumRequest){
-    var req: INewAlbumRequestModel = {
-      request: album
-    }
+    
+    this._store.select(selectToken).subscribe((data) =>{
+      if(data){
+        const req:IGetAlbumsRequestModel={
+          branca: this.branca
+        }
+    
+        this._store.dispatch(newalbum({request: album, token:data}));
+        
+        this._dialog.closeAll();
+      }
 
-    this._store.dispatch(newalbum({data:req}));
-    this._dialog.closeAll();
+    });
   }
 
   closeDialog(){

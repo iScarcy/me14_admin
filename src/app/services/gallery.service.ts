@@ -46,11 +46,17 @@ export class GalleryService {
   
 
 
-  newAlbum(request:IAlbumRequest):Observable<IAlbum>{
+  newAlbum(request:IAlbumRequest, token:string):Observable<IAlbum>{
    
+    
     var url: string = baseGalleryApiUrl+"album";
     
-    return this.httpEvents.post<IAlbum>(url, request).pipe(
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    return this.httpEvents.post<IAlbum>(url, request, {headers:headers}).pipe(
       map(album => ({
         id: album.id,
         title: album.title,

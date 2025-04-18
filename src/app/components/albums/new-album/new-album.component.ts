@@ -23,7 +23,7 @@ export class NewAlbumComponent implements OnInit {
 
   ngOnInit(): void {
      this.FC_title.setValue(this.data.album.title)
-     this.FC_anno.setValue(""+this.data.album.anno)
+     this.FC_anno.setValue(""+new Date().getFullYear())
      this.FC_branca.setValue(this.data.album.branca)
   }
 
