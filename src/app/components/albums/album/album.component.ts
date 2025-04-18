@@ -11,6 +11,7 @@ import { deletealbumfoto, loadalbumfoto, newalbumfoto, rotatealbumfoto } from 's
 import { getalbum } from 'src/app/shared/store/Albums/albums.selectors';
 import { NewAlbumComponent } from '../new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/services/rest/IAlbumRequest';
+import { selectToken } from 'src/app/shared/store/Login/login.selectors';
 
 @Component({
   selector: 'app-album',
@@ -228,11 +229,13 @@ export class AlbumComponent implements OnInit{
   
     loadAlbumFotoFromStore(albumFoto:IAlbumFoto){
     
-      var req: IGetAlbumFotoRequestModel={
-        idAlbum: albumFoto.id
-      }
-      this._store.dispatch(loadalbumfoto({data:req}));
-      
+
+      this._store.select(selectToken).subscribe((data) =>{
+          if(data){
+            this._store.dispatch(loadalbumfoto({idAlbum:albumFoto.id, token: data }));
+          }
+      }); 
+  
       const buttonElement = document.activeElement as HTMLElement; // Get the currently focused element
       buttonElement.blur(); // Remove focus from the button
       let x  = 0

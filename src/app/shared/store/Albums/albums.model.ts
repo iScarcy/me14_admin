@@ -44,14 +44,16 @@ export interface INewAlbumStoreRequest extends IStoreRequest{
 
 //FOTO
 
-export interface IGetAlbumFotoRequestModel{
-    idAlbum:number
+export interface IGetAlbumFotoRequestModel  extends IStoreRequest{
+    idAlbum:number,
+    token:string
 }
 
-export interface IGetAlbumFotoStoreRequest extends IStoreRequest{
+/*
+export interface IGetAlbumFotoStoreRequest{
     data:IGetAlbumFotoRequestModel
 }
-
+*/
 export interface INewAlbumFotoRequestModel{
     request:IAlbumFotoRequest
  }

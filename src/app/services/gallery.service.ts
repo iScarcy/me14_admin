@@ -110,10 +110,16 @@ export class GalleryService {
 
  }
 
-  getFoto(idAlbum:number):Observable<IAlbumFoto>{
+  getFoto(idAlbum:number , token: string):Observable<IAlbumFoto>{
     
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+   
+
     var url: string = baseGalleryApiUrl+"album/photo/"+idAlbum;
-    return this.httpEvents.get<IAlbumFoto>(url).pipe(
+    return this.httpEvents.get<IAlbumFoto>(url, {headers:headers}).pipe(
       map(album => ({
         id: album.id,
         title: album.title,
