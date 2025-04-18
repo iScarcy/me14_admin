@@ -119,19 +119,20 @@ export class AlbumComponent implements OnInit{
           //end sub
           const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
             
-            const req:IDeleteRequestModel = {
-              idAlbum: this.album.id,
-              idFoto: id
-            }
+            this._store.select(selectToken).subscribe((data) =>{
+              if(data){
             
-            this._store.dispatch(deletealbumfoto({data:req}));
+                  this._store.dispatch(deletealbumfoto({idAlbum: this.album.id,idFoto: id, token: data}));
+                  
+                  this._store.select(getalbum(albumFoto.id)).subscribe({
+                    next: (data) =>{
+                      dialogRef.componentInstance.al = data!;
+                    }
+                  }); 
             
-            this._store.select(getalbum(albumFoto.id)).subscribe({
-              next: (data) =>{
-                dialogRef.componentInstance.al = data!;
-              }
-            }); 
-            
+              };
+            //end token
+            });
           })
           //end subDelete
           const subfoto = dialogRef.componentInstance.onUploadAlbumFoto.subscribe((data) => {
@@ -187,19 +188,19 @@ export class AlbumComponent implements OnInit{
           //end sub
           const subDelete = dialogRef.componentInstance.onDelete.subscribe((id) => {
             
-            const req:IDeleteRequestModel = {
-              idAlbum: this.album.id,
-              idFoto: id
-            }
-            
-            this._store.dispatch(deletealbumfoto({data:req}));
-            
-            this._store.select(getalbum(albumFoto.id)).subscribe({
-              next: (data) =>{
-                dialogRef.componentInstance.al = data!;
-              }
+            this._store.select(selectToken).subscribe((data) =>{
+              if(data){
+                  this._store.dispatch(deletealbumfoto({idAlbum: this.album.id, idFoto: id, token: data}));
+                  
+                  this._store.select(getalbum(albumFoto.id)).subscribe({
+                    next: (data) =>{
+                      dialogRef.componentInstance.al = data!;
+                    }
+                  }); 
+                  
+                }
             }); 
-            
+
           })
           //end subDelete
           const subfoto = dialogRef.componentInstance.onUploadAlbumFoto.subscribe((data) => {

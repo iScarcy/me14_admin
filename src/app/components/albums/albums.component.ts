@@ -112,14 +112,12 @@ export class AlbumsComponent implements OnInit {
 
   deleteAlbumListener(id:number){
      
-    var req:IDeleteRequestModel={
-      idAlbum: id,
-      idFoto : undefined
-      
-    }
-    
-    this._store.dispatch(deletealbum({data: req}));
-    
+    this._store.select(selectToken).subscribe((data) =>{
+      if(data){
+        this._store.dispatch(deletealbum({idAlbum: id, idFoto : undefined, token:data}));
+      }
+    }); 
+     
   }
  
    

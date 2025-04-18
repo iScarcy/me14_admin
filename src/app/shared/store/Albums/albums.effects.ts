@@ -4,7 +4,7 @@ import { exhaustMap, map, merge, mergeAll, mergeMap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IAlbumRequest } from "src/app/services/rest/IAlbumRequest";
-import { IDeleteStoreRequest, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumRequestModel, IRotateAlbumFotoStoreRequest } from "./albums.model";
+import { IDeleteRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumRequestModel, IRotateAlbumFotoStoreRequest } from "./albums.model";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { baseGalleryPublicImageUrl } from "src/app/app.costant";
 import { IFoto } from "src/app/models/IFoto";
@@ -29,12 +29,12 @@ export class AlbumEffects {
   effectsDelete$ = createEffect(() =>
     this.action$.pipe(
       ofType(DELETE_ALBUM),
-      exhaustMap((action: IDeleteStoreRequest) => {
+      exhaustMap((action: IDeleteRequestModel) => {
         return this.galleryService
-          .deleteAlbum(action.data.idAlbum)
+          .deleteAlbum(action.idAlbum, action.token)
           .pipe(
             map((data) => {
-              return deletealbumsuccess({ data: action.data });
+              return deletealbumsuccess({ data: action });
             })
           );
       })
@@ -44,12 +44,12 @@ export class AlbumEffects {
   effectsDeleteFoto$ = createEffect(() =>
     this.action$.pipe(
       ofType(DELETE_ALBUM_FOTO),
-      exhaustMap((action: IDeleteStoreRequest) => {
+      exhaustMap((action: IDeleteRequestModel) => {
         return this.galleryService
-          .deleteFoto(action.data.idFoto!)
+          .deleteFoto(action.idFoto!, action.token)
           .pipe(
             map((data) => {
-              return deletealbumfotosuccess({ data: action.data });
+              return deletealbumfotosuccess({ data: action });
             })
           );
       })

@@ -25,14 +25,15 @@ export interface IGetAlbumsStoreRequest extends IStoreRequest{
 
 export interface IDeleteRequestModel{
     idAlbum:number,
-    idFoto:number | undefined
+    idFoto:number | undefined,
+    token:string
 }
-
+/*
 export interface IDeleteStoreRequest extends IStoreRequest{
     data:IDeleteRequestModel
 }
 
- 
+ */
 
 export interface INewAlbumRequestModel{
    request:IAlbumRequest, token:string

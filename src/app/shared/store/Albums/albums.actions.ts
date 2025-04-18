@@ -31,7 +31,7 @@ export const ROTATE_ALBUM_FOTO_SUCCESS = '[Gallery page] rotate album success fo
 export const loadalbums=createAction(LOAD_ALBUMS, props<{branca:string, anno:string, token:string }>());
 export const loadalbumssuccess=createAction(LOAD_ALBUMS_SUCCESS, props<{albums:IAlbumFoto[]}>());
 
-export const deletealbum=createAction(DELETE_ALBUM, props<{data: IDeleteRequestModel}>());
+export const deletealbum=createAction(DELETE_ALBUM, props<{idAlbum:number, idFoto:number | undefined, token:string}>());
 export const deletealbumsuccess=createAction(DELETE_ALBUM_SUCCESS, props<{data: IDeleteRequestModel}>());
 
 export const newalbum=createAction(NEW_ALBUM, props<{request: IAlbumRequest, token: string}>())
@@ -43,7 +43,7 @@ export const loadalbumfotosuccess=createAction(LOAD_ALBUM_FOTO_SUCCESS, props<{a
 export const newalbumfoto=createAction(NEW_ALBUM_FOTO, props<{data: INewAlbumFotoRequestModel}>())
 export const newalbumfotosuccess=createAction(NEW_ALBUM_FOTO_SUCCESS, props<{photo: Array<IFoto>}>())
 
-export const deletealbumfoto=createAction(DELETE_ALBUM_FOTO, props<{data: IDeleteRequestModel}>())
+export const deletealbumfoto=createAction(DELETE_ALBUM_FOTO, props<{idAlbum:number, idFoto:number | undefined, token:string}>())
 export const deletealbumfotosuccess=createAction(DELETE_ALBUM_FOTO_SUCCESS, props<{data: IDeleteRequestModel}>())
 
 export const rotatealbumfoto=createAction(ROTATE_ALBUM_FOTO, props<{data: IRotateAlbumFotoRequestModel}>())

@@ -86,9 +86,15 @@ export class GalleryService {
      )
   }
 
-  deleteAlbum(id:number):Observable<Object>{
+  deleteAlbum(id:number, token:string):Observable<Object>{
     var url: string = baseGalleryApiUrl+"album?idAlbum="+id;    
-    return this.httpEvents.delete(url);
+    
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    return this.httpEvents.delete(url,{headers: headers});
   }
 
   uploadAlbumImg(file: File):Observable<IUploadFile>{
@@ -138,9 +144,14 @@ export class GalleryService {
      )
   }
 
-  deleteFoto(id:number):Observable<Object>{
+  deleteFoto(id:number, token: string):Observable<Object>{
     var url: string = baseGalleryApiUrl+"album/photo?idFoto="+id;    
-    return this.httpEvents.delete(url);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    return this.httpEvents.delete(url, {headers: headers});
   }
 
   rotateFoto(data:IRotateAlbumFotoRequestModel):Observable<number>{
