@@ -13,6 +13,9 @@ export const DELETE_ALBUM_SUCCESS = '[Gallery page] delete album success'
 export const NEW_ALBUM = '[Gallery page] new album'
 export const NEW_ALBUM_SUCCESS = '[Gallery page] new album success'  
 
+export const EDIT_ALBUM = '[Gallery page] edit album'
+export const EDIT_ALBUM_SUCCESS = '[Gallery page] edit album success'  
+
 export const LOAD_ALBUM_FOTO = '[Gallery page] load foto albums'
 export const LOAD_ALBUM_FOTO_SUCCESS = '[Gallery page] load foto albums success'
 
@@ -36,6 +39,10 @@ export const deletealbumsuccess=createAction(DELETE_ALBUM_SUCCESS, props<{data: 
 
 export const newalbum=createAction(NEW_ALBUM, props<{request: IAlbumRequest, token: string}>())
 export const newalbumsuccess=createAction(NEW_ALBUM_SUCCESS, props<{album: IAlbumFoto}>())
+
+export const editalbum=createAction(EDIT_ALBUM, props<{request: IAlbumRequest, token: string}>())
+export const editalbumsuccess=createAction(EDIT_ALBUM, props<{album: IAlbumFoto}>())
+
 //IGetAlbumFotoRequestModel
 export const loadalbumfoto=createAction(LOAD_ALBUM_FOTO, props<{idAlbum:number, token:string}>())
 export const loadalbumfotosuccess=createAction(LOAD_ALBUM_FOTO_SUCCESS, props<{album: IAlbumFoto}>())

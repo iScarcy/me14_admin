@@ -68,17 +68,22 @@ export class GalleryService {
      )
   }
 
-  editAlbum(request:IAlbumRequest):Observable<IAlbum>{
+  editAlbum(request:IAlbumRequest, token:string):Observable<IAlbum>{
    
     var url: string = baseGalleryApiUrl+"album";
     
-    return this.httpEvents.patch<IAlbum>(url, request).pipe(
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+
+    return this.httpEvents.patch<IAlbum>(url, request, {headers: headers}).pipe(
       map(album => ({
         id: album.id,
         title: album.title,
         anno: album.anno,
         branca: album.branca,
-      //  folder: album.folder,
         imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))

@@ -1,5 +1,5 @@
 import { GalleryService } from "src/app/services/gallery.service";
-import { DELETE_ALBUM, DELETE_ALBUM_FOTO, deletealbumfotosuccess, deletealbumsuccess, LOAD_ALBUM_FOTO, LOAD_ALBUMS, loadalbumfotosuccess, loadalbums, loadalbumssuccess, NEW_ALBUM, NEW_ALBUM_FOTO, newalbumfotosuccess, newalbumsuccess, ROTATE_ALBUM_FOTO, rotatealbumfotosuccess } from "./albums.actions";
+import { DELETE_ALBUM, DELETE_ALBUM_FOTO, deletealbumfotosuccess, deletealbumsuccess, EDIT_ALBUM, editalbumsuccess, LOAD_ALBUM_FOTO, LOAD_ALBUMS, loadalbumfotosuccess, loadalbums, loadalbumssuccess, NEW_ALBUM, NEW_ALBUM_FOTO, newalbumfotosuccess, newalbumsuccess, ROTATE_ALBUM_FOTO, rotatealbumfotosuccess } from "./albums.actions";
 import { exhaustMap, map, merge, mergeAll, mergeMap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
@@ -74,6 +74,30 @@ export class AlbumEffects {
                 foto: []
               }
               return newalbumsuccess({ album: albumFoto });
+            })
+          );
+      })
+    )
+  );
+
+  effectsEdit$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(EDIT_ALBUM),
+      exhaustMap((action: INewAlbumRequestModel ) => {
+        return this.galleryService
+          .editAlbum(action.request, action.token)
+          .pipe(
+            map((album) => {
+            
+              var albumFoto: IAlbumFoto = {
+                id: album.id,
+                title: album.title,
+                anno: album.anno,
+                branca: album.branca,
+                imgFolderUrl: album.imgFolderUrl,
+                foto: []
+              }
+              return editalbumsuccess({ album: albumFoto });
             })
           );
       })
