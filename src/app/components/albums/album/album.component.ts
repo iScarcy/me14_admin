@@ -7,7 +7,7 @@ import { AppStateModel } from 'src/app/shared/store/Global/App.state';
 import { Store } from '@ngrx/store';
 import { FotoComponent } from '../foto/foto.component';
 import { IDeleteRequestModel, IGetAlbumFotoRequestModel, INewAlbumFotoRequestModel, IRotateAlbumFotoRequestModel } from 'src/app/shared/store/Albums/albums.model';
-import { deletealbumfoto, loadalbumfoto, newalbumfoto, rotatealbumfoto } from 'src/app/shared/store/Albums/albums.actions';
+import { deletealbumfoto, editalbum, loadalbumfoto, newalbumfoto, rotatealbumfoto } from 'src/app/shared/store/Albums/albums.actions';
 import { getalbum } from 'src/app/shared/store/Albums/albums.selectors';
 import { NewAlbumComponent } from '../new-album/new-album.component';
 import { IAlbumRequest } from 'src/app/services/rest/IAlbumRequest';
@@ -79,7 +79,16 @@ export class AlbumComponent implements OnInit{
     console.log("anno:"+album.anno) 
     console.log("branca:"+album.branca) 
     console.log("title:"+album.title) 
-  
+         this._store.select(selectToken).subscribe((data) =>{
+           
+          if(data){
+                        
+              this._store.dispatch(editalbum({request: album, token:data}));
+              
+              this._dialog.closeAll();
+            }
+      
+          });
    }
   
   

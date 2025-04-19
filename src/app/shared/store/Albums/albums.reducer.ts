@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { deletealbumfotosuccess, deletealbumsuccess, loadalbumfotosuccess, loadalbumssuccess, newalbumfotosuccess, newalbumsuccess, rotatealbumfotosuccess } from "./albums.actions";
+import { deletealbumfotosuccess, deletealbumsuccess, editalbumsuccess, loadalbumfotosuccess, loadalbumssuccess, newalbumfotosuccess, newalbumsuccess, rotatealbumfotosuccess } from "./albums.actions";
 import { initialState } from "./albums.state";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
 import { IFoto } from "src/app/models/IFoto";
@@ -25,6 +25,30 @@ const _albumsReducer = createReducer(
         
         return {
             albums: albumsNew
+        }
+    }),
+    on(editalbumsuccess, (state, action) => {
+        
+        var albumsFoto = [...state.albums];
+        var item =  albumsFoto.find(item => item.id == action.album.id)!;
+        
+        var album : IAlbumFoto = {
+            id: item.id,
+            title: item.title,
+            anno: item.anno,
+            branca: item.branca,
+          //  folder: item.folder,
+            imgFolderUrl: item.imgFolderUrl,
+            foto: item.foto
+        } 
+       
+        let index = albumsFoto.indexOf(item)
+        
+        albumsFoto[index] = album;
+
+
+        return {
+            albums: albumsFoto
         }
     }),
     on(loadalbumfotosuccess, (state,action)=>{

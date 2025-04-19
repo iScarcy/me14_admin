@@ -41,7 +41,7 @@ export const newalbum=createAction(NEW_ALBUM, props<{request: IAlbumRequest, tok
 export const newalbumsuccess=createAction(NEW_ALBUM_SUCCESS, props<{album: IAlbumFoto}>())
 
 export const editalbum=createAction(EDIT_ALBUM, props<{request: IAlbumRequest, token: string}>())
-export const editalbumsuccess=createAction(EDIT_ALBUM, props<{album: IAlbumFoto}>())
+export const editalbumsuccess=createAction(EDIT_ALBUM_SUCCESS, props<{album: IAlbumFoto}>())
 
 //IGetAlbumFotoRequestModel
 export const loadalbumfoto=createAction(LOAD_ALBUM_FOTO, props<{idAlbum:number, token:string}>())
