@@ -79,6 +79,7 @@ export class AlbumComponent implements OnInit{
     console.log("anno:"+album.anno) 
     console.log("branca:"+album.branca) 
     console.log("title:"+album.title) 
+    
          this._store.select(selectToken).subscribe((data) =>{
            
           if(data){

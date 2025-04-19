@@ -77,14 +77,14 @@ export class GalleryService {
       'Authorization': `Bearer ${token}`
     })
 
-
+    debugger;
     return this.httpEvents.patch<IAlbum>(url, request, {headers: headers}).pipe(
       map(album => ({
         id: album.id,
         title: album.title,
         anno: album.anno,
         branca: album.branca,
-        imgFolderUrl: album.imgFolderUrl ,       
+        imgFolderUrl: request.copertina == "" ?  request.copertina : baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))
      )

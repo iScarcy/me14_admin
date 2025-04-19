@@ -28,21 +28,24 @@ const _albumsReducer = createReducer(
         }
     }),
     on(editalbumsuccess, (state, action) => {
-        
+       
         var albumsFoto = [...state.albums];
         var item =  albumsFoto.find(item => item.id == action.album.id)!;
         
+        let index = albumsFoto.indexOf(item)
+        console.log(action.album.imgFolderUrl);
         var album : IAlbumFoto = {
             id: item.id,
-            title: item.title,
-            anno: item.anno,
-            branca: item.branca,
+            title: action.album.title,
+            anno: action.album.anno,
+            branca: action.album.branca,
           //  folder: item.folder,
-            imgFolderUrl: item.imgFolderUrl,
-            foto: item.foto
+            imgFolderUrl: action.album.imgFolderUrl == "" ? item.imgFolderUrl : action.album.imgFolderUrl,
+            foto: item.foto,
+            
         } 
        
-        let index = albumsFoto.indexOf(item)
+        
         
         albumsFoto[index] = album;
 
