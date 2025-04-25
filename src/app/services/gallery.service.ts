@@ -77,7 +77,7 @@ export class GalleryService {
       'Authorization': `Bearer ${token}`
     })
 
-    debugger;
+     
     return this.httpEvents.patch<IAlbum>(url, request, {headers: headers}).pipe(
       map(album => ({
         id: album.id,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, map, Observable, of } from 'rxjs';
-import { baseSecurityApiUrl } from '../app.costant';
+import { baseUsersApiUrl } from '../app.costant';
 import { IUserLoginResponse } from './rest/IUserLoginResponse';
 import { ILogin } from '../models/ILogin';
 
@@ -15,8 +15,8 @@ export class LoginService {
 
   loginuser(username: string, password:string):Observable<IUserLoginResponse>{
        
-      var url: string = baseSecurityApiUrl+"CreateToken"; 
-      return this.httpEvents.post<IUserLoginResponse>(url, {username:username, password:password}).pipe(
+      var url: string = baseUsersApiUrl+"SignIn"; 
+      return this.httpEvents.post<IUserLoginResponse>(url, {email:username, password:password}).pipe(
         
         map(resp => ({
                   name:resp.name,

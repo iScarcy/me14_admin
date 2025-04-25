@@ -2,4 +2,4 @@ export const baseGalleryApiUrl:string = "http://www.agescimessina14.org/fw/api/G
 export const baseGalleryPublicImageUrl: string = "http://www.agescimessina14.org/public/gallery/"
 export const baseTempImageUrl: string = "http://www.agescimessina14.org/fw/upload"
 
-export const baseSecurityApiUrl:string = "http://www.agescimessina14.org/fw/api/Security/";
+export const baseUsersApiUrl:string = "http://www.agescimessina14.org/fw/api/Users/";
