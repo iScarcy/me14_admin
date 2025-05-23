@@ -31,6 +31,7 @@ import { localStorageSync, rehydrateApplicationState } from 'ngrx-store-localsto
 import { LOGIN_SUCCESS } from './shared/store/Login/login.actions';
 import { ErrorInterceptor } from './services/ErrorInterceptor';
 import { APP_BASE_HREF } from '@angular/common';
+import { UtilityComponent } from './components/utility/utility.component';
 
 const INIT_ACTION = "@ngrx/store/init";
 
@@ -77,7 +78,8 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     NewAlbumComponent,
     FotoComponent,
     ConfirmComponent,
-    LoginComponent
+    LoginComponent,
+    UtilityComponent
   ],
   imports: [
     BrowserModule,

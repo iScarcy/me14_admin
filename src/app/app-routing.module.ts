@@ -4,12 +4,15 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { FotoComponent } from './components/albums/foto/foto.component';
 import { MainContentComponent } from './components/layout/main-content/main-content.component';
+import { UtilityComponent } from './components/utility/utility.component';
  
 const routes: Routes = [
       {path:"", component: MainContentComponent},
+      {path:"utility", component: UtilityComponent},
       {path:"gallery", component: AlbumsComponent},
       {path:"gallery/:branca", component: AlbumsComponent},
-      {path:"gallery/photo/:album", component: FotoComponent}
+      {path:"gallery/photo/:album", component: FotoComponent},
+      
 ];
 
 @NgModule({
