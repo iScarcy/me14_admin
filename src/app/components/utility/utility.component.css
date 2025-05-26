@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+    align-items: flex-start ; 
+    justify-content:center;
+}
+
+.item {
+    align-self:auto ;
+    flex: 1 1 calc(25% - 10px);
+    margin: 5px;
+  }
+
+  .itemHead {
+    
+    flex: 1 1 calc(100%);
+    
+    justify-content: center !important;
+    align-content: center !important;
+    align-items: center !important;
+  }
+
+  .itemHead span{
+   
+    font-size: 25px;
+    margin-right: 10px;
+    
+  }

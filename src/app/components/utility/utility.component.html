@@ -1,1 +1,6 @@
-<p>utility works!</p>
+<div class="container">
+    <div class="item"  *ngFor="let uti of this.utility">
+
+        <app-utility-item [item]="uti" />
+    </div>
+</div> 

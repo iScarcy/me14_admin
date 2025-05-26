@@ -32,6 +32,7 @@ import { LOGIN_SUCCESS } from './shared/store/Login/login.actions';
 import { ErrorInterceptor } from './services/ErrorInterceptor';
 import { APP_BASE_HREF } from '@angular/common';
 import { UtilityComponent } from './components/utility/utility.component';
+import { UtilityItemComponent } from './components/utility/utility-item/utility-item.component'; 
 
 const INIT_ACTION = "@ngrx/store/init";
 
@@ -79,7 +80,8 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     FotoComponent,
     ConfirmComponent,
     LoginComponent,
-    UtilityComponent
+    UtilityComponent,
+    UtilityItemComponent, 
   ],
   imports: [
     BrowserModule,

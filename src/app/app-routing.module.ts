@@ -9,6 +9,7 @@ import { UtilityComponent } from './components/utility/utility.component';
 const routes: Routes = [
       {path:"", component: MainContentComponent},
       {path:"utility", component: UtilityComponent},
+      {path:"utility/", component: UtilityComponent},
       {path:"gallery", component: AlbumsComponent},
       {path:"gallery/:branca", component: AlbumsComponent},
       {path:"gallery/photo/:album", component: FotoComponent},
