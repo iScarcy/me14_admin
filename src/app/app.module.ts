@@ -32,7 +32,8 @@ import { LOGIN_SUCCESS } from './shared/store/Login/login.actions';
 import { ErrorInterceptor } from './services/ErrorInterceptor';
 import { APP_BASE_HREF } from '@angular/common';
 import { UtilityComponent } from './components/utility/utility.component';
-import { UtilityItemComponent } from './components/utility/utility-item/utility-item.component'; 
+import { UtilityItemComponent } from './components/utility/utility-item/utility-item.component';
+import { UtilityDialogComponent } from './components/utility/utility-dialog/utility-dialog.component'; 
 
 const INIT_ACTION = "@ngrx/store/init";
 
@@ -81,7 +82,8 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     ConfirmComponent,
     LoginComponent,
     UtilityComponent,
-    UtilityItemComponent, 
+    UtilityItemComponent,
+    UtilityDialogComponent, 
   ],
   imports: [
     BrowserModule,

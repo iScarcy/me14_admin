@@ -1,0 +1,52 @@
+
+<mat-dialog-content>
+  <h2 mat-dialog-titile>{{this.data.titleDialog}}</h2>
+    <div class="dialog-container dialog-responsive">
+          <div>
+          <mat-form-field class="new-album-item">
+            <mat-label>Nome </mat-label>
+            <input matInput [formControl] = "FC_title" required  />        
+            <mat-error>Campo Obligatorio</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+        <mat-form-field>
+            <mat-label>Tipologia</mat-label>
+        
+            <mat-select [(value)]="FC_idUtilityType"  [formControl]="FC_idUtilityType" required="">
+              <mat-option value="1">Modulistica</mat-option>
+              <mat-option value="2">Tecniche</mat-option>
+              <mat-option value="3">Carte di Clan</mat-option>
+              <mat-option value="4">Mani abili</mat-option>
+              <mat-option value="5">Pr. Educativi</mat-option>
+              <mat-option value="6">Canzoni</mat-option>
+            </mat-select>
+            <mat-error>Campo Obligatorio</mat-error>
+          </mat-form-field>
+          
+        </div> 
+      
+        <div>
+          <mat-form-field>
+          <mat-label>File</mat-label>
+          <button mat-icon-button matPrefix (click)="f_input.click()">
+            <mat-icon>attach_file</mat-icon>
+          </button>
+          <input type="text" readonly matInput [formControl]="display" />
+          <input
+            type="file"
+            multiple
+            hidden
+            #f_input
+            (change)="handleFileInputChange(f_input.files!)"
+          />
+          <mat-error>Campo Obligatorio</mat-error>
+        </mat-form-field>
+        </div> 
+        
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="handleSubmit()">Ok</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
