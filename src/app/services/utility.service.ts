@@ -4,6 +4,7 @@ import { IUtility } from './rest/IUtility';
 import { baseUtilityApiUrl } from '../app.costant';
 import { map, Observable } from 'rxjs';
 import { IUploadFile } from '../models/IUploadFile';
+import { IUtilityRequest } from './rest/IUtilityRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,10 @@ export class UtilityService {
       )
     }
 
-    newUtility(){
+    newUtility(request:IUtilityRequest){
+
+       var url: string = baseUtilityApiUrl;
+       this.httpEvents.post(url,request);
 
     }
 }

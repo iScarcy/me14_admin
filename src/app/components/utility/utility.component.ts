@@ -33,6 +33,6 @@ export class UtilityComponent implements OnInit{
   }
 
   new(request:IUtilityRequest){
-
+      this._service.newUtility(request);
   }
 }
