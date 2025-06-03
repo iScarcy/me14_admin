@@ -39,10 +39,10 @@ export class UtilityService {
       )
     }
 
-    newUtility(request:IUtilityRequest){
-
-       var url: string = baseUtilityApiUrl;
-       this.httpEvents.post(url,request);
+    newUtility(request:IUtilityRequest):Observable<IUtility>{
+      
+      var url: string = baseUtilityApiUrl;
+      return this.httpEvents.post<IUtility>(url,request);
 
     }
 }

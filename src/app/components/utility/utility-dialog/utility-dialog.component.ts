@@ -18,7 +18,7 @@ export class UtilityDialogComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
 
   
@@ -57,26 +57,14 @@ export class UtilityDialogComponent implements OnInit{
     }
    
     handleSubmit(): void {
-     //&& this.data. .idAlbum!=undefined
+     
       if(this.FC_title.valid && this.FC_idUtilityType.valid && (this.display.valid || (this.display.valid==false ))){
         
-        const idAlbum : number = 0;
-        
-        /*
+                 
         var albumRequest : IUtilityRequest = {
-          id: 0,
-          title: this.FC_title.value,
+          title: this.FC_title.value!,
           filename:  this.display.value ,
-          typeID: this.FC_idUtilityType.value
-        } 
-        
-        */
-        
-        var albumRequest : IUtilityRequest = {
-          id: 0,
-          title: '',
-          filename:  this.display.value ,
-          typeID: 1
+          type:  +this.FC_idUtilityType.value!
         } 
      
   

@@ -33,6 +33,11 @@ export class UtilityComponent implements OnInit{
   }
 
   new(request:IUtilityRequest){
-      this._service.newUtility(request);
+  
+    this._service.newUtility(request).subscribe((data) => {
+        this.utility.push(data);
+        this._dialog.closeAll();
+    });
+    
   }
 }
