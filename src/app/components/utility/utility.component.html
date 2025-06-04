@@ -2,8 +2,8 @@
     <div class="itemHead">
         <h2>Utilità</h2>
         <button mat-raised-button (click)="this.openUtilityDialog(0)"  ><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="add"  ></mat-icon>Aggiungi</button> 
-        
-    <div class="item"  *ngFor="let uti of this.utility">
+     </div>   
+     <div  *ngFor="let uti of this.utility" class="item" >
 
         <app-utility-item [item]="uti" />
     </div>
