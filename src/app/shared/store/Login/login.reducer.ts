@@ -15,7 +15,7 @@ const _loginReducer = createReducer(
         return {
             login: {
                 displayName:"",
-                token: "",   
+                token: "err",   
                 tokenExpireDate:null,
                 role:""
             }  

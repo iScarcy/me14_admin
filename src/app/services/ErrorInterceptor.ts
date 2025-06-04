@@ -15,7 +15,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(
             catchError(err => {
-                 
+                  
                 if ([401, 403].includes(err.status) ) {
                     // Automatically log out if a 401 or 403 response is returned from the API
                     this._store.dispatch(loginuserfaild())
@@ -23,10 +23,13 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if(err.url.includes("http://www.agescimessina14.org/fw/api/Gallery/album/") && err.status == 0 && err.statusText == "Unknown Error"){
                     this._store.dispatch(logoutuser())
                 }
-
+                
+                if(err.url.includes("http://www.agescimessina14.org/fw/api/Users/SignIn") && err.error.status == 500){
+                     this._store.dispatch(loginuserfaild())
+                }
                
                 const error = err.error?.message || err.statusText;
-                console.error(err);
+                 
                 return throwError(() => error);
             })
         );
