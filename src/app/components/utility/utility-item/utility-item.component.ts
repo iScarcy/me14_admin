@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUtility } from 'src/app/services/rest/IUtility';
 
 @Component({
@@ -7,7 +7,7 @@ import { IUtility } from 'src/app/services/rest/IUtility';
   styleUrls: ['./utility-item.component.css']
 })
 export class UtilityItemComponent implements OnInit {
-  
+    
   @Input() item:IUtility = {
     id: 0,
     name: '',
@@ -16,8 +16,13 @@ export class UtilityItemComponent implements OnInit {
     type: ''
   }
 
+  @Output() public editUtilityEmitter:EventEmitter<number> = new EventEmitter();
+
   ngOnInit(): void {
       console.log(this.item.name);
   }
 
+  editUtility(id:number){
+    this.editUtilityEmitter.emit(id);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,  OnInit} from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { IUtility } from 'src/app/services/rest/IUtility';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -15,12 +15,14 @@ export class UtilityComponent implements OnInit{
   utility:IUtility[] = [];
 
   constructor(private _service:UtilityService,  private _dialog: MatDialog){}
-   
+  
+
+
   ngOnInit(): void {
       this._service.getUtility().subscribe((data) => {this.utility = data.sort((a, b) => a.typeID - b.typeID);});
   }
 
-  openUtilityDialog(id:number):void{
+  openNewUtilityDialog():void{
   
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
@@ -32,6 +34,8 @@ export class UtilityComponent implements OnInit{
     let dialogRed = this._dialog.open(UtilityDialogComponent, config)
   }
 
+  
+
   new(request:IUtilityRequest){
   
     this._service.newUtility(request).subscribe((data) => {
@@ -39,5 +43,11 @@ export class UtilityComponent implements OnInit{
         this._dialog.closeAll();
     });
     
+  }
+
+  editUtilityListener(id:number){
+       
+     console.log(id);
+      
   }
 }
