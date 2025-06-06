@@ -16,13 +16,13 @@ export class UtilityItemComponent implements OnInit {
     type: ''
   }
 
-  @Output() public editUtilityEmitter:EventEmitter<number> = new EventEmitter();
+  @Output() public editUtilityEmitter:EventEmitter<IUtility> = new EventEmitter();
 
   ngOnInit(): void {
       console.log(this.item.name);
   }
 
-  editUtility(id:number){
-    this.editUtilityEmitter.emit(id);
+  editUtility(utility:IUtility){
+    this.editUtilityEmitter.emit(utility);
   }
 }

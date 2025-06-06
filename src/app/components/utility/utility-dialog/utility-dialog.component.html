@@ -5,7 +5,7 @@
           <div>
           <mat-form-field class="new-album-item">
             <mat-label>Nome </mat-label>
-            <input matInput [formControl] = "FC_title" required  />        
+            <input matInput (value)="FC_title" [formControl] = "FC_title" required  />        
             <mat-error>Campo Obligatorio</mat-error>
           </mat-form-field>
         </div>

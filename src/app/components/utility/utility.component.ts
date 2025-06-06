@@ -45,9 +45,19 @@ export class UtilityComponent implements OnInit{
     
   }
 
-  editUtilityListener(id:number){
-       
-     console.log(id);
+  editUtilityListener(utility:IUtility){
+    this.openEditUtilityDialog(utility);  
+  }
+
+    openEditUtilityDialog(utility:IUtility):void{
+  
+    let config: MatDialogConfig = {
+      panelClass: "dialog-responsive",
+      disableClose: true,
+      data: {titleDialog: "Modifica utilità", id: utility.id, title: utility.name, FC_idUtilityType:utility.typeID,  callback: (request:IUtilityRequest) => this.new(request)} 
       
+    }
+    
+    let dialogRed = this._dialog.open(UtilityDialogComponent, config)
   }
 }

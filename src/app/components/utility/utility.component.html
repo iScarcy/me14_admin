@@ -5,6 +5,6 @@
      </div>   
      <div  *ngFor="let uti of this.utility" class="item" >
 
-        <app-utility-item [item]="uti" (editUtilityEmitter)="editUtilityListener(uti.id)" />
+        <app-utility-item [item]="uti" (editUtilityEmitter)="editUtilityListener(uti)" />
     </div>
 </div> 

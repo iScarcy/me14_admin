@@ -18,7 +18,8 @@ export class UtilityDialogComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    
+      console.log(this.data)
+      this.FC_title.setValue(this.data.title);
   }
 
   
