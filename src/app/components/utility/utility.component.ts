@@ -45,6 +45,15 @@ export class UtilityComponent implements OnInit{
     
   }
 
+  edit(request:IUtilityRequest){
+
+    this._service.editUtility(request).subscribe((data) => {
+        this.utility.push(data);
+        this._dialog.closeAll();
+    });
+    
+  }
+
   editUtilityListener(utility:IUtility){
     this.openEditUtilityDialog(utility);  
   }
@@ -54,7 +63,7 @@ export class UtilityComponent implements OnInit{
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
       disableClose: true,
-      data: {titleDialog: "Modifica utilità", id: utility.id, title: utility.name, FC_idUtilityType:utility.typeID,  callback: (request:IUtilityRequest) => this.new(request)} 
+      data: {titleDialog: "Modifica utilità", id: utility.id, title: utility.name, FC_idUtilityType:utility.typeID,  callback: (request:IUtilityRequest) => this.edit(request)} 
       
     }
     

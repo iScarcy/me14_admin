@@ -20,6 +20,7 @@ export class UtilityDialogComponent implements OnInit{
   ngOnInit(): void {
       console.log(this.data)
       this.FC_title.setValue(this.data.title);
+      this.FC_idUtilityType.setValue(""+this.data.FC_idUtilityType)
   }
 
   
@@ -62,14 +63,15 @@ export class UtilityDialogComponent implements OnInit{
       if(this.FC_title.valid && this.FC_idUtilityType.valid && (this.display.valid || (this.display.valid==false ))){
         
                  
-        var albumRequest : IUtilityRequest = {
+        var request : IUtilityRequest = {
+          id: this.data.id,
           title: this.FC_title.value!,
           filename:  this.display.value ,
           type:  +this.FC_idUtilityType.value!
         } 
      
   
-        this.data.callback(albumRequest);
+        this.data.callback(request);
         
       }
   

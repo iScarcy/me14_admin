@@ -45,4 +45,11 @@ export class UtilityService {
       return this.httpEvents.post<IUtility>(url,request);
 
     }
+
+    editUtility(request:IUtilityRequest):Observable<IUtility>{
+      
+      var url: string = baseUtilityApiUrl;
+      return this.httpEvents.patch<IUtility>(url,request);
+
+    }
 }
