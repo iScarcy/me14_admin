@@ -3,7 +3,7 @@
     <mat-card-title-group>
       <mat-card-title><a :href={{item.fileFullPath}} target="_blank">{{item.name}}</a></mat-card-title>
       <mat-card-subtitle>{{item.type}}</mat-card-subtitle>
-      <img mat-card-sm-image src="https://material.angular.dev/assets/img/examples/shiba2.jpg" >
+      <img mat-card-sm-image src="{{itemImage(item.typeID)}}" >
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-actions class="row justify-content-center align-items-center">

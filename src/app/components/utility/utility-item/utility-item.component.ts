@@ -25,4 +25,13 @@ export class UtilityItemComponent implements OnInit {
   editUtility(utility:IUtility){
     this.editUtilityEmitter.emit(utility);
   }
+
+  itemImage(typeID:number):string{
+    let img:string = "";
+    switch(typeID){
+      case 1: img="assets/img/utility/documenti-83x83.jpg" ;
+              break;
+    }
+    return img;
+  }
 }
