@@ -4,6 +4,7 @@ import { IUtility } from 'src/app/services/rest/IUtility';
 import { UtilityService } from 'src/app/services/utility.service';
 import { UtilityDialogComponent } from './utility-dialog/utility-dialog.component';
 import { IUtilityRequest } from 'src/app/services/rest/IUtilityRequest';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
   selector: 'app-utility',
@@ -45,20 +46,11 @@ export class UtilityComponent implements OnInit{
     
   }
 
-  edit(request:IUtilityRequest){
-
-    this._service.editUtility(request).subscribe((data) => {
-        this.utility.push(data);
-        this._dialog.closeAll();
-    });
-    
-  }
-
   editUtilityListener(utility:IUtility){
     this.openEditUtilityDialog(utility);  
   }
 
-    openEditUtilityDialog(utility:IUtility):void{
+  openEditUtilityDialog(utility:IUtility):void{
   
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
@@ -68,5 +60,39 @@ export class UtilityComponent implements OnInit{
     }
     
     let dialogRed = this._dialog.open(UtilityDialogComponent, config)
+  }
+
+  edit(request:IUtilityRequest){
+
+    this._service.editUtility(request).subscribe((data) => {
+        this.utility.push(data);
+        this._dialog.closeAll();
+    });
+    
+  }
+
+  deleteUtilityListener(id:number){
+    this.openDeleteConfirmDialog(id);
+  }
+
+  openDeleteConfirmDialog(id:number): void {
+    
+    let config: MatDialogConfig = {
+      panelClass: "dialog-responsive",
+      disableClose: true,
+      data: {message: "Confermi di voler eliminare questa utilità ?", callback: () => this.delete(id)}    
+    }
+  
+    
+    let dialogRef = this._dialog.open(ConfirmComponent, config);
+              
+  }
+
+  delete(id:number){
+      this._service.deleteUtility(id).subscribe((data) => {
+         
+        this._dialog.closeAll();
+    });
+    
   }
 }

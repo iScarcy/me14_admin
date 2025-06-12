@@ -17,7 +17,8 @@ export class UtilityItemComponent implements OnInit {
   }
 
   @Output() public editUtilityEmitter:EventEmitter<IUtility> = new EventEmitter();
-
+  @Output() public deleteUtilityEmitter:EventEmitter<number> = new EventEmitter();
+  
   ngOnInit(): void {
       console.log(this.item.name);
   }
@@ -26,10 +27,18 @@ export class UtilityItemComponent implements OnInit {
     this.editUtilityEmitter.emit(utility);
   }
 
+  
+
+  deleteUtility(id:number){
+     this.deleteUtilityEmitter.emit(id);
+  }
+
   itemImage(typeID:number):string{
     let img:string = "";
     switch(typeID){
       case 1: img="assets/img/utility/documenti-83x83.jpg" ;
+              break;
+      case 2: img="assets/img/utility/tracce-83x83.jpg" ;
               break;
     }
     return img;

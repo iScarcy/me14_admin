@@ -8,6 +8,6 @@
   </mat-card-header>
   <mat-card-actions class="row justify-content-center align-items-center">
       <button mat-raised-button (click)="editUtility(item)" >Modifica</button>
-      <button mat-raised-button>Elimina</button>
+      <button mat-raised-button (click)="deleteUtility(item.id)">Elimina</button>
   </mat-card-actions>
 </mat-card>

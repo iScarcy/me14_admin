@@ -52,4 +52,11 @@ export class UtilityService {
       return this.httpEvents.patch<IUtility>(url,request);
 
     }
+
+    deleteUtility(id:number):Observable<IUtility>{
+      
+      var url: string = baseUtilityApiUrl+"?idUtility="+id;    
+      return this.httpEvents.delete<IUtility>(url);
+
+    }
 }
