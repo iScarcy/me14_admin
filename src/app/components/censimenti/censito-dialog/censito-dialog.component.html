@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Nuovo Censito</h1>
+<div mat-dialog-content>
+  <form #censitoForm="ngForm">
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Codice Scout</mat-label>
+      <input matInput [(ngModel)]="censito.codScout" name="codScout" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Nome</mat-label>
+      <input matInput [(ngModel)]="censito.nome" name="nome" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Cognome</mat-label>
+      <input matInput [(ngModel)]="censito.cognome" name="cognome" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Data di nascita</mat-label>
+      <input matInput [(ngModel)]="censito.dataNascita" name="dataNascita" type="date" required />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="censito.mail" name="mail" type="email" required />
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="censito.attivo" name="attivo">Attivo</mat-checkbox>
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Luogo di nascita</mat-label>
+      <input matInput [(ngModel)]="censito.luogoNascita" name="luogoNascita" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Telefono</mat-label>
+      <input matInput [(ngModel)]="censito.tel" name="tel" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Cellulare</mat-label>
+      <input matInput [(ngModel)]="censito.cell" name="cell" />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Annulla</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!censitoForm.form.valid">Salva</button>
+</div>

@@ -1,0 +1,7 @@
+/* Stili base per il dialog */
+mat-form-field {
+  margin-bottom: 12px;
+}
+mat-dialog-content {
+  min-width: 350px;
+}

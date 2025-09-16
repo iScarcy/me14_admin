@@ -13,10 +13,11 @@ export class CensimentiService {
 
     getCensiti():Observable<ICensito[]>{
    
-      var url = baseUsersApiUrl;
-
+      var url = baseUsersApiUrl+"Censiti";
+ 
       return this.httpEvents.get<Array<ICensito>>(url).pipe(
             map(censiti => censiti.map(user => ({
+              
                   id: user.id,
                   codScout: user.codScout,
                   nome: user.nome,

@@ -33,7 +33,10 @@ import { ErrorInterceptor } from './services/ErrorInterceptor';
 import { APP_BASE_HREF } from '@angular/common';
 import { UtilityComponent } from './components/utility/utility.component';
 import { UtilityItemComponent } from './components/utility/utility-item/utility-item.component';
-import { UtilityDialogComponent } from './components/utility/utility-dialog/utility-dialog.component'; 
+import { UtilityDialogComponent } from './components/utility/utility-dialog/utility-dialog.component';
+import { CensimentiComponent } from './components/censimenti/censimenti.component';
+import { CensitoComponent } from './components/censimenti/censito/censito.component'; 
+import { CensitoDialogComponent } from './components/censimenti/censito-dialog/censito-dialog.component';
 
 const INIT_ACTION = "@ngrx/store/init";
 
@@ -83,7 +86,10 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     LoginComponent,
     UtilityComponent,
     UtilityItemComponent,
-    UtilityDialogComponent, 
+    UtilityDialogComponent,
+    CensimentiComponent,
+    CensitoComponent, 
+    CensitoDialogComponent
   ],
   imports: [
     BrowserModule,

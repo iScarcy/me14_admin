@@ -1,0 +1,12 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{item.cognome }} {{item.nome}}</mat-card-title>
+      <mat-card-subtitle>{{item.codScout}}</mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-actions class="row justify-content-center align-items-center">
+      <button mat-raised-button (click)="editUtility(item)" >Modifica</button>
+      <button mat-raised-button (click)="deleteUtility(item.id)">Elimina</button>
+  </mat-card-actions>
+</mat-card>
