@@ -20,11 +20,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                     // Automatically log out if a 401 or 403 response is returned from the API
                     this._store.dispatch(loginuserfaild())
                 }
-                if(err.url.includes("http://www.agescimessina14.org/fw/api/Gallery/album/") && err.status == 0 && err.statusText == "Unknown Error"){
+                if(err.url.includes("https://www.agescimessina14.org/fw/api/Gallery/album/") && err.status == 0 && err.statusText == "Unknown Error"){
                     this._store.dispatch(logoutuser())
                 }
                 
-                if(err.url.includes("http://www.agescimessina14.org/fw/api/Users/SignIn") && err.error.status == 500){
+                if(err.url.includes("https://www.agescimessina14.org/fw/api/Users/SignIn") && err.error.status == 500){
                      this._store.dispatch(loginuserfaild())
                 }
                
