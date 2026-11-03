@@ -6,6 +6,7 @@ import { IUtilityRequest } from 'src/app/services/rest/IUtilityRequest';
 import { UtilityService } from 'src/app/services/utility.service';
 
 @Component({
+  standalone: false,
   selector: 'app-utility-dialog',
   templateUrl: './utility-dialog.component.html',
   styleUrls: ['./utility-dialog.component.css']

@@ -1,9 +1,12 @@
 export interface IUserLoginResponse{
-    username:string,
-    name:string,
     token:string,
     expire:Date,
-    role:string
+    user: IUser
 }
 
- 
+ export interface IUser{
+    id:number,
+    email:string,
+    displayName:string,
+    role:string
+}

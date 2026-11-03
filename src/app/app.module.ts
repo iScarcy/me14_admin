@@ -12,7 +12,6 @@ import { GalleryComponent } from './components/gallery/gallery.component';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AlbumComponent } from './components/albums/album/album.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { NewAlbumComponent } from './components/albums/new-album/new-album.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FotoComponent } from './components/albums/foto/foto.component';
@@ -24,6 +23,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { AlbumEffects } from './shared/store/Albums/albums.effects';
 import { AppState } from './shared/store/Global/AppState.model';
 import { LoginComponent } from './components/login/login.component';
+import { LoginDialogComponent } from './components/login/login-dialog.component';
+import { SessionExpiredDialogComponent } from './components/session-expired/session-expired-dialog.component';
 import { LoginEffects } from './shared/store/Login/login.effects';
 import { ILogin } from './models/ILogin';
 import {  IAppStateModel, IAppStateInfoLogin } from './shared/store/Global/App.state';
@@ -34,33 +35,36 @@ import { APP_BASE_HREF } from '@angular/common';
 import { UtilityComponent } from './components/utility/utility.component';
 import { UtilityItemComponent } from './components/utility/utility-item/utility-item.component';
 import { UtilityDialogComponent } from './components/utility/utility-dialog/utility-dialog.component';
-import { CensimentiComponent } from './components/censimenti/censimenti.component';
-import { CensitoComponent } from './components/censimenti/censito/censito.component'; 
-import { CensitoDialogComponent } from './components/censimenti/censito-dialog/censito-dialog.component';
+
 
 const INIT_ACTION = "@ngrx/store/init";
 
 export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>): ActionReducer<IAppStateModel> {
   return function(state, action : any) {
-    
- 
+
+
     const keys = ['login','lastUpdate'];
 
     let clearErrOnIinit : boolean = false;
     if (action.type === INIT_ACTION){
-     
-     
-      const rehydratedState = rehydrateApplicationState(keys, localStorage, k => k, true);
-     
-      if(rehydratedState.login != null && rehydratedState.login.login.token=="err")
+
+
+      const rehydratedState = rehydrateApplicationState({
+        keys,
+        storage: localStorage,
+        storageKeySerializer: key => key,
+        restoreDates: true
+      });
+
+      if(rehydratedState.login != null && rehydratedState.login.token=="err")
         clearErrOnIinit = true;
     }
- 
+
     let xapp = localStorageSync({
       keys,
       rehydrate: true,
     })(reducer)(state, action);
-   
+
     if(clearErrOnIinit)
       xapp.login.login.token = "";
     return xapp;
@@ -70,7 +74,7 @@ export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>):
 
 
 export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyncReducer];
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,12 +88,12 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     FotoComponent,
     ConfirmComponent,
     LoginComponent,
+    LoginDialogComponent,
+    SessionExpiredDialogComponent,
     UtilityComponent,
     UtilityItemComponent,
     UtilityDialogComponent,
-    CensimentiComponent,
-    CensitoComponent, 
-    CensitoDialogComponent
+
   ],
   imports: [
     BrowserModule,
@@ -97,16 +101,15 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-    FlexLayoutModule,
-    FormsModule, 
-    ReactiveFormsModule, 
+    FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(AppState, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([AlbumEffects, LoginEffects])
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-  
+
   ],
   bootstrap: [AppComponent]
 })

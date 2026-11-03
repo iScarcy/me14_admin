@@ -5,6 +5,7 @@ import { logoutuser } from 'src/app/shared/store/Login/login.actions';
 import { selectUserLogged } from 'src/app/shared/store/Login/login.selectors';
 
 @Component({
+  standalone: false,
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
@@ -19,7 +20,7 @@ export class ToolbarComponent  implements OnInit {
   
   ngOnInit(): void {
    this._store.select(selectUserLogged).subscribe((data) =>{
- 
+   
     this.userLogged = data
      });
   }

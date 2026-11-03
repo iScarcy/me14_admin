@@ -7,6 +7,7 @@ import { IUtilityRequest } from 'src/app/services/rest/IUtilityRequest';
 import { ConfirmComponent } from '../confirm/confirm.component';
 
 @Component({
+  standalone: false,
   selector: 'app-utility',
   templateUrl: './utility.component.html',
   styleUrls: ['./utility.component.css']

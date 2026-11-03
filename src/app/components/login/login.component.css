@@ -1,6 +1,96 @@
-.err{
-    float: right;
-    font-size: small;
-    color: red;
-    font-style: italic;
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.login-page {
+  box-sizing: border-box;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 32px 20px;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(251, 191, 36, 0.2), transparent 30%),
+    linear-gradient(145deg, #101d35 0%, #183b5b 55%, #176b70 100%);
+}
+
+.login-card {
+  box-sizing: border-box;
+  width: min(100%, 440px);
+  padding: 42px 40px 38px;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 24px 70px rgba(7, 20, 38, 0.28);
+}
+
+.brand-mark {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 16px;
+  background: #e8f3f2;
+  color: #176b70;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.eyebrow {
+  margin: 28px 0 8px;
+  color: #187276;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+}
+
+h1 {
+  margin: 0;
+  color: #17263d;
+  font-size: clamp(28px, 7vw, 34px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+}
+
+.subtitle {
+  margin: 9px 0 28px;
+  color: #657286;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.login-form {
+  display: grid;
+  gap: 8px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.login-error {
+  margin: -2px 0 8px;
+  color: #b42318;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.submit-button {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 34px 24px 28px;
+    border-radius: 18px;
+  }
 }

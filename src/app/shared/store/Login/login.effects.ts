@@ -18,12 +18,12 @@ export class LoginEffects {
             return this.service.loginuser(request.username,request.password).pipe(
               
               map((resp) => {
-               
+               debugger;
                 let info:ILogin = {
-                  displayName: resp.name,
+                  displayName: resp.user.displayName,
                   token: resp.token,
                   tokenExpireDate: resp.expire,
-                  role: resp.role
+                  role: resp.user.role
                 }
                 this.localStorage.set("login",JSON.stringify(info));
                 

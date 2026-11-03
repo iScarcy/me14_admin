@@ -1,42 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { LoginComponent } from './components/login/login.component';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppStateModel } from './shared/store/Global/App.state';
 import { Store } from '@ngrx/store';
-
-import { LocalStorageService } from './services/local-storage.service';
 import { selectIsLogged } from './shared/store/Login/login.selectors';
+import { filter } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  
-constructor(private _dialog: MatDialog, private _store: Store<AppStateModel>, private _localStorage: LocalStorageService){
+  private isLogged: boolean | undefined;
 
-}
+  constructor(private _router: Router, private _store: Store<AppStateModel>) {}
 
 ngOnInit(): void {
-  
-  let config: MatDialogConfig = {
-    panelClass: "dialog-responsive",
-    disableClose: true        
-  }
-  
-    this._store.select(selectIsLogged).subscribe((data) =>{
-    
-    if(!data){
-      let dialogRef = this._dialog.open(LoginComponent, config); 
-     
-    }else{
-      let dialogRef = this._dialog.getDialogById("mat-mdc-dialog-0");      
-      dialogRef?.close();
-    }
+  this._router.events.pipe(
+    filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+  ).subscribe(() => this.redirectForAuthentication());
 
-  }); 
-   
+  this._store.select(selectIsLogged).subscribe((isLogged) => {
+    this.isLogged = isLogged;
+    this.redirectForAuthentication();
+  });
+}
+
+private redirectForAuthentication(): void {
+  if (this.isLogged === undefined) return;
+
+  const onLoginPage = this._router.url.split('?')[0] === '/login';
+  if (!this.isLogged && !onLoginPage) {
+    this._router.navigateByUrl('/login');
+  } else if (this.isLogged && onLoginPage) {
+    this._router.navigateByUrl('/');
+  }
 }
 
 

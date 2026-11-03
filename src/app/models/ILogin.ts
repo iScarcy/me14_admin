@@ -4,3 +4,4 @@ export interface ILogin{
     tokenExpireDate:Date | null,
     role:string
 }
+

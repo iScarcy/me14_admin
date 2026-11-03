@@ -14,6 +14,7 @@ import { IAlbumRequest } from 'src/app/services/rest/IAlbumRequest';
 import { selectToken } from 'src/app/shared/store/Login/login.selectors';
 
 @Component({
+  standalone: false,
   selector: 'app-album',
   templateUrl: './album.component.html',
   styleUrls: ['./album.component.css']

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUtility } from 'src/app/services/rest/IUtility';
 
 @Component({
+  standalone: false,
   selector: 'app-utility-item',
   templateUrl: './utility-item.component.html',
   styleUrls: ['./utility-item.component.css']

@@ -9,6 +9,7 @@ import { IUploadFile } from 'src/app/models/IUploadFile';
 import { GalleryService } from 'src/app/services/gallery.service';
 
 @Component({
+  standalone: false,
   selector: 'app-new-album',
   templateUrl: './new-album.component.html',
   styleUrls: ['./new-album.component.css']

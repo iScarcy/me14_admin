@@ -11,6 +11,7 @@ import { IFotoRotateRequest } from 'src/app/services/rest/IFotoRotateRequest';
 
 
 @Component({
+  standalone: false,
   selector: 'app-foto',
   templateUrl: './foto.component.html',
   styleUrls: ['./foto.component.css']

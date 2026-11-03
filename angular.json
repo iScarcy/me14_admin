@@ -34,6 +34,16 @@
           },
           "configurations": {
             "production": {
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": {
+                  "inline": false
+                }
+              },
               "budgets": [
                 {
                  "type": "initial",
@@ -63,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "me14_admin:build:production"
+              "buildTarget": "me14_admin:build:production"
             },
             "development": {
-              "browserTarget": "me14_admin:build:development"
+              "buildTarget": "me14_admin:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "me14_admin:build"
+            "buildTarget": "me14_admin:build"
           }
         },
         "test": {

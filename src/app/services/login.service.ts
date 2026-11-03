@@ -22,11 +22,9 @@ export class LoginService {
       return this.httpEvents.post<IUserLoginResponse>(url, {email:username, password: this.encrypt(password)}).pipe(
         
         map(resp => ({
-                  name:resp.name,
-                  username: resp.username,
                   token:resp.token,
                   expire:resp.expire,
-                  role:resp.role,
+                  user:resp.user
                 }))
       );
      

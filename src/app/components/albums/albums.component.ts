@@ -18,6 +18,7 @@ import { selectToken } from 'src/app/shared/store/Login/login.selectors';
 import { FormControl, Validators } from '@angular/forms';
  
 @Component({
+  standalone: false,
   selector: 'app-albums',
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.css']
