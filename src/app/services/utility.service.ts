@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IUtility } from './rest/IUtility';
-import { baseUtilityApiUrl } from '../app.costant';
+import { RuntimeConfigService } from './runtime-config.service';
 import { map, Observable } from 'rxjs';
 import { IUploadFile } from '../models/IUploadFile';
 import { IUtilityRequest } from './rest/IUtilityRequest';
@@ -11,11 +11,11 @@ import { IUtilityRequest } from './rest/IUtilityRequest';
 })
 export class UtilityService {
 
-    constructor(private httpEvents: HttpClient) { }
+    constructor(private httpEvents: HttpClient, private config: RuntimeConfigService) { }
 
     getUtility():Observable<IUtility[]>{
 
-      var url = baseUtilityApiUrl;
+      var url = this.config.settings.baseUtilityApiUrl;
 
        return this.httpEvents.get<Array<IUtility>>(url).pipe(
             map(utility => utility.map(item => ({
@@ -30,7 +30,7 @@ export class UtilityService {
 
     uploadFile(file: File):Observable<IUploadFile>{
         
-      var url: string = baseUtilityApiUrl+"upload";
+      var url: string = this.config.settings.baseUtilityApiUrl+"upload";
       const formData = new FormData();
       formData.append('file', file);
   
@@ -41,21 +41,21 @@ export class UtilityService {
 
     newUtility(request:IUtilityRequest):Observable<IUtility>{
       
-      var url: string = baseUtilityApiUrl;
+      var url: string = this.config.settings.baseUtilityApiUrl;
       return this.httpEvents.post<IUtility>(url,request);
 
     }
 
     editUtility(request:IUtilityRequest):Observable<IUtility>{
       
-      var url: string = baseUtilityApiUrl;
+      var url: string = this.config.settings.baseUtilityApiUrl;
       return this.httpEvents.patch<IUtility>(url,request);
 
     }
 
     deleteUtility(id:number):Observable<IUtility>{
       
-      var url: string = baseUtilityApiUrl+"?idUtility="+id;    
+      var url: string = this.config.settings.baseUtilityApiUrl+"?idUtility="+id;    
       return this.httpEvents.delete<IUtility>(url);
 
     }

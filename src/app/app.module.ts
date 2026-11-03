@@ -1,4 +1,4 @@
-import { isDevMode, NgModule } from '@angular/core';
+import { APP_INITIALIZER, isDevMode, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -35,9 +35,14 @@ import { APP_BASE_HREF } from '@angular/common';
 import { UtilityComponent } from './components/utility/utility.component';
 import { UtilityItemComponent } from './components/utility/utility-item/utility-item.component';
 import { UtilityDialogComponent } from './components/utility/utility-dialog/utility-dialog.component';
+import { RuntimeConfigService } from './services/runtime-config.service';
 
 
 const INIT_ACTION = "@ngrx/store/init";
+
+export function initializeRuntimeConfig(config: RuntimeConfigService): () => Promise<void> {
+  return () => config.load();
+}
 
 export function localStorageSyncReducer(reducer: ActionReducer<IAppStateModel>): ActionReducer<IAppStateModel> {
   return function(state, action : any) {
@@ -109,6 +114,7 @@ export const metaReducers: MetaReducer<IAppStateModel, any>[] = [localStorageSyn
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    { provide: APP_INITIALIZER, useFactory: initializeRuntimeConfig, deps: [RuntimeConfigService], multi: true },
 
   ],
   bootstrap: [AppComponent]

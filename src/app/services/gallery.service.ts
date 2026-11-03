@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Branca } from '../models/Branca';
 import { map, Observable, of } from 'rxjs';
 import { IAlbum } from '../models/IAlbum';
-import { baseGalleryApiUrl, baseGalleryPublicImageUrl } from '../app.costant';
+import { RuntimeConfigService } from './runtime-config.service';
 import { IUploadFile } from '../models/IUploadFile';
 import { IFoto } from '../models/IFoto';
 import { IAlbumFoto } from '../models/IAlbumFoto';
@@ -19,7 +19,7 @@ export class GalleryService {
 
   token : string | undefined;
 
-  constructor(private httpEvents: HttpClient) { }
+  constructor(private httpEvents: HttpClient, private config: RuntimeConfigService) { }
 
   getAlbums(branca: string , anno: string , token: string):Observable<IAlbumFoto[]>{
   
@@ -28,7 +28,7 @@ export class GalleryService {
     'Authorization': `Bearer ${token}`
   })
 
-   var url: string = baseGalleryApiUrl+"album/"+branca+"/"+anno;
+  var url: string = this.config.settings.baseGalleryApiUrl+"album/"+branca+"/"+anno;
   
     return this.httpEvents.get<Array<IAlbum>>(url, {headers:headers}).pipe(
       map(albums => albums.map(album => ({
@@ -36,7 +36,7 @@ export class GalleryService {
         title: album.title,
         anno: album.anno,
         branca: album.branca, 
-        imgFolderUrl:  baseGalleryPublicImageUrl + album.imgFolderUrl ,            
+        imgFolderUrl:  this.config.settings.baseGalleryPublicImageUrl + album.imgFolderUrl ,            
         foto: []
       })))
     );
@@ -48,7 +48,7 @@ export class GalleryService {
   newAlbum(request:IAlbumRequest, token:string):Observable<IAlbum>{
    
     
-    var url: string = baseGalleryApiUrl+"album";
+    var url: string = this.config.settings.baseGalleryApiUrl+"album";
     
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export class GalleryService {
         anno: album.anno,
         branca: album.branca,
         //folder: album.folder,
-        imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl ,       
+        imgFolderUrl: this.config.settings.baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))
      )
@@ -70,7 +70,7 @@ export class GalleryService {
 
   editAlbum(request:IAlbumRequest, token:string):Observable<IAlbum>{
    
-    var url: string = baseGalleryApiUrl+"album";
+    var url: string = this.config.settings.baseGalleryApiUrl+"album";
     
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -84,14 +84,14 @@ export class GalleryService {
         title: album.title,
         anno: album.anno,
         branca: album.branca,
-        imgFolderUrl: request.copertina == "" ?  request.copertina : baseGalleryPublicImageUrl + album.imgFolderUrl ,       
+        imgFolderUrl: request.copertina == "" ?  request.copertina : this.config.settings.baseGalleryPublicImageUrl + album.imgFolderUrl ,       
         status: album.status
       }))
      )
   }
 
   deleteAlbum(id:number, token:string):Observable<Object>{
-    var url: string = baseGalleryApiUrl+"album?idAlbum="+id;    
+    var url: string = this.config.settings.baseGalleryApiUrl+"album?idAlbum="+id;    
     
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ export class GalleryService {
 
   uploadAlbumImg(file: File):Observable<IUploadFile>{
     
-    var url: string = baseGalleryApiUrl+"album/upload";
+    var url: string = this.config.settings.baseGalleryApiUrl+"album/upload";
     const formData = new FormData();
     formData.append('file', file);
 
@@ -114,7 +114,7 @@ export class GalleryService {
 
  uploadAlbumFoto(request:IAlbumFotoRequest):Observable<Array<IFoto>>{
   
-  var url: string = baseGalleryApiUrl+"album/photo";
+  var url: string = this.config.settings.baseGalleryApiUrl+"album/photo";
   const formData = new FormData();
   formData.append("idAlbum", ""+request.idAlbum);
   for (const image of request.Files) {
@@ -134,7 +134,7 @@ export class GalleryService {
     })
    
 
-    var url: string = baseGalleryApiUrl+"album/photo/"+idAlbum;
+    var url: string = this.config.settings.baseGalleryApiUrl+"album/photo/"+idAlbum;
     return this.httpEvents.get<IAlbumFoto>(url, {headers:headers}).pipe(
       map(album => ({
         id: album.id,
@@ -142,7 +142,7 @@ export class GalleryService {
         anno: album.anno,
         branca: album.branca, 
         folder: '',
-        imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl,       
+        imgFolderUrl: this.config.settings.baseGalleryPublicImageUrl + album.imgFolderUrl,       
         foto: album.foto
       }))
      )
@@ -150,7 +150,7 @@ export class GalleryService {
 
   deleteFoto(id:number, token: string):Observable<Object>{
     
-    var url: string = baseGalleryApiUrl+"album/photo?idFoto="+id;    
+    var url: string = this.config.settings.baseGalleryApiUrl+"album/photo?idFoto="+id;    
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
@@ -161,7 +161,7 @@ export class GalleryService {
 
   rotateFoto(data:IRotateAlbumFotoRequestModel):Observable<number>{
    
-   var url: string = baseGalleryApiUrl+"album/photo/rotate";
+   var url: string = this.config.settings.baseGalleryApiUrl+"album/photo/rotate";
  // var url: string = "http://localhost:7065/api/Gallery/album/photo/rotate";
     return this.httpEvents.patch<number>(url, {"urlPhoto": data.request.urlPhoto, "idAlbum": data.request.idAlbum});
 

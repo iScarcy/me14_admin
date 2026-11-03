@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, map, Observable, of } from 'rxjs';
-import { baseUsersApiUrl } from '../app.costant';
+import { RuntimeConfigService } from './runtime-config.service';
 import { IUserLoginResponse } from './rest/IUserLoginResponse';
 import * as CryptoJS from 'crypto-js';
 
@@ -12,13 +12,13 @@ export class LoginService {
 
   key:string =  "abcdefghijklmnop";
 
-  constructor(private httpEvents: HttpClient) { }
+  constructor(private httpEvents: HttpClient, private config: RuntimeConfigService) { }
 
 
   loginuser(username: string, password:string):Observable<IUserLoginResponse>{
       
     
-      var url: string = baseUsersApiUrl+"SignIn"; 
+      var url: string = this.config.settings.baseUsersApiUrl+"SignIn"; 
       return this.httpEvents.post<IUserLoginResponse>(url, {email:username, password: this.encrypt(password)}).pipe(
         
         map(resp => ({

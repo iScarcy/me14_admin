@@ -6,7 +6,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IAlbumRequest } from "src/app/services/rest/IAlbumRequest";
 import { IDeleteRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoStoreRequest, INewAlbumRequestModel, IRotateAlbumFotoStoreRequest } from "./albums.model";
 import { IAlbumFoto } from "src/app/models/IAlbumFoto";
-import { baseGalleryPublicImageUrl } from "src/app/app.costant";
+import { RuntimeConfigService } from "src/app/services/runtime-config.service";
 import { IFoto } from "src/app/models/IFoto";
 
 @Injectable()
@@ -119,7 +119,7 @@ export class AlbumEffects {
                 anno: album.anno,
                 branca: album.branca,
              //   folder: album.folder,
-                imgFolderUrl: baseGalleryPublicImageUrl + album.imgFolderUrl,
+                imgFolderUrl: this.config.settings.baseGalleryPublicImageUrl + album.imgFolderUrl,
                 foto: album.foto
               }
               return loadalbumfotosuccess({ album: albumFoto });
@@ -161,6 +161,7 @@ export class AlbumEffects {
   
   constructor(
     private action$: Actions,
-    private galleryService: GalleryService   
+    private galleryService: GalleryService,
+    private config: RuntimeConfigService
   ) {}
 }
