@@ -1,0 +1,47 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IUtility } from 'src/app/services/rest/IUtility';
+
+@Component({
+  standalone: false,
+  selector: 'app-utility-item',
+  templateUrl: './utility-item.component.html',
+  styleUrls: ['./utility-item.component.css']
+})
+export class UtilityItemComponent implements OnInit {
+    
+  @Input() item:IUtility = {
+    id: 0,
+    name: '',
+    fileFullPath: '',
+    typeID: 0,
+    type: ''
+  }
+
+  @Output() public editUtilityEmitter:EventEmitter<IUtility> = new EventEmitter();
+  @Output() public deleteUtilityEmitter:EventEmitter<number> = new EventEmitter();
+  
+  ngOnInit(): void {
+      console.log(this.item.name);
+  }
+
+  editUtility(utility:IUtility){
+    this.editUtilityEmitter.emit(utility);
+  }
+
+  
+
+  deleteUtility(id:number){
+     this.deleteUtilityEmitter.emit(id);
+  }
+
+  itemImage(typeID:number):string{
+    let img:string = "";
+    switch(typeID){
+      case 1: img="assets/img/utility/documenti-83x83.jpg" ;
+              break;
+      case 2: img="assets/img/utility/tracce-83x83.jpg" ;
+              break;
+    }
+    return img;
+  }
+}

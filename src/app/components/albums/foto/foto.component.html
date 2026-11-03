@@ -1,18 +1,35 @@
-<h2 >{{this.al.title}}</h2>
-<div class="container">
+<mat-dialog-content>
+  <h2 mat-dialog-title>{{this.al.title}}</h2>
+
+  <div class="container">
        
-        <div class="item"  *ngFor="let ph of this.foto">
+        <div class="item"  *ngFor="let ph of this.al?.foto">
             
             <mat-card appearance="outlined">
                
                 <img mat-card-image src="{{ph.thumbPathFile}}"  >
                 
                 <mat-card-actions class="row  align-items-center">
-                  <button mat-raised-button><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="sync"></mat-icon>Ruota</button>
-                  <button mat-raised-button><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="delete"></mat-icon>Elimina</button>
+                  <button mat-raised-button (click)="this.rotate(ph.albumID, ph.thumbPathFile)"><mat-icon aria-hidden="false" aria-label="Ruota" fontIcon="sync"></mat-icon>Ruota</button>
+                  <button mat-raised-button (click)="this.delete(ph.id)"><mat-icon aria-hidden="false" aria-label="Elimina" fontIcon="delete"></mat-icon>Elimina</button>
                 </mat-card-actions>
             </mat-card>
 
 
         </div>
   </div>
+</mat-dialog-content>  
+<mat-dialog-actions>
+  
+  <button mat-icon-button matPrefix (click)="f_input.click()">
+    <mat-icon>attach_file</mat-icon> 
+  </button>
+  <input
+              type="file"
+              multiple
+              hidden
+              #f_input
+              (change)="this.handleFileInputChange(f_input.files!)"
+            />
+  <button mat-button mat-dialog-close>Chiudi</button>
+</mat-dialog-actions>

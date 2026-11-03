@@ -1,0 +1,51 @@
+<main class="login-page">
+  <section class="login-card" aria-labelledby="login-title">
+    <div class="brand-mark" aria-hidden="true">M14</div>
+    <p class="eyebrow">AREA RISERVATA</p>
+    <h1 id="login-title">Bentornato</h1>
+    <p class="subtitle">Accedi all’area amministrativa Messina 14</p>
+
+    <form class="login-form" (ngSubmit)="ok()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="text"
+          autocomplete="username"
+          placeholder="Inserisci il tuo username"
+          [formControl]="FC_login">
+        <mat-icon matSuffix>person_outline</mat-icon>
+        <mat-error *ngIf="FC_login.hasError('required')">Inserisci il tuo username</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="hide() ? 'password' : 'text'"
+          autocomplete="current-password"
+          placeholder="Inserisci la password"
+          [formControl]="FC_password">
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="clickEvent($event)"
+          [attr.aria-label]="hide() ? 'Mostra password' : 'Nascondi password'"
+          [attr.aria-pressed]="!hide()">
+          <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        <mat-error *ngIf="FC_password.hasError('required')">Inserisci la password</mat-error>
+      </mat-form-field>
+
+      <p class="login-error" *ngIf="isErr" role="alert">
+        Username o password non validi. Riprova.
+      </p>
+
+      <button class="submit-button" mat-flat-button color="primary" type="submit">
+        Accedi
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </form>
+  </section>
+</main>

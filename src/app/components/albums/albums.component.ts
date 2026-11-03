@@ -2,42 +2,109 @@ import { Component, OnInit, inject  } from '@angular/core';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
-import { IAlbum } from 'src/app/models/IAlbum';
-import { Branca } from 'src/app/models/Branca';
+
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewAlbumComponent } from '../albums/new-album/new-album.component';
-import { IAlbumRequest } from 'src/app/models/IAlbumRequest';
+import { IAlbumRequest } from 'src/app/services/rest/IAlbumRequest';
+
+import { IAlbumsModel, IDeleteRequestModel, IGetAlbumFotoRequestModel, IGetAlbumsRequestModel, IGetAlbumsStoreRequest, INewAlbumFotoRequestModel, INewAlbumRequestModel } from 'src/app/shared/store/Albums/albums.model';
+import { Store } from '@ngrx/store';
+import { deletealbum, loadalbumfoto, loadalbums, newalbum, newalbumfoto } from 'src/app/shared/store/Albums/albums.actions';
+import { AppStateModel } from 'src/app/shared/store/Global/App.state';
+import { IAlbumFoto } from 'src/app/models/IAlbumFoto';
+import { FotoComponent } from './foto/foto.component';
+import { getalbum, getalbumslist } from 'src/app/shared/store/Albums/albums.selectors';
+import { selectToken } from 'src/app/shared/store/Login/login.selectors';
+import { FormControl, Validators } from '@angular/forms';
+ 
 @Component({
+  standalone: false,
   selector: 'app-albums',
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.css']
 })
 export class AlbumsComponent implements OnInit {
   branca:string = "";
-  
-  albums$: Observable<IAlbum[]> | undefined;
-  
+  anno : string = "";
+
+  albums$ = new Observable<IAlbumFoto[]> ();
+  albumF : IAlbumFoto | undefined
   private readonly route = inject(ActivatedRoute);
 
-  constructor(private _service:GalleryService, private _dialog: MatDialog){
+  constructor(
+    private _store: Store<AppStateModel>,
+    private _dialog: MatDialog){
 
   }
 
+  
+  brancaSelected = '';
   ngOnInit(): void {    
+        
+  }
+  
+  onAnnoChange(event: any) {
+    let anno:string = this.anno;
+    let branca:string = this.brancaSelected;
+    console.log(anno+"_"+anno.length);
     
-    this.branca  =  this.route.snapshot.paramMap.get('branca')!;
-    this.albums$ = this.fetchData();
+        
+    if(branca!=""){
+      if(anno.length==4 || anno== ""){
+        
+          
+          this.loadAlbums(branca, anno);
+         
+      }
+    }
+  }
+  
+
+  changeBranca(event: any):void{
+    let anno:string = this.anno;
+    let branca:string = this.brancaSelected;
+    if(anno.length != 4 && (anno=="" || anno == null)){
+      anno = "0"
+    }
+    
+    if(branca!=null){
+      
+      switch(branca){
+        case "lc":  this.branca = "L/C";
+                    break;
+        case "eg":  this.branca = "E/G";
+                    break;
+        case "rs": this.branca = "R/S";
+                    break;            
+        case "varie": this.branca = "Gruppo";
+                    break;            
+      }
+      
+      this.loadAlbums(branca, anno);
+    }
     
   }
-  fetchData():Observable<IAlbum[]>{
-    return this._service.getAlbums(this.branca);
+
+  loadAlbums(branca:string, anno: string){
+   
+    this._store.select(selectToken).subscribe((data) =>{
+      if(data){
+        const req:IGetAlbumsRequestModel={
+          branca: this.branca
+        }
+    
+        this._store.dispatch(loadalbums({branca: branca, anno: anno, token:data}));
+        
+        this.albums$ = this._store.select(getalbumslist);
+      }
+    }); 
   }
-  openNewAlbumDialog(){
-   console.log("new");
+  openNewAlbumDialog():void{
+  
     let config: MatDialogConfig = {
       panelClass: "dialog-responsive",
       disableClose: true,
-      data: {album:{branca: this.branca}, callback: (request:IAlbumRequest) => this.new(request)} 
+      data: {titleDialog: "Aggiungi album", album:{branca: this.brancaSelected}, callback: (request:IAlbumRequest) => this.new(request)} 
       
     }
     
@@ -45,39 +112,34 @@ export class AlbumsComponent implements OnInit {
   }
 
   deleteAlbumListener(id:number){
-   
-
-    this._service.deleteAlbum(id)
-      .subscribe({
-        complete: () => {
-          this.albums$ = this.albums$!.pipe(
-            map(albums => albums.filter(album => album.id !== id))
-          )
-        } 
-      })
-  }
-
-  new(request:IAlbumRequest){
-   
-    this._service.newAlbum(request).subscribe({
-      /*next: (album) => {
-        console.log("ciao::"+album);
-        this.albums$!.pipe(
-          tap(albums => albums.unshift(album))
-        )
-        console.log("_______ooooooo_______")
-        this._dialog.closeAll();
-        
-      }*/
-     complete:() => { 
-      this.albums$ = this.fetchData();
-      this._dialog.closeAll();
-        
+     
+    this._store.select(selectToken).subscribe((data) =>{
+      if(data){
+        this._store.dispatch(deletealbum({idAlbum: id, idFoto : undefined, token:data}));
       }
-    });
+    }); 
+     
+  }
+ 
+   
 
+  new(album:IAlbumRequest){
     
+    this._store.select(selectToken).subscribe((data) =>{
+      if(data){
+        const req:IGetAlbumsRequestModel={
+          branca: this.branca
+        }
+    
+        this._store.dispatch(newalbum({request: album, token:data}));
+        
+        this._dialog.closeAll();
+      }
 
+    });
   }
 
+  closeDialog(){
+    this._dialog.closeAll();
+  }
 }
