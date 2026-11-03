@@ -1,7 +1,7 @@
 {
-  "baseGalleryApiUrl": "https://www.agescimessina14.org/fw/api/Gallery/",
+  "baseGalleryApiUrl": "http://localhost:5251/api/Gallery/",
   "baseGalleryPublicImageUrl": "https://www.agescimessina14.org/public/gallery/",
   "baseTempImageUrl": "https://www.agescimessina14.org/fw/upload",
   "baseUsersApiUrl": "http://localhost:5251/api/Users/",
-  "baseUtilityApiUrl": "https://www.agescimessina14.org/fw/api/Utility/"
+  "baseUtilityApiUrl": ""
 }
